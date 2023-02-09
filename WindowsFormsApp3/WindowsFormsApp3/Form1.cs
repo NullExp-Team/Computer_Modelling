@@ -91,7 +91,7 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label1.Text = Math.Round(error, 2).ToString();
+            label1.Text = "Ошибка для линнейной функции= "+Math.Round(error, 2).ToString();
 
 
             return rezult;
@@ -138,7 +138,7 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label2.Text = Math.Round(error, 2).ToString();
+            label2.Text = "Ошибка для степенной функции= " + Math.Round(error, 2).ToString();
 
             return rezult;
         }
@@ -173,7 +173,7 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label3.Text = Math.Round(error, 2).ToString();
+            label3.Text = "Ошибка для показательной функции= " + Math.Round(error, 2).ToString();
 
             return result;
         }
@@ -240,7 +240,7 @@ namespace WindowsFormsApp3
                     XOfInput4++;
                 }
             }
-            label4.Text = Math.Round(error4, 2).ToString();
+            label4.Text = "Ошибка для квадратичной функции= " + Math.Round(error4, 2).ToString();
 
             return rezult4;
         }
@@ -256,18 +256,16 @@ namespace WindowsFormsApp3
                 startLine.Add(inputList[i].First, inputList[i].Second);
             }
             PointPairList lin = linFunk();
-            //
-            //
-            PointPairList chlin = FourthFunk();
             PointPairList step = SecondFunk();
             PointPairList exp = ThirdFunk();
+            PointPairList chlin = FourthFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
-            LineItem myCircle1 = my_Pane.AddCurve("Func", startLine, Color.Green, SymbolType.Circle);
-            LineItem myCircle2 = my_Pane.AddCurve("Lin", lin, Color.Blue, SymbolType.None);
-            LineItem myCircle3 = my_Pane.AddCurve("Step", step, Color.Orange, SymbolType.None);
-            LineItem myCircle4 = my_Pane.AddCurve("NullExp", exp, Color.Red, SymbolType.None);
-            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.None);
+            LineItem myCircle1 = my_Pane.AddCurve("Прямая из 6 начальных точек", startLine, Color.Green, SymbolType.Circle);
+            LineItem myCircle2 = my_Pane.AddCurve("Линейная функция", lin, Color.Blue, SymbolType.None);
+            LineItem myCircle3 = my_Pane.AddCurve("Степенная функция", step, Color.Orange, SymbolType.None);
+            LineItem myCircle4 = my_Pane.AddCurve("Показательная функция", exp, Color.DarkViolet, SymbolType.None);
+            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.Circle);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 
@@ -294,14 +292,20 @@ namespace WindowsFormsApp3
                 //inputList.Add(new Pair<int, double>(300, 12.7));
                 //inputList.Add(new Pair<int, double>(350, 13.2));
 
-                inputList.Add(new Pair<int, double>(1, 1));
-                inputList.Add(new Pair<int, double>(2, 1.5));
-                inputList.Add(new Pair<int, double>(3, 3));
-                inputList.Add(new Pair<int, double>(4, 4.5));
-                inputList.Add(new Pair<int, double>(5, 7));
-                inputList.Add(new Pair<int, double>(6, 8.5));
-
-
+                //inputList.Add(new Pair<int, double>(5, 5.6));
+                //inputList.Add(new Pair<int, double>(7, 9.2));
+                //inputList.Add(new Pair<int, double>(9, 13.6));
+                //inputList.Add(new Pair<int, double>(11, 18.3));
+                //inputList.Add(new Pair<int, double>(13, 23.5));
+                //inputList.Add(new Pair<int, double>(15, 29.1));
+                //Это пример
+                //inputList.Clear();
+                //inputList.Add(new Pair<int, double>(1, 1.0));
+                //inputList.Add(new Pair<int, double>(2, 1.5));
+                //inputList.Add(new Pair<int, double>(3, 3.0));
+                //inputList.Add(new Pair<int, double>(4, 4.5));
+                //inputList.Add(new Pair<int, double>(5, 7.0));
+                //inputList.Add(new Pair<int, double>(6, 8.5));
 
                 isBuilding = true;
                 build(zedGraphControl1);
@@ -315,5 +319,9 @@ namespace WindowsFormsApp3
             InitializeComponent();
         }
 
+        private void zedGraphControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

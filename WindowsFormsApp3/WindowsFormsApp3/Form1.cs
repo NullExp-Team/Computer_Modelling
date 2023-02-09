@@ -105,31 +105,36 @@ namespace WindowsFormsApp3
             var logPoints = inputList.Select(p => new PointPair(Math.Log(p.First), Math.Log(p.Second))).ToList();
 
             int n = logPoints.Count;
-            double sumX = logPoints.Sum(p => p.X);
-            double sumY = logPoints.Sum(p => p.Y);
-            double sumXX = logPoints.Sum(p => p.X * p.X);
-            double sumXY = logPoints.Sum(p => p.X * p.Y);
+            double sumX = logPoints.Sum(p => Math.Round(p.X, 4));
+            double sumY = logPoints.Sum(p => Math.Round(p.Y,4));
+            double sumXX = logPoints.Sum(p => Math.Round(p.X * p.X, 4));
+            double sumXY = logPoints.Sum(p => Math.Round(p.X * p.Y,4));
+
+
 
          
             //double b = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
             //double a = (sumY - b * sumX) / n;
 
-            double delta = sumXX * n - sumX * sumX;
-            double a = (sumXY * n - sumY * sumX) / delta;
-            double b = (sumXX * sumY - sumXY * sumX) / delta;
+            double delta = Math.Round(sumXX * n - sumX * sumX,4);
+            double a = Math.Round((sumXY * n - sumY * sumX) / delta,2);
+            double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta,2);
 
 
             int XOfInput = 0;
             double error = 0;
+            double bb = Math.Round (Math.Exp(b), 2);
+           
             PointPairList rezult = new PointPairList();
             for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
             {
-                rezult.Add(i, Math.Exp(b) * Math.Pow(i, a));
+                double xa = Math.Round(Math.Pow(i, a),2);
+                rezult.Add(i, bb * xa);
 
              
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
                 {
-                    error += Math.Pow(inputList[XOfInput].Second - (Math.Exp(b) * Math.Pow(i, a)), 2);
+                    error += Math.Round(Math.Pow(inputList[XOfInput].Second - Math.Round(bb * xa, 2), 2), 2);
                     XOfInput++;
                 }
             }
@@ -143,14 +148,14 @@ namespace WindowsFormsApp3
             var logPoints = inputList.Select(p => new PointPair((p.First), (p.Second))).ToList();
 
             int n = logPoints.Count;
-            double sumX = logPoints.Sum(p => p.X);
-            double sumY = logPoints.Sum(p => Math.Log(p.Y));
-            double sumXX = logPoints.Sum(p => p.X * p.X);
-            double sumXY = logPoints.Sum(p => p.X * Math.Log(p.Y));
+            double sumX = logPoints.Sum(p => Math.Round( p.X,4));
+            double sumY = logPoints.Sum(p => Math.Round(Math.Log(p.Y),4));
+            double sumXX = logPoints.Sum(p => Math.Round(p.X * p.X, 4));
+            double sumXY = logPoints.Sum(p => Math.Round(p.X * Math.Log(p.Y),4));
 
-            double delta = sumXX * n - sumX * sumX;
-            double a = (sumXY * n - sumY * sumX) / delta;
-            double b = (sumXX * sumY - sumXY * sumX) / delta;
+            double delta = Math.Round(sumXX * n - sumX * sumX,2);
+            double a = Math.Round((sumXY * n - sumY * sumX) / delta,2);
+            double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta,2);
 
             int XOfInput = 0;
             double error = 0;
@@ -161,11 +166,11 @@ namespace WindowsFormsApp3
 
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
                 {
-                    error += Math.Pow(inputList[XOfInput].Second - Math.Exp(b + a * i), 2);
+                    error += Math.Round(Math.Pow(inputList[XOfInput].Second - Math.Round(Math.Exp(b + a * i),4), 2),4);
                     XOfInput++;
                 }
             }
-            label2.Text = Math.Round(error, 2).ToString();
+            label3.Text = Math.Round(error, 2).ToString();
 
             return result;
         }
@@ -259,7 +264,7 @@ namespace WindowsFormsApp3
             LineItem myCircle2 = my_Pane.AddCurve("Lin", lin, Color.Blue, SymbolType.None);
             LineItem myCircle3 = my_Pane.AddCurve("Step", step, Color.Orange, SymbolType.None);
             LineItem myCircle4 = my_Pane.AddCurve("NullExp", exp, Color.Red, SymbolType.None);
-            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.Circle);
+            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 
@@ -271,13 +276,13 @@ namespace WindowsFormsApp3
             Clear(zedGraphControl1);
             try
             {
-                inputList.Clear();
-                inputList.Add(new Pair<int, double>(10, 1.06));
-                inputList.Add(new Pair<int, double>(20, 1.33));
-                inputList.Add(new Pair<int, double>(30, 1.52));
-                inputList.Add(new Pair<int, double>(40, 1.68));
-                inputList.Add(new Pair<int, double>(50, 1.81));
-                inputList.Add(new Pair<int, double>(60, 1.91));
+                //inputList.Clear();
+                //inputList.Add(new Pair<int, double>(10, 1.06));
+                //inputList.Add(new Pair<int, double>(20, 1.33));
+                //inputList.Add(new Pair<int, double>(30, 1.52));
+                //inputList.Add(new Pair<int, double>(40, 1.68));
+                //inputList.Add(new Pair<int, double>(50, 1.81));
+                //inputList.Add(new Pair<int, double>(60, 1.91));
 
                 //inputList.Add(new Pair<int, double>(100, 9.6));
                 //inputList.Add(new Pair<int, double>(150, 10.4));
@@ -285,6 +290,13 @@ namespace WindowsFormsApp3
                 //inputList.Add(new Pair<int, double>(250, 12.1));
                 //inputList.Add(new Pair<int, double>(300, 12.7));
                 //inputList.Add(new Pair<int, double>(350, 13.2));
+
+                inputList.Add(new Pair<int, double>(1, 1));
+                inputList.Add(new Pair<int, double>(2, 1.5));
+                inputList.Add(new Pair<int, double>(3, 3));
+                inputList.Add(new Pair<int, double>(4, 4.5));
+                inputList.Add(new Pair<int, double>(5, 7));
+                inputList.Add(new Pair<int, double>(6, 8.5));
 
 
 

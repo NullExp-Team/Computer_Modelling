@@ -140,7 +140,9 @@ namespace WindowsFormsApp3
             //n* sum(xx**2)*sum((xx * *2) * yy) + sum(xx * yy) * sum(xx) * sum(xx * *2) + sum(xx * *3) * sum(xx) * sum(yy) - ((sum(xx * *2)) * *2) * sum(yy) - (sum(xx) * *2) * sum((xx * *2) * yy) - n * sum(xx * yy) * sum(xx * *3)
             double a = inputList.Count * sumOfXpow2 * sumOfX2multY + sumOfXmultY * sumOfX * sumOfXpow2 + (sumOfXpow2 * sumOfX) * sumOfX * sumOfY - (Math.Pow(sumOfXpow2, 2)) * sumOfY - sumOfXpow2 * sumOfX2multY - inputList.Count * sumOfXmultY * sumOfXpow2 * sumOfX;
             //n*sum(x*y)*sum(x**4)+sum(x**3)*sum(y)*sum(x**2)+sum((x**2)*y)*sum(x)*sum(x**2)-((sum(x**2))**2)*sum(x*y)-sum(y)*sum(x)*sum(x**4)-n*sum(x**3)*sum((x**2)*y)
-            double b = inputList.Count * sumOfXmultY*Math.Pow(sumOfXpow2,2)+ 
+            double b = inputList.Count * sumOfXmultY * Math.Pow(sumOfXpow2, 2) + sumOfXpow2 * sumOfX * sumOfY * sumOfXpow2 + sumOfX2multY * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 2) * sumOfXmultY - sumOfY * sumOfX * (Math.Pow(sumOfXpow2, 2)) - inputList.Count * sumOfXpow2 * sumOfX * sumOfX2multY;
+            //sum(x**4)*sum(x**2)*sum(y)+sum(x**3)*sum(x*y)*sum(x**2)+sum(x**3)*sum(x)*sum((x**2)*y)-((sum(x**2))**2)*sum((x**2)*y)-(sum(x**3)**2)*sum(y)-sum(x)*sum(x*y)*sum(x**4)
+            double c = Math.Pow(sumOfXpow2,2)*sumOfXpow2*sumOfY+sumOfXpow2*sumOfX*sumOfXpow2+sumOfXpow2*sumOfX*sumOfX*sumOfX2multY-Math.Pow(sumOfXpow2,2)*sumOfX2multY-Math.Pow(sumOfXpow2*sumOfX,2)*sumOfY-sumOfX*sumOfXmultY
 
 
 

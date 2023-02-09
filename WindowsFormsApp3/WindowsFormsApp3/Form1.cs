@@ -104,10 +104,48 @@ namespace WindowsFormsApp3
         //{
 
         //}
-        //PointPairList Funk()
-        //{
+        PointPairList FourthFunk()
+        {
+            double sumOfX = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfX += inputList[i].First;
+            }
 
-        //}
+            double sumOfY = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfY += inputList[i].Second;
+            }
+
+            double sumOfXpow2 = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfXpow2 += inputList[i].First * inputList[i].First;
+            }
+
+            double sumOfXmultY = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfXmultY += inputList[i].First * inputList[i].Second;
+            }
+
+            double sumOfX2multY = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfX2multY += inputList[i].First * inputList[i].First * inputList[i].Second;
+            }
+
+            double delta = inputList.Count* (sumOfXpow2 * sumOfXpow2) * (sumOfXpow2) + (2 * sumOfXpow2 * sumOfX) * sumOfX * sumOfXpow2 - (Math.Pow(sumOfXpow2, 3)) - (sumOfXpow2 * (sumOfXpow2 * sumOfXpow2)) - (Math.Pow((sumOfXpow2 * sumOfX), 2)) * inputList.Count;
+            //n* sum(xx**2)*sum((xx * *2) * yy) + sum(xx * yy) * sum(xx) * sum(xx * *2) + sum(xx * *3) * sum(xx) * sum(yy) - ((sum(xx * *2)) * *2) * sum(yy) - (sum(xx) * *2) * sum((xx * *2) * yy) - n * sum(xx * yy) * sum(xx * *3)
+            double a = inputList.Count * sumOfXpow2 * sumOfX2multY + sumOfXmultY * sumOfX * sumOfXpow2 + (sumOfXpow2 * sumOfX) * sumOfX * sumOfY - (Math.Pow(sumOfXpow2, 2)) * sumOfY - sumOfXpow2 * sumOfX2multY - inputList.Count * sumOfXmultY * sumOfXpow2 * sumOfX;
+            //n*sum(x*y)*sum(x**4)+sum(x**3)*sum(y)*sum(x**2)+sum((x**2)*y)*sum(x)*sum(x**2)-((sum(x**2))**2)*sum(x*y)-sum(y)*sum(x)*sum(x**4)-n*sum(x**3)*sum((x**2)*y)
+            double b = inputList.Count * sumOfXmultY*Math.Pow(sumOfXpow2,2)+ 
+
+
+
+            return null;
+        }
 
         public void build(ZedGraphControl Zed_GraphControl)
         {

@@ -160,13 +160,16 @@ namespace WindowsFormsApp3
             int XOfInput = 0;
             double error = 0;
             PointPairList result = new PointPairList();
+
+            double bb = Math.Round(Math.Exp(b), 2);
+
             for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
             {
-                result.Add(i, Math.Exp(b + a * i));
+                result.Add(i, bb * Math.Exp( a * i));
 
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
                 {
-                    error += Math.Round(Math.Pow(inputList[XOfInput].Second - Math.Round(Math.Exp(b + a * i),4), 2),4);
+                    error += Math.Round(Math.Pow(inputList[XOfInput].Second - bb *  Math.Round(Math.Exp( a * i),4), 2),4);
                     XOfInput++;
                 }
             }

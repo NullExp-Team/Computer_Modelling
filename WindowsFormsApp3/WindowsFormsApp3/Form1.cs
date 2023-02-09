@@ -201,32 +201,40 @@ namespace WindowsFormsApp3
                 sumOfX2multY += inputList[i].First * inputList[i].First * inputList[i].Second;
             }
 
-            double delta = inputList.Count* (sumOfXpow2 * sumOfXpow2) * (sumOfXpow2) + (2 * sumOfXpow2 * sumOfX) * sumOfX * sumOfXpow2 - (Math.Pow(sumOfXpow2, 3)) - (sumOfXpow2 * (sumOfXpow2 * sumOfXpow2)) - (Math.Pow((sumOfXpow2 * sumOfX), 2)) * inputList.Count;
-            //n* sum(xx**2)*sum((xx * *2) * yy) + sum(xx * yy) * sum(xx) * sum(xx * *2) + sum(xx * *3) * sum(xx) * sum(yy) - ((sum(xx * *2)) * *2) * sum(yy) - (sum(xx) * *2) * sum((xx * *2) * yy) - n * sum(xx * yy) * sum(xx * *3)
-            double a = inputList.Count * sumOfXpow2 * sumOfX2multY + sumOfXmultY * sumOfX * sumOfXpow2 + (sumOfXpow2 * sumOfX) * sumOfX * sumOfY - (Math.Pow(sumOfXpow2, 2)) * sumOfY - sumOfXpow2 * sumOfX2multY - inputList.Count * sumOfXmultY * sumOfXpow2 * sumOfX;
-            //n*sum(x*y)*sum(x**4)+sum(x**3)*sum(y)*sum(x**2)+sum((x**2)*y)*sum(x)*sum(x**2)-((sum(x**2))**2)*sum(x*y)-sum(y)*sum(x)*sum(x**4)-n*sum(x**3)*sum((x**2)*y)
-            double b = inputList.Count * sumOfXmultY * Math.Pow(sumOfXpow2, 2) + sumOfXpow2 * sumOfX * sumOfY * sumOfXpow2 + sumOfX2multY * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 2) * sumOfXmultY - sumOfY * sumOfX * (Math.Pow(sumOfXpow2, 2)) - inputList.Count * sumOfXpow2 * sumOfX * sumOfX2multY;
-            //sum(x**4)*sum(x**2)*sum(y)+sum(x**3)*sum(x*y)*sum(x**2)+sum(x**3)*sum(x)*sum((x**2)*y)-((sum(x**2))**2)*sum((x**2)*y)-(sum(x**3)**2)*sum(y)-sum(x)*sum(x*y)*sum(x**4)
-            double c = Math.Pow(sumOfXpow2, 2) * sumOfXpow2 * sumOfY + sumOfXpow2 * sumOfX * sumOfXpow2 + sumOfXpow2 * sumOfX * sumOfX * sumOfX2multY - Math.Pow(sumOfXpow2, 2) * sumOfX2multY - Math.Pow(sumOfXpow2 * sumOfX, 2) * sumOfY - sumOfX * sumOfXmultY * sumOfXpow2 * sumOfXpow2;
+            double sumOfXpow3 = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfXpow3 += inputList[i].First * inputList[i].First * inputList[i].First;
+            }
 
-            int XOfInput = 0;
-            double error = 0;
-            PointPairList rezult = new PointPairList();
+            double sumOfXpow4 = 0;
+            for (int i = 0; i < inputList.Count; i++)
+            {
+                sumOfXpow4 += inputList[i].First * inputList[i].First * inputList[i].First * inputList[i].First;
+            }
+
+            double delta = inputList.Count * sumOfXpow4 * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 3) - Math.Pow(sumOfX, 2) * sumOfXpow4 - Math.Pow((sumOfXpow3), 2) * inputList.Count;          
+            double a = (inputList.Count * sumOfXpow2 * sumOfX2multY + sumOfXmultY * sumOfX * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfY - (Math.Pow(sumOfXpow2, 2)) * sumOfY - Math.Pow(sumOfX,2) * sumOfX2multY - inputList.Count * sumOfXmultY * sumOfXpow3) / delta;
+            double b = (inputList.Count * sumOfXmultY * sumOfXpow4 + sumOfXpow3 * sumOfY * sumOfXpow2 + sumOfX2multY * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 2) * sumOfXmultY - sumOfY * sumOfX * sumOfXpow4 - inputList.Count * sumOfXpow3 * sumOfX2multY) / delta;
+            double c = (sumOfXpow4 * sumOfXpow2 * sumOfY + sumOfXpow3 * sumOfXmultY * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfX2multY - Math.Pow(sumOfXpow2, 2) * sumOfX2multY - Math.Pow(sumOfXpow3, 2) * sumOfY - sumOfX * sumOfXmultY * sumOfXpow4) / delta;
+
+            int XOfInput4 = 0;
+            double error4 = 0;
+            PointPairList rezult4 = new PointPairList();
             for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
             {
-                rezult.Add(i, a * Math.Pow(i,2) + b * i + c) ;
+                rezult4.Add(i, a * i*i + b * i + c);
 
-                //считаем ошибку
-                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                //считаем ошибку давай давай считай мы же миллионеры еще посчитаем
+                if (XOfInput4 < inputList.Count && i == inputList[XOfInput4].First)
                 {
-                    error += Math.Pow(inputList[XOfInput].Second - (a * i + b), 2);
-                    XOfInput++;
+                    error4 += Math.Pow(inputList[XOfInput4].Second - (a * i*i + b * i + c), 2);
+                    XOfInput4++;
                 }
             }
-            label1.Text = Math.Round(error, 2).ToString();
+            label4.Text = Math.Round(error4, 2).ToString();
 
-
-            return rezult;
+            return rezult4;
         }
 
         public void build(ZedGraphControl Zed_GraphControl)
@@ -240,6 +248,8 @@ namespace WindowsFormsApp3
                 startLine.Add(inputList[i].First, inputList[i].Second);
             }
             PointPairList lin = linFunk();
+            //
+            //
             PointPairList chlin = FourthFunk();
             PointPairList step = SecondFunk();
             PointPairList exp = ThirdFunk();
@@ -249,7 +259,7 @@ namespace WindowsFormsApp3
             LineItem myCircle2 = my_Pane.AddCurve("Lin", lin, Color.Blue, SymbolType.None);
             LineItem myCircle3 = my_Pane.AddCurve("Step", step, Color.Orange, SymbolType.None);
             LineItem myCircle4 = my_Pane.AddCurve("NullExp", exp, Color.Red, SymbolType.None);
-            // LineItem myCircle3 = my_Pane.AddCurve("Func4", chlin, Color.Red, SymbolType.Circle);
+            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.Circle);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 
@@ -278,8 +288,6 @@ namespace WindowsFormsApp3
 
 
 
-
-
                 isBuilding = true;
                 build(zedGraphControl1);
                 return;
@@ -291,5 +299,6 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
         }
+
     }
 }

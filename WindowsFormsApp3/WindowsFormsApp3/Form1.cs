@@ -142,11 +142,26 @@ namespace WindowsFormsApp3
             //n*sum(x*y)*sum(x**4)+sum(x**3)*sum(y)*sum(x**2)+sum((x**2)*y)*sum(x)*sum(x**2)-((sum(x**2))**2)*sum(x*y)-sum(y)*sum(x)*sum(x**4)-n*sum(x**3)*sum((x**2)*y)
             double b = inputList.Count * sumOfXmultY * Math.Pow(sumOfXpow2, 2) + sumOfXpow2 * sumOfX * sumOfY * sumOfXpow2 + sumOfX2multY * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 2) * sumOfXmultY - sumOfY * sumOfX * (Math.Pow(sumOfXpow2, 2)) - inputList.Count * sumOfXpow2 * sumOfX * sumOfX2multY;
             //sum(x**4)*sum(x**2)*sum(y)+sum(x**3)*sum(x*y)*sum(x**2)+sum(x**3)*sum(x)*sum((x**2)*y)-((sum(x**2))**2)*sum((x**2)*y)-(sum(x**3)**2)*sum(y)-sum(x)*sum(x*y)*sum(x**4)
-            double c = Math.Pow(sumOfXpow2,2)*sumOfXpow2*sumOfY+sumOfXpow2*sumOfX*sumOfXpow2+sumOfXpow2*sumOfX*sumOfX*sumOfX2multY-Math.Pow(sumOfXpow2,2)*sumOfX2multY-Math.Pow(sumOfXpow2*sumOfX,2)*sumOfY-sumOfX*sumOfXmultY
+            double c = Math.Pow(sumOfXpow2, 2) * sumOfXpow2 * sumOfY + sumOfXpow2 * sumOfX * sumOfXpow2 + sumOfXpow2 * sumOfX * sumOfX * sumOfX2multY - Math.Pow(sumOfXpow2, 2) * sumOfX2multY - Math.Pow(sumOfXpow2 * sumOfX, 2) * sumOfY - sumOfX * sumOfXmultY * sumOfXpow2 * sumOfXpow2;
+
+            int XOfInput = 0;
+            double error = 0;
+            PointPairList rezult = new PointPairList();
+            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            {
+                rezult.Add(i, a * Math.Pow(i,2) + b * i + c) ;
+
+                //считаем ошибку
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                {
+                    error += Math.Pow(inputList[XOfInput].Second - (a * i + b), 2);
+                    XOfInput++;
+                }
+            }
+            label1.Text = Math.Round(error, 2).ToString();
 
 
-
-            return null;
+            return rezult;
         }
 
         public void build(ZedGraphControl Zed_GraphControl)
@@ -160,10 +175,12 @@ namespace WindowsFormsApp3
                 startLine.Add(inputList[i].First, inputList[i].Second);
             }
             PointPairList lin = linFunk();
+            PointPairList chlin = FourthFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
             LineItem myCircle1 = my_Pane.AddCurve("Func", startLine, Color.Green, SymbolType.Circle);
             LineItem myCircle2 = my_Pane.AddCurve("Func", lin, Color.Blue, SymbolType.Circle);
+           LineItem myCircle3 = my_Pane.AddCurve("Func4", chlin, Color.Red, SymbolType.Circle);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 

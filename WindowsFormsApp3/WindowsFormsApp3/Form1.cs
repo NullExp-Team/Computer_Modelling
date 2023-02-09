@@ -96,14 +96,79 @@ namespace WindowsFormsApp3
 
             return rezult;
         }
-        //PointPairList SecondFunk()
-        //{
 
-        //}
-        //PointPairList ThirdFunk()
-        //{
 
-        //}
+
+        //Степенная функция
+        PointPairList SecondFunk()
+        {
+            var logPoints = inputList.Select(p => new PointPair(Math.Log(p.First), Math.Log(p.Second))).ToList();
+
+            int n = logPoints.Count;
+            double sumX = logPoints.Sum(p => p.X);
+            double sumY = logPoints.Sum(p => p.Y);
+            double sumXX = logPoints.Sum(p => p.X * p.X);
+            double sumXY = logPoints.Sum(p => p.X * p.Y);
+
+         
+            //double b = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            //double a = (sumY - b * sumX) / n;
+
+            double delta = sumXX * n - sumX * sumX;
+            double a = (sumXY * n - sumY * sumX) / delta;
+            double b = (sumXX * sumY - sumXY * sumX) / delta;
+
+
+            int XOfInput = 0;
+            double error = 0;
+            PointPairList rezult = new PointPairList();
+            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            {
+                rezult.Add(i, Math.Exp(b) * Math.Pow(i, a));
+
+             
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                {
+                    error += Math.Pow(inputList[XOfInput].Second - (Math.Exp(b) * Math.Pow(i, a)), 2);
+                    XOfInput++;
+                }
+            }
+            label2.Text = Math.Round(error, 2).ToString();
+
+            return rezult;
+        }
+
+        PointPairList ThirdFunk()
+        {
+            var logPoints = inputList.Select(p => new PointPair((p.First), (p.Second))).ToList();
+
+            int n = logPoints.Count;
+            double sumX = logPoints.Sum(p => p.X);
+            double sumY = logPoints.Sum(p => Math.Log(p.Y));
+            double sumXX = logPoints.Sum(p => p.X * p.X);
+            double sumXY = logPoints.Sum(p => p.X * Math.Log(p.Y));
+
+            double delta = sumXX * n - sumX * sumX;
+            double a = (sumXY * n - sumY * sumX) / delta;
+            double b = (sumXX * sumY - sumXY * sumX) / delta;
+
+            int XOfInput = 0;
+            double error = 0;
+            PointPairList result = new PointPairList();
+            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            {
+                result.Add(i, Math.Exp(b + a * i));
+
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                {
+                    error += Math.Pow(inputList[XOfInput].Second - Math.Exp(b + a * i), 2);
+                    XOfInput++;
+                }
+            }
+            label2.Text = Math.Round(error, 2).ToString();
+
+            return result;
+        }
         PointPairList FourthFunk()
         {
             double sumOfX = 0;
@@ -186,12 +251,14 @@ namespace WindowsFormsApp3
             //
             //
             PointPairList chlin = FourthFunk();
+            PointPairList step = SecondFunk();
+            PointPairList exp = ThirdFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
-            LineItem myCircle1 = my_Pane.AddCurve("это че вообще?", startLine, Color.Green, SymbolType.Circle);
-            LineItem myCircle2 = my_Pane.AddCurve("Линейная функция", lin, Color.Blue, SymbolType.Circle);
-            //
-            //
+            LineItem myCircle1 = my_Pane.AddCurve("Func", startLine, Color.Green, SymbolType.Circle);
+            LineItem myCircle2 = my_Pane.AddCurve("Lin", lin, Color.Blue, SymbolType.None);
+            LineItem myCircle3 = my_Pane.AddCurve("Step", step, Color.Orange, SymbolType.None);
+            LineItem myCircle4 = my_Pane.AddCurve("NullExp", exp, Color.Red, SymbolType.None);
             LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.Circle);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
@@ -205,13 +272,22 @@ namespace WindowsFormsApp3
             try
             {
                 inputList.Clear();
-                inputList.Add(new Pair<int, double>(1, 1.0));
-                inputList.Add(new Pair<int, double>(2, 1.5));
-                inputList.Add(new Pair<int, double>(3, 3.0));
-                inputList.Add(new Pair<int, double>(4, 4.5));
-                inputList.Add(new Pair<int, double>(5, 7.0));
-                inputList.Add(new Pair<int, double>(6, 8.5));
-                  
+                inputList.Add(new Pair<int, double>(10, 1.06));
+                inputList.Add(new Pair<int, double>(20, 1.33));
+                inputList.Add(new Pair<int, double>(30, 1.52));
+                inputList.Add(new Pair<int, double>(40, 1.68));
+                inputList.Add(new Pair<int, double>(50, 1.81));
+                inputList.Add(new Pair<int, double>(60, 1.91));
+
+                //inputList.Add(new Pair<int, double>(100, 9.6));
+                //inputList.Add(new Pair<int, double>(150, 10.4));
+                //inputList.Add(new Pair<int, double>(200, 11.2));
+                //inputList.Add(new Pair<int, double>(250, 12.1));
+                //inputList.Add(new Pair<int, double>(300, 12.7));
+                //inputList.Add(new Pair<int, double>(350, 13.2));
+
+
+
                 isBuilding = true;
                 build(zedGraphControl1);
                 return;

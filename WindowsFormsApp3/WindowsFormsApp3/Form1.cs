@@ -96,10 +96,43 @@ namespace WindowsFormsApp3
 
             return rezult;
         }
-        //PointPairList SecondFunk()
-        //{
 
-        //}
+        //Степенная функция
+        PointPairList SecondFunk()
+        {
+
+          
+            var logPoints = inputList.Select(p => new PointPair(Math.Log(p.First), Math.Log(p.Second))).ToList();
+
+            int n = logPoints.Count;
+            double sumX = logPoints.Sum(p => p.X);
+            double sumY = logPoints.Sum(p => p.Y);
+            double sumXX = logPoints.Sum(p => p.X * p.X);
+            double sumXY = logPoints.Sum(p => p.X * p.Y);
+
+         
+            double b = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            double a = (sumY - b * sumX) / n;
+
+       
+            int XOfInput = 0;
+            double error = 0;
+            PointPairList rezult = new PointPairList();
+            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            {
+                rezult.Add(i, Math.Exp(a) * Math.Pow(i, b));
+
+             
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                {
+                    error += Math.Pow(inputList[XOfInput].Second - (Math.Exp(a) * Math.Pow(i, b)), 2);
+                    XOfInput++;
+                }
+            }
+            label2.Text = Math.Round(error, 2).ToString();
+
+            return rezult;
+        }
         //PointPairList ThirdFunk()
         //{
 
@@ -176,11 +209,13 @@ namespace WindowsFormsApp3
             }
             PointPairList lin = linFunk();
             PointPairList chlin = FourthFunk();
+            PointPairList step = SecondFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
             LineItem myCircle1 = my_Pane.AddCurve("Func", startLine, Color.Green, SymbolType.Circle);
-            LineItem myCircle2 = my_Pane.AddCurve("Func", lin, Color.Blue, SymbolType.Circle);
-           LineItem myCircle3 = my_Pane.AddCurve("Func4", chlin, Color.Red, SymbolType.Circle);
+            LineItem myCircle2 = my_Pane.AddCurve("Lin", lin, Color.Blue, SymbolType.None);
+            LineItem myCircle3 = my_Pane.AddCurve("Step", step, Color.Red, SymbolType.None);
+          //  LineItem myCircle3 = my_Pane.AddCurve("Func4", chlin, Color.Red, SymbolType.Circle);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 

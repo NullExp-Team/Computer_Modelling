@@ -31,6 +31,8 @@ namespace WindowsFormsApp3
         bool isBuilding = false;
         List<Pair<int, double>> pointList = new List<Pair<int, double>>();
 
+        List<double> errors = new List<double>();
+
         private void Clear(ZedGraphControl Zed_GraphControl)
         {
             zedGraphControl1.GraphPane.CurveList.Clear();
@@ -66,7 +68,6 @@ namespace WindowsFormsApp3
             label6.Text = "A= " + Math.Round(a, 2).ToString();
             label7.Text = "B= " + Math.Round(b, 2).ToString();
 
-
            
             int xi = 0;
             double error = 0;
@@ -83,6 +84,7 @@ namespace WindowsFormsApp3
                     xi++;
                 }
             }
+            errors.Add(error);
             label1.Text = "Ошибка линнейной функции: " + Math.Round(error, 2).ToString();
 
 
@@ -109,7 +111,7 @@ namespace WindowsFormsApp3
             double a = Math.Round((sumXY * n - sumY * sumX) / delta, 2);
             double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta, 2);
             label9.Text = "A= " + Math.Round(a, 2).ToString();
-            label8.Text = "B= " + Math.Round(b, 2).ToString();
+            label8.Text = "B= " + Math.Round(Math.Exp(b) , 2).ToString();
 
             int xi = 0;
             double error = 0;
@@ -129,6 +131,7 @@ namespace WindowsFormsApp3
                     xi++;
                 }
             }
+            errors.Add(error);
             label2.Text = "Ошибка степенной функции: " + Math.Round(error, 2).ToString();
 
             return result;
@@ -149,7 +152,7 @@ namespace WindowsFormsApp3
             double a = Math.Round((sumXY * n - sumY * sumX) / delta, 2);
             double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta, 2);
             label12.Text = "A= " + Math.Round(a, 2).ToString();
-            label11.Text = "B= " + Math.Round(b, 2).ToString();
+            label11.Text = "B= " + Math.Round(Math.Exp(b), 2).ToString();
 
             int xi = 0;
             double error = 0;
@@ -168,6 +171,7 @@ namespace WindowsFormsApp3
                     xi++;
                 }
             }
+            errors.Add(error);
             label3.Text = "Ошибка показательной функции: " + Math.Round(error, 2).ToString();
 
             return result;
@@ -190,11 +194,12 @@ namespace WindowsFormsApp3
             double a = (pointList.Count * sumXX * sumXXY + sumXY * sumX * sumXX + sumXXX * sumX * sumY - (Math.Pow(sumXX, 2)) * sumY - Math.Pow(sumX, 2) * sumXXY - pointList.Count * sumXY * sumXXX) / delta;
             double b = (pointList.Count * sumXY * sumXXXX + sumXXX * sumY * sumXX + sumXXY * sumX * sumXX - Math.Pow(sumXX, 2) * sumXY - sumY * sumX * sumXXXX - pointList.Count * sumXXX * sumXXY) / delta;
             double c = (sumXXXX * sumXX * sumY + sumXXX * sumXY * sumXX + sumXXX * sumX * sumXXY - Math.Pow(sumXX, 2) * sumXXY - Math.Pow(sumXXX, 2) * sumY - sumX * sumXY * sumXXXX) / delta;
+            
             label15.Text = "A= " + Math.Round(a, 2).ToString();
             label14.Text = "B= " + Math.Round(b, 2).ToString();
             label17.Text = "C= " + Math.Round(c, 2).ToString();
 
-            int XOfInput = 0;
+            int xi = 0;
             double error = 0;
             PointPairList result = new PointPairList();
             for (int i = pointList[0].First; i <= pointList.Last().First; i += 1)
@@ -202,12 +207,13 @@ namespace WindowsFormsApp3
                 
                 result.Add(i, a * i * i + b * i + c);
 
-                if (XOfInput < pointList.Count && i == pointList[XOfInput].First)
+                if (xi < pointList.Count && i == pointList[xi].First)
                 {
-                    error += Math.Pow(pointList[XOfInput].Second - (a * i * i + b * i + c), 2);
-                    XOfInput++;
+                    error += Math.Pow(pointList[xi].Second - (a * i * i + b * i + c), 2);
+                    xi++;
                 }
             }
+            errors.Add(error);
             label4.Text = "Ошибка квадратичной функции: " + Math.Round(error, 2).ToString();
 
             return result;
@@ -229,14 +235,36 @@ namespace WindowsFormsApp3
             PointPairList exp = ExpFunk();
             PointPairList chlin = FourthFunk();
 
+            String str = "";
+
+            int ind = errors.IndexOf(errors.Min());
+
+            switch(ind)
+            {
+                case 0:
+                    str = "Линейная";
+                    break;
+                case 1:
+                    str = "Степенная";
+                    break;
+                case 2:
+                    str = "Показательная";
+                    break;
+                case 3:
+                    str = "Квадратичная";
+                    break;
+                default: str = "";
+                    break;
+            }
+            label18.Text = "Минимальная ошибка: " + str;
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
-            LineItem myCircle1 = my_Pane.AddCurve("Оригинал", startLine, Color.Blue, SymbolType.Diamond);
+            LineItem myCircle1 = my_Pane.AddCurve("Эксперимент", startLine, Color.Blue, SymbolType.Diamond);
             myCircle1.Line.IsVisible = false;
             myCircle1.Symbol.Size = 6;
             LineItem myCircle2 = my_Pane.AddCurve("Линейная", lin, Color.Black, SymbolType.None);
             LineItem myCircle3 = my_Pane.AddCurve("Степенная", step, Color.Red, SymbolType.None);
             LineItem myCircle4 = my_Pane.AddCurve("Показательная", exp, Color.Orange, SymbolType.None);
-            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная", chlin, Color.Azure, SymbolType.None);
+            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная", chlin, Color.Purple, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 

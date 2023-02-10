@@ -50,6 +50,7 @@ namespace WindowsFormsApp3
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // zedGraphControl1
@@ -135,9 +136,8 @@ namespace WindowsFormsApp3
             this.label6.Location = new System.Drawing.Point(976, 241);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 16);
+            this.label6.Size = new System.Drawing.Size(0, 16);
             this.label6.TabIndex = 7;
-            this.label6.Text = "А=";
             // 
             // label7
             // 
@@ -145,9 +145,8 @@ namespace WindowsFormsApp3
             this.label7.Location = new System.Drawing.Point(976, 257);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 16);
+            this.label7.Size = new System.Drawing.Size(0, 16);
             this.label7.TabIndex = 8;
-            this.label7.Text = "B=";
             // 
             // label8
             // 
@@ -155,9 +154,8 @@ namespace WindowsFormsApp3
             this.label8.Location = new System.Drawing.Point(976, 327);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(23, 16);
+            this.label8.Size = new System.Drawing.Size(0, 16);
             this.label8.TabIndex = 11;
-            this.label8.Text = "B=";
             // 
             // label9
             // 
@@ -165,9 +163,8 @@ namespace WindowsFormsApp3
             this.label9.Location = new System.Drawing.Point(976, 311);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 16);
+            this.label9.Size = new System.Drawing.Size(0, 16);
             this.label9.TabIndex = 10;
-            this.label9.Text = "А=";
             // 
             // label10
             // 
@@ -185,9 +182,8 @@ namespace WindowsFormsApp3
             this.label11.Location = new System.Drawing.Point(976, 400);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 16);
+            this.label11.Size = new System.Drawing.Size(0, 16);
             this.label11.TabIndex = 14;
-            this.label11.Text = "B=";
             // 
             // label12
             // 
@@ -195,9 +191,8 @@ namespace WindowsFormsApp3
             this.label12.Location = new System.Drawing.Point(976, 384);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(23, 16);
+            this.label12.Size = new System.Drawing.Size(0, 16);
             this.label12.TabIndex = 13;
-            this.label12.Text = "А=";
             // 
             // label13
             // 
@@ -215,9 +210,8 @@ namespace WindowsFormsApp3
             this.label14.Location = new System.Drawing.Point(976, 481);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(23, 16);
+            this.label14.Size = new System.Drawing.Size(0, 16);
             this.label14.TabIndex = 17;
-            this.label14.Text = "B=";
             // 
             // label15
             // 
@@ -225,9 +219,8 @@ namespace WindowsFormsApp3
             this.label15.Location = new System.Drawing.Point(976, 465);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(23, 16);
+            this.label15.Size = new System.Drawing.Size(0, 16);
             this.label15.TabIndex = 16;
-            this.label15.Text = "А=";
             // 
             // label16
             // 
@@ -245,15 +238,23 @@ namespace WindowsFormsApp3
             this.label17.Location = new System.Drawing.Point(976, 497);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(23, 16);
+            this.label17.Size = new System.Drawing.Size(0, 16);
             this.label17.TabIndex = 18;
-            this.label17.Text = "C=";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(979, 14);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(0, 16);
+            this.label18.TabIndex = 19;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1299, 683);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label15);
@@ -303,6 +304,7 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }
 

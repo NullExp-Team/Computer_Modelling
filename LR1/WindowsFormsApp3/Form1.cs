@@ -84,7 +84,7 @@ namespace WindowsFormsApp3
             PointPairList rezult = new PointPairList();
             for (int i = 1; i < 7; i += 1) 
             {
-                //if (i >= 1 && a * i + b >= 1) 
+                
                     rezult.Add(i, a * i + b);
 
                 //считаем ошибку
@@ -94,7 +94,7 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label1.Text = "Ошибка для линнейной функции= "+Math.Round(error, 2).ToString();
+            label1.Text = "Ошибка линейной функции= " + Math.Round(error, 2).ToString();
 
 
             return rezult;
@@ -120,7 +120,7 @@ namespace WindowsFormsApp3
             double a = Math.Round((sumXY * n - sumY * sumX) / delta,2);
             double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta,2);
             label9.Text = "A= " + Math.Round(a, 2).ToString();
-            label8.Text = "B= " + Math.Round(b, 2).ToString();
+            label8.Text = "β= " + Math.Round(Math.Exp(b), 2).ToString();
 
             int XOfInput = 0;
             double error = 0;
@@ -130,7 +130,7 @@ namespace WindowsFormsApp3
             for (int i = 1; i < 7; i += 1)
             {
                 double xa = Math.Round(Math.Pow(i, a),2);
-                //if (i >= 1 && bb * xa >= 1)
+                
                     rezult.Add(i, bb * xa);
 
              
@@ -140,12 +140,12 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label2.Text = "Ошибка для степенной функции= " + Math.Round(error, 2).ToString();
+            label2.Text = "Ошибка степенной функции= " + Math.Round(error, 2).ToString();
 
             return rezult;
         }
 
-        //Степенная функция
+        //Показательная функция
         PointPairList ThirdFunk()
         {
             var logPoints = inputList.Select(p => new PointPair((p.First), (p.Second))).ToList();
@@ -160,7 +160,7 @@ namespace WindowsFormsApp3
             double a = Math.Round((sumXY * n - sumY * sumX) / delta,2);
             double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta,2);
             label12.Text = "A= " + Math.Round(a, 2).ToString();
-            label11.Text = "B= " + Math.Round(b, 2).ToString();
+            label11.Text = "β= " + Math.Round(Math.Exp(b), 2).ToString();
 
             int XOfInput = 0;
             double error = 0;
@@ -170,7 +170,7 @@ namespace WindowsFormsApp3
 
             for (int i = 1; i < 7; i += 1)
             {
-               // if (i >= 1 && b * Math.Exp(a * i) >= 1)
+               
                     result.Add(i, bb * Math.Exp(a * i));
 
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
@@ -179,7 +179,7 @@ namespace WindowsFormsApp3
                     XOfInput++;
                 }
             }
-            label3.Text = "Ошибка для показательной функции= " + Math.Round(error, 2).ToString();
+            label3.Text = "Ошибка показательной функции= " + Math.Round(error, 2).ToString();
 
             return result;
         }
@@ -240,7 +240,7 @@ namespace WindowsFormsApp3
             PointPairList rezult4 = new PointPairList();
             for (int i = 1; i < 7; i += 1)
             {
-                //if (i >= 1 && a * i * i + b * i + c >= 1)
+                
                     rezult4.Add(i, a * i*i + b * i + c);
 
                 //считаем ошибку давай давай считай мы же миллионеры еще посчитаем
@@ -250,7 +250,8 @@ namespace WindowsFormsApp3
                     XOfInput4++;
                 }
             }
-            label4.Text = "Ошибка для квадратичной функции= " + Math.Round(error4, 2).ToString();
+            label4.Text = "Ошибка квадратичной функции= " + Math.Round(error4, 2).ToString();
+            label18.Text = "В данной задаче лучшей аппроксимирующей функцией является квадратичная.";
 
             return rezult4;
         }
@@ -272,11 +273,13 @@ namespace WindowsFormsApp3
             PointPairList chlin = FourthFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
-            LineItem myCircle1 = my_Pane.AddCurve("6 начальных точек", startLine, Color.Green, SymbolType.Diamond);
+            LineItem myCircle1 = my_Pane.AddCurve("6 начальных точек", startLine, Color.Orange, SymbolType.Circle);
             myCircle1.Line.IsVisible = false;
             myCircle1.Symbol.Size = 6;
+            myCircle1.Symbol.Fill.Color = Color.Orange;
+            myCircle1.Symbol.Fill.Type = FillType.Solid;
             LineItem myCircle2 = my_Pane.AddCurve("Линейная функция", lin, Color.Blue, SymbolType.None);
-            LineItem myCircle3 = my_Pane.AddCurve("Степенная функция", step, Color.Orange, SymbolType.None);
+            LineItem myCircle3 = my_Pane.AddCurve("Степенная функция", step, Color.Green, SymbolType.None);
             LineItem myCircle4 = my_Pane.AddCurve("Показательная функция", exp, Color.DarkViolet, SymbolType.None);
             LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.None);
             zedGraphControl1.AxisChange();
@@ -290,15 +293,6 @@ namespace WindowsFormsApp3
             Clear(zedGraphControl1);
             try
             {
-                //inputList.Clear();
-                //inputList.Add(new Pair<int, double>(5, 5.6));
-                //inputList.Add(new Pair<int, double>(7, 9.2));
-                //inputList.Add(new Pair<int, double>(9, 13.6));
-                //inputList.Add(new Pair<int, double>(11, 18.3));
-                //inputList.Add(new Pair<int, double>(13, 23.5));
-                //inputList.Add(new Pair<int, double>(15, 29.1));
-
-                //Это пример
                 inputList.Clear();
                 inputList.Add(new Pair<int, double>(1, 1.0));
                 inputList.Add(new Pair<int, double>(2, 1.5));

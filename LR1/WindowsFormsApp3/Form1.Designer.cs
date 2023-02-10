@@ -50,6 +50,7 @@ namespace WindowsFormsApp3
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // zedGraphControl1
@@ -63,7 +64,7 @@ namespace WindowsFormsApp3
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(716, 426);
+            this.zedGraphControl1.Size = new System.Drawing.Size(716, 455);
             this.zedGraphControl1.TabIndex = 0;
             this.zedGraphControl1.UseExtendedPrintDialog = true;
             this.zedGraphControl1.Load += new System.EventHandler(this.zedGraphControl1_Load);
@@ -158,9 +159,9 @@ namespace WindowsFormsApp3
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(732, 266);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(20, 13);
+            this.label8.Size = new System.Drawing.Size(19, 13);
             this.label8.TabIndex = 11;
-            this.label8.Text = "B=";
+            this.label8.Text = "β=";
             // 
             // label9
             // 
@@ -185,9 +186,9 @@ namespace WindowsFormsApp3
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(732, 325);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 13);
+            this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 14;
-            this.label11.Text = "B=";
+            this.label11.Text = "β=";
             // 
             // label12
             // 
@@ -243,11 +244,21 @@ namespace WindowsFormsApp3
             this.label17.TabIndex = 18;
             this.label17.Text = "C=";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(30, 480);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(0, 20);
+            this.label18.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 555);
+            this.ClientSize = new System.Drawing.Size(942, 528);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label15);
@@ -297,6 +308,7 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }
 

@@ -82,7 +82,7 @@ namespace WindowsFormsApp3
             int XOfInput = 0;
             double error = 0;
             PointPairList rezult = new PointPairList();
-            for (int i = 1; i < 7; i += 1) 
+            for (int i = inputList[0].First; i <= inputList.Last().First; i += 1) 
             {
                 //if (i >= 1 && a * i + b >= 1) 
                     rezult.Add(i, a * i + b);
@@ -127,7 +127,7 @@ namespace WindowsFormsApp3
             double bb = Math.Round (Math.Exp(b), 2);
            
             PointPairList rezult = new PointPairList();
-            for (int i = 1; i < 7; i += 1)
+            for (int i = inputList[0].First; i <= inputList.Last().First; i += 1)
             {
                 double xa = Math.Round(Math.Pow(i, a),2);
                 //if (i >= 1 && bb * xa >= 1)
@@ -168,7 +168,7 @@ namespace WindowsFormsApp3
 
             double bb = Math.Round(Math.Exp(b), 2);
 
-            for (int i = 1; i < 7; i += 1)
+            for (int i = inputList[0].First; i <= inputList.Last().First; i += 1)
             {
                // if (i >= 1 && b * Math.Exp(a * i) >= 1)
                     result.Add(i, bb * Math.Exp(a * i));
@@ -238,7 +238,7 @@ namespace WindowsFormsApp3
             int XOfInput4 = 0;
             double error4 = 0;
             PointPairList rezult4 = new PointPairList();
-            for (int i = 1; i < 7; i += 1)
+            for (int i = inputList[0].First; i <= inputList.Last().First; i += 1)
             {
                 //if (i >= 1 && a * i * i + b * i + c >= 1)
                     rezult4.Add(i, a * i*i + b * i + c);
@@ -306,6 +306,13 @@ namespace WindowsFormsApp3
                 inputList.Add(new Pair<int, double>(4, 4.5));
                 inputList.Add(new Pair<int, double>(5, 7.0));
                 inputList.Add(new Pair<int, double>(6, 8.5));
+
+                //inputList.Add(new Pair<int, double>(2, 2.8));
+                //inputList.Add(new Pair<int, double>(3, 2.4));
+                //inputList.Add(new Pair<int, double>(4, 2.0));
+                //inputList.Add(new Pair<int, double>(5, 1.5));
+                //inputList.Add(new Pair<int, double>(6, 1.3));
+                //inputList.Add(new Pair<int, double>(7, 1.2));
 
                 isBuilding = true;
                 build(zedGraphControl1);

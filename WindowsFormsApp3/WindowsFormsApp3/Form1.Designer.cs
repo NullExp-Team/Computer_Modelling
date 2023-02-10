@@ -55,7 +55,7 @@ namespace WindowsFormsApp3
             // zedGraphControl1
             // 
             this.zedGraphControl1.Location = new System.Drawing.Point(13, 14);
-            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(5);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -72,10 +72,10 @@ namespace WindowsFormsApp3
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(365, 545);
+            this.button1.Location = new System.Drawing.Point(12, 545);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(312, 44);
+            this.button1.Size = new System.Drawing.Size(956, 44);
             this.button1.TabIndex = 1;
             this.button1.Text = "Build";
             this.button1.UseVisualStyleBackColor = true;

@@ -50,30 +50,21 @@ namespace WindowsFormsApp3
 
         PointPairList linFunk()
         {
-            double sumOfX = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfX += inputList[i].First;
-            }
-            double sumOfY = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfY += inputList[i].Second;
-            }
-            double sumOfXpow2 = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXpow2 += inputList[i].First * inputList[i].First;
-            }
-            double sumOfXmultY = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXmultY += inputList[i].First * inputList[i].Second;
-            }
-            // метод Крамера
-            double delta = sumOfXpow2 * inputList.Count - sumOfX * sumOfX;
-            double a = (sumOfXmultY * inputList.Count - sumOfY * sumOfX) / delta;
-            double b = (sumOfXpow2 * sumOfY - sumOfXmultY * sumOfX) / delta;
+            var logPoints = inputList.Select(p => new PointPair(p.First, p.Second)).ToList();
+
+            int n = logPoints.Count;
+            double sumX = logPoints.Sum(p => Math.Round(p.X, 4));
+            double sumY = logPoints.Sum(p => Math.Round(p.Y, 4));
+            double sumXX = logPoints.Sum(p => Math.Round(p.X * p.X, 4));
+            double sumXY = logPoints.Sum(p => Math.Round(p.X * p.Y, 4));
+
+            //double b = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            //double a = (sumY - b * sumX) / n;
+
+            double delta = Math.Round(sumXX * n - sumX * sumX, 4);
+            double a = Math.Round((sumXY * n - sumY * sumX) / delta, 2);
+            double b = Math.Round((sumXX * sumY - sumXY * sumX) / delta, 2);
+
             label6.Text = "A= " + Math.Round(a,2).ToString();
             label7.Text = "B= " + Math.Round(b,2).ToString();
             //y = a*x + b
@@ -85,12 +76,13 @@ namespace WindowsFormsApp3
             for (int i = inputList[0].First; i <= inputList.Last().First; i += 1) 
             {
                 //if (i >= 1 && a * i + b >= 1) 
-                    rezult.Add(i, a * i + b);
+                double x = Math.Round(a * i, 2);
+                    rezult.Add(i, Math.Round(x + b,2));
 
                 //считаем ошибку
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First) 
                 {
-                    error += Math.Pow(inputList[XOfInput].Second - (a * i + b), 2);
+                    error += Math.Pow(Math.Round(inputList[XOfInput].Second - (x + b),2), 2);
                     XOfInput++;
                 }
             }

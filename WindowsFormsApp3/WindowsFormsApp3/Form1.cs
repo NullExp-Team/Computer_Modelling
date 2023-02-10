@@ -72,12 +72,12 @@ namespace WindowsFormsApp3
             // рисуем полученную функцию
             int XOfInput = 0;
             double error = 0;
-            PointPairList rezult = new PointPairList();
+            PointPairList result = new PointPairList();
             for (int i = inputList[0].First; i <= inputList.Last().First; i += 1) 
             {
                 //if (i >= 1 && a * i + b >= 1) 
                 double x = Math.Round(a * i, 2);
-                    rezult.Add(i, Math.Round(x + b,2));
+                result.Add(i, Math.Round(x + b,2));
 
                 //считаем ошибку
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First) 
@@ -89,7 +89,7 @@ namespace WindowsFormsApp3
             label1.Text = "Ошибка для линнейной функции= "+Math.Round(error, 2).ToString();
 
 
-            return rezult;
+            return result;
         }
 
 
@@ -118,12 +118,12 @@ namespace WindowsFormsApp3
             double error = 0;
             double bb = Math.Round (Math.Exp(b), 2);
            
-            PointPairList rezult = new PointPairList();
+            PointPairList result = new PointPairList();
             for (int i = inputList[0].First; i <= inputList.Last().First; i += 1)
             {
                 double xa = Math.Round(Math.Pow(i, a),2);
                 //if (i >= 1 && bb * xa >= 1)
-                    rezult.Add(i, bb * xa);
+                    result.Add(i, bb * xa);
 
              
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
@@ -134,7 +134,7 @@ namespace WindowsFormsApp3
             }
             label2.Text = "Ошибка для степенной функции= " + Math.Round(error, 2).ToString();
 
-            return rezult;
+            return result;
         }
 
         //Степенная функция
@@ -177,74 +177,54 @@ namespace WindowsFormsApp3
         }
         PointPairList FourthFunk()
         {
-            double sumOfX = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfX += inputList[i].First;
-            }
+            var logPoints = inputList.Select(p => new PointPair((p.First), (p.Second))).ToList();
 
-            double sumOfY = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfY += inputList[i].Second;
-            }
+            double sumX = logPoints.Sum(p => Math.Round(p.X, 4));
+            double sumY = logPoints.Sum(p => Math.Round(p.Y, 4));
+            double sumXX = logPoints.Sum(p => Math.Round(p.X * p.X, 4));
+            double sumXY = logPoints.Sum(p => Math.Round(p.X * p.Y, 4));
+            double sumXXY = logPoints.Sum(p => Math.Round(p.X * p.X * p.Y, 4));
 
-            double sumOfXpow2 = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXpow2 += inputList[i].First * inputList[i].First;
-            }
+            double sumXXX = logPoints.Sum(p => Math.Round(p.X * p.X * p.X, 4));
+            double sumXXXX = logPoints.Sum(p => Math.Round(p.X * p.X * p.X * p.X, 4));
 
-            double sumOfXmultY = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXmultY += inputList[i].First * inputList[i].Second;
-            }
+           
 
-            double sumOfX2multY = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfX2multY += inputList[i].First * inputList[i].First * inputList[i].Second;
-            }
+             
 
-            double sumOfXpow3 = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXpow3 += inputList[i].First * inputList[i].First * inputList[i].First;
-            }
+          
 
-            double sumOfXpow4 = 0;
-            for (int i = 0; i < inputList.Count; i++)
-            {
-                sumOfXpow4 += inputList[i].First * inputList[i].First * inputList[i].First * inputList[i].First;
-            }
+             
 
-            double delta = inputList.Count * sumOfXpow4 * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 3) - Math.Pow(sumOfX, 2) * sumOfXpow4 - Math.Pow((sumOfXpow3), 2) * inputList.Count;          
-            double a = (inputList.Count * sumOfXpow2 * sumOfX2multY + sumOfXmultY * sumOfX * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfY - (Math.Pow(sumOfXpow2, 2)) * sumOfY - Math.Pow(sumOfX,2) * sumOfX2multY - inputList.Count * sumOfXmultY * sumOfXpow3) / delta;
-            double b = (inputList.Count * sumOfXmultY * sumOfXpow4 + sumOfXpow3 * sumOfY * sumOfXpow2 + sumOfX2multY * sumOfX * sumOfXpow2 - Math.Pow(sumOfXpow2, 2) * sumOfXmultY - sumOfY * sumOfX * sumOfXpow4 - inputList.Count * sumOfXpow3 * sumOfX2multY) / delta;
-            double c = (sumOfXpow4 * sumOfXpow2 * sumOfY + sumOfXpow3 * sumOfXmultY * sumOfXpow2 + sumOfXpow3 * sumOfX * sumOfX2multY - Math.Pow(sumOfXpow2, 2) * sumOfX2multY - Math.Pow(sumOfXpow3, 2) * sumOfY - sumOfX * sumOfXmultY * sumOfXpow4) / delta;
+           
+
+          
+
+            double delta = inputList.Count * sumXXXX * sumXX + sumXXX * sumX * sumXX + sumXXX * sumX * sumXX - Math.Pow(sumXX, 3) - Math.Pow(sumX, 2) * sumXXXX - Math.Pow((sumXXX), 2) * inputList.Count;          
+            double a = (inputList.Count * sumXX * sumXXY + sumXY * sumX * sumXX + sumXXX * sumX * sumY - (Math.Pow(sumXX, 2)) * sumY - Math.Pow(sumX,2) * sumXXY - inputList.Count * sumXY * sumXXX) / delta;
+            double b = (inputList.Count * sumXY * sumXXXX + sumXXX * sumY * sumXX + sumXXY * sumX * sumXX - Math.Pow(sumXX, 2) * sumXY - sumY * sumX * sumXXXX - inputList.Count * sumXXX * sumXXY) / delta;
+            double c = (sumXXXX * sumXX * sumY + sumXXX * sumXY * sumXX + sumXXX * sumX * sumXXY - Math.Pow(sumXX, 2) * sumXXY - Math.Pow(sumXXX, 2) * sumY - sumX * sumXY * sumXXXX) / delta;
             label15.Text = "A= " + Math.Round(a, 2).ToString();
             label14.Text = "B= " + Math.Round(b, 2).ToString();
             label17.Text = "C= " + Math.Round(c, 2).ToString();
 
-            int XOfInput4 = 0;
-            double error4 = 0;
-            PointPairList rezult4 = new PointPairList();
+            int XOfInput = 0;
+            double error = 0;
+            PointPairList result = new PointPairList();
             for (int i = inputList[0].First; i <= inputList.Last().First; i += 1)
             {
                 //if (i >= 1 && a * i * i + b * i + c >= 1)
-                    rezult4.Add(i, a * i*i + b * i + c);
+                    result.Add(i, a * i*i + b * i + c);
 
-                //считаем ошибку давай давай считай мы же миллионеры еще посчитаем
-                if (XOfInput4 < inputList.Count && i == inputList[XOfInput4].First)
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
                 {
-                    error4 += Math.Pow(inputList[XOfInput4].Second - (a * i*i + b * i + c), 2);
-                    XOfInput4++;
+                    error += Math.Pow(inputList[XOfInput].Second - (a * i*i + b * i + c), 2);
+                    XOfInput++;
                 }
             }
-            label4.Text = "Ошибка для квадратичной функции= " + Math.Round(error4, 2).ToString();
+            label4.Text = "Ошибка для квадратичной функции= " + Math.Round(error, 2).ToString();
 
-            return rezult4;
+            return result;
         }
 
         public void build(ZedGraphControl Zed_GraphControl)
@@ -282,29 +262,22 @@ namespace WindowsFormsApp3
             Clear(zedGraphControl1);
             try
             {
-                //inputList.Clear();
-                //inputList.Add(new Pair<int, double>(5, 5.6));
-                //inputList.Add(new Pair<int, double>(7, 9.2));
-                //inputList.Add(new Pair<int, double>(9, 13.6));
-                //inputList.Add(new Pair<int, double>(11, 18.3));
-                //inputList.Add(new Pair<int, double>(13, 23.5));
-                //inputList.Add(new Pair<int, double>(15, 29.1));
-
-                //Это пример
+               
                 inputList.Clear();
-                inputList.Add(new Pair<int, double>(1, 1.0));
-                inputList.Add(new Pair<int, double>(2, 1.5));
-                inputList.Add(new Pair<int, double>(3, 3.0));
-                inputList.Add(new Pair<int, double>(4, 4.5));
-                inputList.Add(new Pair<int, double>(5, 7.0));
-                inputList.Add(new Pair<int, double>(6, 8.5));
 
-                //inputList.Add(new Pair<int, double>(2, 2.8));
-                //inputList.Add(new Pair<int, double>(3, 2.4));
-                //inputList.Add(new Pair<int, double>(4, 2.0));
-                //inputList.Add(new Pair<int, double>(5, 1.5));
-                //inputList.Add(new Pair<int, double>(6, 1.3));
-                //inputList.Add(new Pair<int, double>(7, 1.2));
+                //inputList.Add(new Pair<int, double>(1, 1.0));
+                //inputList.Add(new Pair<int, double>(2, 1.5));
+                //inputList.Add(new Pair<int, double>(3, 3.0));
+                //inputList.Add(new Pair<int, double>(4, 4.5));
+                //inputList.Add(new Pair<int, double>(5, 7.0));
+                //inputList.Add(new Pair<int, double>(6, 8.5));
+
+                inputList.Add(new Pair<int, double>(2, 2.8));
+                inputList.Add(new Pair<int, double>(3, 2.4));
+                inputList.Add(new Pair<int, double>(4, 2.0));
+                inputList.Add(new Pair<int, double>(5, 1.5));
+                inputList.Add(new Pair<int, double>(6, 1.3));
+                inputList.Add(new Pair<int, double>(7, 1.2));
 
                 isBuilding = true;
                 build(zedGraphControl1);

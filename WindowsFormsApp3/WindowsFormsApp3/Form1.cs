@@ -82,12 +82,13 @@ namespace WindowsFormsApp3
             int XOfInput = 0;
             double error = 0;
             PointPairList rezult = new PointPairList();
-            for (int i = inputList[0].First-10; i< inputList.Last().First+10; i+=1)
+            for (int i = 1; i < 7; i += 1) 
             {
-                rezult.Add(i, a * i + b);
-                
+                //if (i >= 1 && a * i + b >= 1) 
+                    rezult.Add(i, a * i + b);
+
                 //считаем ошибку
-                if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
+                if (XOfInput < inputList.Count && i == inputList[XOfInput].First) 
                 {
                     error += Math.Pow(inputList[XOfInput].Second - (a * i + b), 2);
                     XOfInput++;
@@ -126,10 +127,11 @@ namespace WindowsFormsApp3
             double bb = Math.Round (Math.Exp(b), 2);
            
             PointPairList rezult = new PointPairList();
-            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            for (int i = 1; i < 7; i += 1)
             {
                 double xa = Math.Round(Math.Pow(i, a),2);
-                rezult.Add(i, bb * xa);
+                //if (i >= 1 && bb * xa >= 1)
+                    rezult.Add(i, bb * xa);
 
              
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
@@ -166,9 +168,10 @@ namespace WindowsFormsApp3
 
             double bb = Math.Round(Math.Exp(b), 2);
 
-            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            for (int i = 1; i < 7; i += 1)
             {
-                result.Add(i, bb * Math.Exp(a * i));
+               // if (i >= 1 && b * Math.Exp(a * i) >= 1)
+                    result.Add(i, bb * Math.Exp(a * i));
 
                 if (XOfInput < inputList.Count && i == inputList[XOfInput].First)
                 {
@@ -235,9 +238,10 @@ namespace WindowsFormsApp3
             int XOfInput4 = 0;
             double error4 = 0;
             PointPairList rezult4 = new PointPairList();
-            for (int i = inputList[0].First - 10; i < inputList.Last().First + 10; i += 1)
+            for (int i = 1; i < 7; i += 1)
             {
-                rezult4.Add(i, a * i*i + b * i + c);
+                //if (i >= 1 && a * i * i + b * i + c >= 1)
+                    rezult4.Add(i, a * i*i + b * i + c);
 
                 //считаем ошибку давай давай считай мы же миллионеры еще посчитаем
                 if (XOfInput4 < inputList.Count && i == inputList[XOfInput4].First)
@@ -258,20 +262,23 @@ namespace WindowsFormsApp3
 
             PointPairList startLine = new PointPairList();
             for (int i = 0; i < inputList.Count; i++)
-            {
-                startLine.Add(inputList[i].First, inputList[i].Second);
+            { 
+               startLine.Add(inputList[i].First, inputList[i].Second);
             }
+
             PointPairList lin = linFunk();
             PointPairList step = SecondFunk();
             PointPairList exp = ThirdFunk();
             PointPairList chlin = FourthFunk();
 
             GraphPane my_Pane = Zed_GraphControl.GraphPane;
-            LineItem myCircle1 = my_Pane.AddCurve("Прямая из 6 начальных точек", startLine, Color.Green, SymbolType.Circle);
+            LineItem myCircle1 = my_Pane.AddCurve("6 начальных точек", startLine, Color.Green, SymbolType.Diamond);
+            myCircle1.Line.IsVisible = false;
+            myCircle1.Symbol.Size = 6;
             LineItem myCircle2 = my_Pane.AddCurve("Линейная функция", lin, Color.Blue, SymbolType.None);
             LineItem myCircle3 = my_Pane.AddCurve("Степенная функция", step, Color.Orange, SymbolType.None);
             LineItem myCircle4 = my_Pane.AddCurve("Показательная функция", exp, Color.DarkViolet, SymbolType.None);
-            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.Circle);
+            LineItem myCircle5 = my_Pane.AddCurve("Квадратичная функция", chlin, Color.Red, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
 
@@ -284,26 +291,13 @@ namespace WindowsFormsApp3
             try
             {
                 //inputList.Clear();
-                //inputList.Add(new Pair<int, double>(10, 1.06));
-                //inputList.Add(new Pair<int, double>(20, 1.33));
-                //inputList.Add(new Pair<int, double>(30, 1.52));
-                //inputList.Add(new Pair<int, double>(40, 1.68));
-                //inputList.Add(new Pair<int, double>(50, 1.81));
-                //inputList.Add(new Pair<int, double>(60, 1.91));
-
-                //inputList.Add(new Pair<int, double>(100, 9.6));
-                //inputList.Add(new Pair<int, double>(150, 10.4));
-                //inputList.Add(new Pair<int, double>(200, 11.2));
-                //inputList.Add(new Pair<int, double>(250, 12.1));
-                //inputList.Add(new Pair<int, double>(300, 12.7));
-                //inputList.Add(new Pair<int, double>(350, 13.2));
-
                 //inputList.Add(new Pair<int, double>(5, 5.6));
                 //inputList.Add(new Pair<int, double>(7, 9.2));
                 //inputList.Add(new Pair<int, double>(9, 13.6));
                 //inputList.Add(new Pair<int, double>(11, 18.3));
                 //inputList.Add(new Pair<int, double>(13, 23.5));
                 //inputList.Add(new Pair<int, double>(15, 29.1));
+
                 //Это пример
                 inputList.Clear();
                 inputList.Add(new Pair<int, double>(1, 1.0));

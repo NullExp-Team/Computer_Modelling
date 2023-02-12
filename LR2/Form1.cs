@@ -29,8 +29,6 @@ namespace LR2
         }
         private void DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
-        
-
             PointPairList list = new PointPairList();
             for (double x = xMin; x <= xMax; x += xStep)
             {
@@ -49,10 +47,34 @@ namespace LR2
 
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
-
-
-
         }
+
+        private void DrawFunctionY(Func<double, double> func, double xMin, double xMax, double yMin, double yMax, double xStep, string title, Color color, bool lastToFirst = false)
+        {
+            PointPairList list = new PointPairList();
+
+
+            
+            for (double x = xMin; x <= xMax; x += xStep)
+            {
+                double y = func(x);
+                if (y >= yMin && y <= yMax) list.Add(x, y);
+            }
+            if (lastToFirst && list.Count() > 0)
+            {
+                list.Add(list.First());
+            }
+
+
+            GraphPane plane = zedGraphControl1.GraphPane;
+
+            plane.AddCurve(title, list, color, SymbolType.None);
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+
+
 
         private void Clear(ZedGraphControl control)
         {
@@ -73,7 +95,41 @@ namespace LR2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Func<double, double> f1 = (x) =>
+            {
+                int n = 10;
+                if (x < n)
+                {
+                    return (10 * x) / n;
+                }
+                else
+                {
+                    return (10 * ((x - 20) / (n - 20)));
+                }
+            };
 
+            DrawFunction(f1, 0, 20, 0.01, "AEE", Color.Red, true);
+
+            Func<double, double> f2 = (x) =>
+            {
+                int n = 11;
+                //Эту хуйню сомостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
+                //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
+                if (x < 20.9)
+                {
+                    return (10 * x) / n;
+                }
+                else
+                {
+                    return (10 * ((x - 20) / (n - 20))) + 20;
+                }
+            };
+
+            DrawFunctionY(f2, 0, 40, 0, 100, 0.01, "AEE", Color.Purple, true);
+
+            //DrawFunction((x) => x * x, 0, 10, 1, "AEE", Color.Orange);
+
+            DrawFunction(Math.Sin, 0, 10, 1, "Sin", Color.Blue);
         }
     }
 }

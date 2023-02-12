@@ -135,7 +135,7 @@ namespace LR2
 
             areaLabel.Text = area.ToString();
 
-            return inPoints.Count() / n;
+            return k;
         }
 
 

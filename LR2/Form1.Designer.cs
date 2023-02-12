@@ -68,6 +68,7 @@
             this.pointTestCount.Name = "pointTestCount";
             this.pointTestCount.Size = new System.Drawing.Size(130, 22);
             this.pointTestCount.TabIndex = 3;
+            this.pointTestCount.Text = "100";
             // 
             // firstTask
             // 

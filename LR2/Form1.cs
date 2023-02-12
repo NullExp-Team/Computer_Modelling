@@ -19,8 +19,25 @@ namespace LR2
 
 
         int currentPointCount { 
-            get { 
-                return int.Parse(pointTestCount.Text); 
+            get {
+                try
+                {
+                    return int.Parse(pointTestCount.Text);
+                }
+                catch {
+                    MessageBox.Show(
+                                   "Укажите количество точек",
+                                   "Сообщение",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information,
+                                   MessageBoxDefaultButton.Button1,
+                                   MessageBoxOptions.DefaultDesktopOnly);
+
+                    return 100;
+                }
+                    
+              
+                
             } 
         }
 

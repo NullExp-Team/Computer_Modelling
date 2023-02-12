@@ -54,6 +54,16 @@ namespace LR2
             plane.XAxis.Title.Text = "Ось X";
             plane.YAxis.Title.Text = "Ось Y";
         }
+
+        private void addCurve(String title, PointPairList points, Color color, SymbolType symbolType)
+        {
+            GraphPane plane = zedGraphControl1.GraphPane;
+
+            plane.AddCurve(title, points, color, SymbolType.None);
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
         private void DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
             PointPairList list = new PointPairList();
@@ -68,12 +78,7 @@ namespace LR2
             }
 
 
-            GraphPane plane = zedGraphControl1.GraphPane;
-
-            plane.AddCurve(title, list, color, SymbolType.None);
-
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
+            addCurve(title, list, color, SymbolType.None);
         }
 
         private void DrawFunctionY(Func<double, double> func, double xMin, double xMax, double yMin, double yMax, double xStep, string title, Color color, bool lastToFirst = false)
@@ -93,12 +98,8 @@ namespace LR2
             }
 
 
-            GraphPane plane = zedGraphControl1.GraphPane;
+            addCurve(title, list, color, SymbolType.None);
 
-            plane.AddCurve(title, list, color, SymbolType.None);
-
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
         }
 
         private void DrawFunctionFromPoints(PointPairList points, string title, Color color, bool lastToFirst = false)
@@ -110,12 +111,7 @@ namespace LR2
             }
 
 
-            GraphPane plane = zedGraphControl1.GraphPane;
-
-            plane.AddCurve(title, list, color, SymbolType.None);
-
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
+            addCurve(title, list, color, SymbolType.None);
         }
 
         private double PointTest(int n, PointPair minPoint, PointPair maxPoint, Func<PointPair, bool> func)

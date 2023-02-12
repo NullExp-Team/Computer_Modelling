@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
 
+
+
 namespace LR2
 {
     public partial class Form1 : Form
-    {   
+    {
+        Random random = new Random();
 
         public Form1()
         {
@@ -35,11 +38,11 @@ namespace LR2
                 double y = func(x);
                 list.Add(x, y);
             }
-            if(lastToFirst && list.Count() > 0)
+            if (lastToFirst && list.Count() > 0)
             {
                 list.Add(list.First());
             }
-           
+
 
             GraphPane plane = zedGraphControl1.GraphPane;
 
@@ -54,7 +57,7 @@ namespace LR2
             PointPairList list = new PointPairList();
 
 
-            
+
             for (double x = xMin; x <= xMax; x += xStep)
             {
                 double y = func(x);
@@ -72,6 +75,52 @@ namespace LR2
 
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
+        }
+
+        private void DrawFunctionFromPoints(PointPairList points, string title, Color color, bool lastToFirst = false)
+        {
+            PointPairList list = points.Clone();
+            if (lastToFirst && list.Count() > 0)
+            {
+                list.Add(list.First());
+            }
+
+
+            GraphPane plane = zedGraphControl1.GraphPane;
+
+            plane.AddCurve(title, list, color, SymbolType.None);
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+
+        private double PointTest(int n, PointPair minPoint, PointPair maxPoint, Func<PointPair, bool> func)
+        {
+            GraphPane plane = zedGraphControl1.GraphPane;
+            PointPairList inPoints = new PointPairList();
+            PointPairList outPoints = new PointPairList();
+
+            for (int i = 0; i < n; i++)
+            {
+                PointPair t = new PointPair(
+                    random.NextDouble() * (maxPoint.X - minPoint.X) + minPoint.X,
+                    random.NextDouble() * (maxPoint.Y - minPoint.Y) + minPoint.Y
+                );
+                
+                if (func(t)) inPoints.Add(t);
+                else outPoints.Add(t);
+            }
+          
+            
+            var inLine = plane.AddCurve("", inPoints, Color.Green, SymbolType.Circle);
+            inLine.Line.IsVisible = false;
+            inLine.Symbol.Size = 4;
+
+            var outLine = plane.AddCurve("", outPoints, Color.Black, SymbolType.Circle);
+            outLine.Line.IsVisible = false;
+            outLine.Symbol.Size = 4;
+
+            return inPoints.Count() / n;
         }
 
 
@@ -110,26 +159,40 @@ namespace LR2
 
             DrawFunction(f1, 0, 20, 0.01, "AEE", Color.Red, true);
 
-            Func<double, double> f2 = (x) =>
-            {
-                int n = 11;
-                //Эту хуйню сомостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
-                //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
-                if (x < 20.9)
-                {
-                    return (10 * x) / n;
-                }
-                else
-                {
-                    return (10 * ((x - 20) / (n - 20))) + 20;
-                }
-            };
+            PointTest(1000, new PointPair(0, 0), new PointPair(20, 10),
+                (point) => point.Y < f1(point.X)
+            );
 
-            DrawFunctionY(f2, 0, 40, 0, 100, 0.01, "AEE", Color.Purple, true);
 
-            //DrawFunction((x) => x * x, 0, 10, 1, "AEE", Color.Orange);
 
-            DrawFunction(Math.Sin, 0, 10, 1, "Sin", Color.Blue);
+            //Func<double, double> f2 = (x) =>
+            //{
+            //    int n = 11;
+            //    //Эту хуйню сомостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
+            //    //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
+            //    if (x < 20.9)
+            //    {
+            //        return (10 * x) / n;
+            //    }
+            //    else
+            //    {
+            //        return (10 * ((x - 20) / (n - 20))) + 20;
+            //    }
+            //};
+
+            //DrawFunctionY(f2, 0, 40, 0, 100, 0.01, "AEE", Color.Purple, true);
+
+            ////DrawFunction((x) => x * x, 0, 10, 1, "AEE", Color.Orange);
+
+            //DrawFunction(Math.Sin, 0, 10, 1, "Sin", Color.Blue);
+
+            //var list = new PointPairList();
+            //list.Add(new PointPair(0, 0));
+            //list.Add(new PointPair(1, 2));
+            //list.Add(new PointPair(5, 3));
+            //DrawFunctionFromPoints(list, "points", Color.Green, true);
+
+
         }
     }
 }

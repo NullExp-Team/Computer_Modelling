@@ -17,6 +17,13 @@ namespace LR2
     {
         Random random = new Random();
 
+
+        int currentPointCount { 
+            get { 
+                return int.Parse(pointTestCount.Text); 
+            } 
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -120,30 +127,61 @@ namespace LR2
             outLine.Line.IsVisible = false;
             outLine.Symbol.Size = 4;
 
+            inPointsCountLabel.Text = inPoints.Count.ToString();
+
+            double k = inPoints.Count()*1.0 / n;
+
+            double area = k * (maxPoint.X - minPoint.X) * (maxPoint.Y - minPoint.Y);
+
+            areaLabel.Text = area.ToString();
+
             return inPoints.Count() / n;
         }
 
 
 
-        private void Clear(ZedGraphControl control)
+        private void Clear()
         {
-            control.GraphPane.CurveList.Clear();
-            control.GraphPane.GraphObjList.Clear();
+            zedGraphControl1.GraphPane.CurveList.Clear();
+            zedGraphControl1.GraphPane.GraphObjList.Clear();
 
-            control.GraphPane.XAxis.Type = AxisType.Linear;
-            control.GraphPane.XAxis.Scale.TextLabels = null;
-            control.GraphPane.XAxis.MajorGrid.IsVisible = false;
-            control.GraphPane.YAxis.MajorGrid.IsVisible = false;
-            control.GraphPane.YAxis.MinorGrid.IsVisible = false;
-            control.GraphPane.XAxis.MinorGrid.IsVisible = false;
-            control.RestoreScale(control.GraphPane);
+            zedGraphControl1.GraphPane.XAxis.Type = AxisType.Linear;
+            zedGraphControl1.GraphPane.XAxis.Scale.TextLabels = null;
+            zedGraphControl1.GraphPane.XAxis.MajorGrid.IsVisible = false;
+            zedGraphControl1.GraphPane.YAxis.MajorGrid.IsVisible = false;
+            zedGraphControl1.GraphPane.YAxis.MinorGrid.IsVisible = false;
+            zedGraphControl1.GraphPane.XAxis.MinorGrid.IsVisible = false;
+            zedGraphControl1.RestoreScale(zedGraphControl1.GraphPane);
 
-            control.AxisChange();
-            control.Invalidate();
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+          
+
+
+       
+
+            ////DrawFunction((x) => x * x, 0, 10, 1, "AEE", Color.Orange);
+
+            //DrawFunction(Math.Sin, 0, 10, 1, "Sin", Color.Blue);
+
+            //var list = new PointPairList();
+            //list.Add(new PointPair(0, 0));
+            //list.Add(new PointPair(1, 2));
+            //list.Add(new PointPair(5, 3));
+            //DrawFunctionFromPoints(list, "points", Color.Green, true);
+
+
+        }
+
+
+        private void firstTask_Click(object sender, EventArgs e)
+        {
+            Clear();
+
             Func<double, double> f1 = (x) =>
             {
                 int n = 10;
@@ -157,41 +195,47 @@ namespace LR2
                 }
             };
 
-            DrawFunction(f1, 0, 20, 0.01, "AEE", Color.Red, true);
+            DrawFunction(f1, 0, 20, 0.01, "Task1.1", Color.Red, true);
 
-            PointTest(1000, new PointPair(0, 0), new PointPair(20, 10),
+            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
                 (point) => point.Y < f1(point.X)
             );
 
+            Func<double, double> f2 = (x) =>
+            {
+                int n = 11;
+                //Эту хуйню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
+                //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
+                if (x < 20.9)
+                {
+                    return (10 * x) / n;
+                }
+                else
+                {
+                    return (10 * ((x - 20) / (n - 20))) + 20;
+                }
+            };
 
+            DrawFunctionY(f2, 0, 40, 0, 100, 0.01, "Task1.2", Color.Purple, true);
+        }
 
-            //Func<double, double> f2 = (x) =>
-            //{
-            //    int n = 11;
-            //    //Эту хуйню сомостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
-            //    //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
-            //    if (x < 20.9)
-            //    {
-            //        return (10 * x) / n;
-            //    }
-            //    else
-            //    {
-            //        return (10 * ((x - 20) / (n - 20))) + 20;
-            //    }
-            //};
+        private void secondTask_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
 
-            //DrawFunctionY(f2, 0, 40, 0, 100, 0.01, "AEE", Color.Purple, true);
+        private void thirdTask_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
 
-            ////DrawFunction((x) => x * x, 0, 10, 1, "AEE", Color.Orange);
+        private void fourthTask_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
 
-            //DrawFunction(Math.Sin, 0, 10, 1, "Sin", Color.Blue);
-
-            //var list = new PointPairList();
-            //list.Add(new PointPair(0, 0));
-            //list.Add(new PointPair(1, 2));
-            //list.Add(new PointPair(5, 3));
-            //DrawFunctionFromPoints(list, "points", Color.Green, true);
-
+        private void label7_Click(object sender, EventArgs e)
+        {
 
         }
     }

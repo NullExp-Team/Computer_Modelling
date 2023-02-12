@@ -73,7 +73,7 @@ namespace LR2
             zedGraphControl1.Invalidate();
         }
 
-        private void addCurve(string title, PointPairList points, Color color, SymbolType symbolType, bool lastToFirst = false)
+        private void addCurve(string title, PointPairList points, Color color, SymbolType symbolType = SymbolType.None, bool lastToFirst = false)
         {
             GraphPane plane = zedGraphControl1.GraphPane;
 
@@ -81,7 +81,7 @@ namespace LR2
 
             if(lastToFirst && pointCloned.Count() > 0) pointCloned.Add(pointCloned.First());
 
-            plane.AddCurve(title, pointCloned, color, SymbolType.None);
+            plane.AddCurve(title, pointCloned, color, symbolType);
 
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
@@ -94,7 +94,8 @@ namespace LR2
             for (double x = xMin; x <= xMax; x += xStep)
             {
                 double y = func(x);
-                if (yMin == null || yMax == null || (y >= yMin && y <= yMax)) list.Add(x, y);
+                if (yMin == null || y >= yMin) list.Add(x, y);
+                if (yMax == null || y >= yMax) list.Add(x, y);
             }
 
             addCurve(title, list, color, SymbolType.None, lastToFirst);

@@ -35,9 +35,6 @@ namespace LR2
 
                     return 100;
                 }
-                    
-              
-                
             } 
         }
 
@@ -73,6 +70,8 @@ namespace LR2
             zedGraphControl1.Invalidate();
         }
 
+        /// Этот метод добавляет на график кривую с указанным заголовком, списком точек, цветом и типом символа.
+        /// Если для параметра lastToFirst задано значение true и список точек содержит хотя бы одну точку, первая точка добавляется в конец списка.
         private void addCurve(string title, PointPairList points, Color color, SymbolType symbolType = SymbolType.None, bool lastToFirst = false)
         {
             GraphPane plane = zedGraphControl1.GraphPane;
@@ -86,7 +85,11 @@ namespace LR2
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
-
+     
+        /// Этот метод рисует функцию на графике, оценивая function func для диапазона значений x между xMin и xMax с шагом xStep.
+        /// Если указаны yMin и yMax, на график будут добавлены только точки со значениями y в пределах этого диапазона.
+        /// Название и цвет кривой задаются параметрами title и color соответственно.
+        /// Если для параметра lastToFirst установлено значение true, первая и последняя точки будут соединены линией.
         private void DrawFunction(Func<double, double> func, double xMin, double xMax, double? yMin, double? yMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
             PointPairList list = new PointPairList();
@@ -101,11 +104,15 @@ namespace LR2
             addCurve(title, list, color, SymbolType.None, lastToFirst);
         }
 
+        /// Это перегрузка предыдущего метода DrawFunction, который не принимает параметры yMin и yMax и не фильтрует значения y.
         private void DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
             DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
         }
 
+        /// этот метод генерирует набор случайных точек в указанном диапазоне и добавляет на график два набора точек,
+        /// которые соответствуют или не соответствуют заданному условию, определяемое функцией func.
+        /// Метод возвращает отношение количества точек, удовлетворяющих условию, к общему количеству точек. 
         private double PointTest(int n, PointPair minPoint, PointPair maxPoint, Func<PointPair, bool> func)
         {
             GraphPane plane = zedGraphControl1.GraphPane;

@@ -17,7 +17,7 @@ namespace LR2
     {
         Random random = new Random();
 
-
+        public static int n = 10;
         int currentPointCount { 
             get {
                 try
@@ -156,7 +156,7 @@ namespace LR2
 
             Func<double, double> f1 = (x) =>
             {
-                int n = 10;
+                //int n = 10;
                 if (x < n)
                 {
                     return (10 * x) / n;
@@ -167,7 +167,7 @@ namespace LR2
                 }
             };
 
-            DrawFunction(f1, 0, 20, 0.01, "Task1.1", Color.Red, true);
+            DrawFunction(f1, 0, 20, 0.01, "Task1", Color.Red, true);
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
                 (point) => point.Y < f1(point.X)
@@ -175,7 +175,7 @@ namespace LR2
 
             Func<double, double> f2 = (x) =>
             {
-                int n = 11;
+                //int n = 11;
                 //Эту фигню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
                 //а эта сложна, поэтому строим на всё одну функцию и не выпендриваемся
                 // ок!!
@@ -189,7 +189,7 @@ namespace LR2
                 }
             };
 
-            DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1.2", Color.Purple, true);
+            DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1", Color.Purple, true);
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
             (point) => point.Y < f2(point.X)
@@ -224,7 +224,7 @@ namespace LR2
 
             Func<double, double> f1 = (x) =>
             {
-                int n = 11;
+                //int n = 11;
                 if (x <= n)
                 {
                     return sin(x,n);
@@ -235,7 +235,7 @@ namespace LR2
                 }
             };
 
-            DrawFunction(f1, 0, 20, 0.01, "Task 1.3", Color.Chocolate);
+            DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
             (point) => point.Y < f1(point.X));

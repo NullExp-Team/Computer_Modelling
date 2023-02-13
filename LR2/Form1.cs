@@ -17,7 +17,7 @@ namespace LR2
     {
         Random random = new Random();
 
-        public static int n = 10;
+        public static int n = 11;
         int currentPointCount { 
             get {
                 try
@@ -156,7 +156,6 @@ namespace LR2
 
             Func<double, double> f1 = (x) =>
             {
-                //int n = 10;
                 if (x < n)
                 {
                     return (10 * x) / n;
@@ -175,7 +174,6 @@ namespace LR2
 
             Func<double, double> f2 = (x) =>
             {
-                //int n = 11;
                 //Эту фигню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
                 //а эта сложна, поэтому строим на всё одну функцию и не выпендриваемся
                 // ок!!
@@ -224,7 +222,6 @@ namespace LR2
 
             Func<double, double> f1 = (x) =>
             {
-                //int n = 11;
                 if (x <= n)
                 {
                     return sin(x,n);

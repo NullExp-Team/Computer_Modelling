@@ -141,7 +141,7 @@ namespace LR2
 
             inPointsCountLabel.Text = inPoints.Count.ToString();
 
-            double k = inPoints.Count()*1.0 / n;
+            double k = inPoints.Count() * 1.0 / n;
 
             double area = k * (maxPoint.X - minPoint.X) * (maxPoint.Y - minPoint.Y);
 
@@ -176,8 +176,9 @@ namespace LR2
             Func<double, double> f2 = (x) =>
             {
                 int n = 11;
-                //Эту хуйню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
-                //а эта сложна, поэтому строим на всё одну функцию и не выёбываемся
+                //Эту фигню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
+                //а эта сложна, поэтому строим на всё одну функцию и не выпендриваемся
+                // ок!!
                 if (x < 20.9)
                 {
                     return (10 * x) / n;
@@ -189,11 +190,56 @@ namespace LR2
             };
 
             DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1.2", Color.Purple, true);
+
+            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+            (point) => point.Y < f2(point.X)
+            );
         }
 
         private void secondTask_Click(object sender, EventArgs e)
         {
             Clear();
+
+            double sin(double x,int n)
+            {
+                double sum = 0;
+                for (int i = 1; i < n; i++)
+                {
+                    sum += Math.Sqrt(11 - n * Math.Pow(Math.Sin(x), 2));
+                }
+
+                return sum;
+            }
+
+            double cos(double x, int n)
+            {
+                double sum = 0;
+                for (int i = 1; i < n; i++)
+                {
+                    sum += Math.Sqrt(29 - n * Math.Pow(Math.Cos(x), 2));
+                }
+
+                return sum;
+            }
+
+            Func<double, double> f1 = (x) =>
+            {
+                int n = 11;
+                if (x <= n)
+                {
+                    return sin(x,n);
+                }
+                else 
+                {
+                    return cos(x,n);
+                }
+            };
+
+            DrawFunction(f1, 0, 20, 0.01, "Task 1.3", Color.Chocolate);
+
+            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+            (point) => point.Y < f1(point.X));
+
         }
 
         private void thirdTask_Click(object sender, EventArgs e)

@@ -187,6 +187,8 @@ namespace LR2
                 //Эту фигню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
                 //а эта сложна, поэтому строим на всё одну функцию и не выпендриваемся
                 // ок!!
+                //20.9 - для 10 варианта
+                //23.99 - для 18 варианта
                 if (x < 20.9)
                 {
                     return (10 * x) / n;
@@ -205,8 +207,8 @@ namespace LR2
             }
             else
             {
-                DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1", Color.Purple, true);
-                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+                DrawFunction(f2, 0, 50, 0, 100, 0.01, "Task1", Color.Purple, true);
+                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(25, 16),
                 (point) => point.Y < f2(point.X));
             }
         }
@@ -254,7 +256,7 @@ namespace LR2
             }
             else
             {
-                PointPair maxp = DrawFunction(f2, 15, 30, 0.01, "Task 2", Color.Chocolate);
+                PointPair maxp = DrawFunction(f2, 10, 30, 0.01, "Task 2", Color.Chocolate);
                 PointTest(currentPointCount, new PointPair(10, 0), maxp,
                 (point) => point.Y < f2(point.X));
             }

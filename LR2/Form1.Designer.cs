@@ -49,7 +49,6 @@
             // zedGraphControl1
             // 
             this.zedGraphControl1.Location = new System.Drawing.Point(-1, -2);
-            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -58,23 +57,25 @@
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(1097, 602);
+            this.zedGraphControl1.Size = new System.Drawing.Size(823, 489);
             this.zedGraphControl1.TabIndex = 0;
             this.zedGraphControl1.UseExtendedPrintDialog = true;
             // 
             // pointTestCount
             // 
-            this.pointTestCount.Location = new System.Drawing.Point(1099, 28);
+            this.pointTestCount.Location = new System.Drawing.Point(824, 23);
+            this.pointTestCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pointTestCount.Name = "pointTestCount";
-            this.pointTestCount.Size = new System.Drawing.Size(130, 22);
+            this.pointTestCount.Size = new System.Drawing.Size(98, 20);
             this.pointTestCount.TabIndex = 3;
             this.pointTestCount.Text = "100";
             // 
             // firstTask
             // 
-            this.firstTask.Location = new System.Drawing.Point(28, 607);
+            this.firstTask.Location = new System.Drawing.Point(21, 493);
+            this.firstTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.firstTask.Name = "firstTask";
-            this.firstTask.Size = new System.Drawing.Size(75, 23);
+            this.firstTask.Size = new System.Drawing.Size(56, 19);
             this.firstTask.TabIndex = 4;
             this.firstTask.Text = "firstTask";
             this.firstTask.UseVisualStyleBackColor = true;
@@ -82,9 +83,10 @@
             // 
             // secondTask
             // 
-            this.secondTask.Location = new System.Drawing.Point(119, 607);
+            this.secondTask.Location = new System.Drawing.Point(89, 493);
+            this.secondTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.secondTask.Name = "secondTask";
-            this.secondTask.Size = new System.Drawing.Size(103, 23);
+            this.secondTask.Size = new System.Drawing.Size(77, 19);
             this.secondTask.TabIndex = 5;
             this.secondTask.Text = "secondTask";
             this.secondTask.UseVisualStyleBackColor = true;
@@ -92,9 +94,10 @@
             // 
             // thirdTask
             // 
-            this.thirdTask.Location = new System.Drawing.Point(240, 607);
+            this.thirdTask.Location = new System.Drawing.Point(180, 493);
+            this.thirdTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.thirdTask.Name = "thirdTask";
-            this.thirdTask.Size = new System.Drawing.Size(103, 23);
+            this.thirdTask.Size = new System.Drawing.Size(77, 19);
             this.thirdTask.TabIndex = 6;
             this.thirdTask.Text = "thirdTask";
             this.thirdTask.UseVisualStyleBackColor = true;
@@ -102,9 +105,10 @@
             // 
             // fourthTask
             // 
-            this.fourthTask.Location = new System.Drawing.Point(365, 607);
+            this.fourthTask.Location = new System.Drawing.Point(274, 493);
+            this.fourthTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fourthTask.Name = "fourthTask";
-            this.fourthTask.Size = new System.Drawing.Size(103, 23);
+            this.fourthTask.Size = new System.Drawing.Size(77, 19);
             this.fourthTask.TabIndex = 7;
             this.fourthTask.Text = "fourthTask";
             this.fourthTask.UseVisualStyleBackColor = true;
@@ -113,74 +117,81 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1100, 9);
+            this.label1.Location = new System.Drawing.Point(825, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 17);
+            this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Количество точек:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1104, 69);
+            this.label2.Location = new System.Drawing.Point(828, 56);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 17);
+            this.label2.Size = new System.Drawing.Size(230, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Количество точек, лежащих внутри фигуры:";
             // 
             // inPointsCountLabel
             // 
             this.inPointsCountLabel.AutoSize = true;
-            this.inPointsCountLabel.Location = new System.Drawing.Point(1107, 95);
+            this.inPointsCountLabel.Location = new System.Drawing.Point(830, 77);
+            this.inPointsCountLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.inPointsCountLabel.Name = "inPointsCountLabel";
-            this.inPointsCountLabel.Size = new System.Drawing.Size(16, 17);
+            this.inPointsCountLabel.Size = new System.Drawing.Size(13, 13);
             this.inPointsCountLabel.TabIndex = 10;
             this.inPointsCountLabel.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1100, 124);
+            this.label3.Location = new System.Drawing.Point(825, 101);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 17);
+            this.label3.Size = new System.Drawing.Size(137, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = " Площадь (приближённо):";
             // 
             // areaLabel
             // 
             this.areaLabel.AutoSize = true;
-            this.areaLabel.Location = new System.Drawing.Point(1107, 152);
+            this.areaLabel.Location = new System.Drawing.Point(830, 124);
+            this.areaLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.areaLabel.Name = "areaLabel";
-            this.areaLabel.Size = new System.Drawing.Size(16, 17);
+            this.areaLabel.Size = new System.Drawing.Size(13, 13);
             this.areaLabel.TabIndex = 12;
             this.areaLabel.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1104, 184);
+            this.label4.Location = new System.Drawing.Point(828, 150);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 17);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Абсолютная погрешность:";
-            this.label4.Visible = false;
+            this.label4.Text = "Погрешность:";
             // 
             // absoluteErrorLabel
             // 
             this.absoluteErrorLabel.AutoSize = true;
-            this.absoluteErrorLabel.Location = new System.Drawing.Point(1107, 215);
+            this.absoluteErrorLabel.Location = new System.Drawing.Point(830, 175);
+            this.absoluteErrorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.absoluteErrorLabel.Name = "absoluteErrorLabel";
-            this.absoluteErrorLabel.Size = new System.Drawing.Size(16, 17);
+            this.absoluteErrorLabel.Size = new System.Drawing.Size(13, 13);
             this.absoluteErrorLabel.TabIndex = 14;
             this.absoluteErrorLabel.Text = "0";
-            this.absoluteErrorLabel.Visible = false;
+            this.absoluteErrorLabel.Click += new System.EventHandler(this.absoluteErrorLabel_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1104, 245);
+            this.label6.Location = new System.Drawing.Point(828, 199);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(204, 17);
+            this.label6.Size = new System.Drawing.Size(157, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "Относительная погрешность:";
             this.label6.Visible = false;
@@ -188,9 +199,10 @@
             // relativeErrorLabel
             // 
             this.relativeErrorLabel.AutoSize = true;
-            this.relativeErrorLabel.Location = new System.Drawing.Point(1107, 274);
+            this.relativeErrorLabel.Location = new System.Drawing.Point(830, 223);
+            this.relativeErrorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.relativeErrorLabel.Name = "relativeErrorLabel";
-            this.relativeErrorLabel.Size = new System.Drawing.Size(16, 17);
+            this.relativeErrorLabel.Size = new System.Drawing.Size(13, 13);
             this.relativeErrorLabel.TabIndex = 16;
             this.relativeErrorLabel.Text = "0";
             this.relativeErrorLabel.Visible = false;
@@ -198,9 +210,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1442, 820);
+            this.ClientSize = new System.Drawing.Size(1082, 666);
             this.Controls.Add(this.relativeErrorLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.absoluteErrorLabel);
@@ -216,6 +228,7 @@
             this.Controls.Add(this.firstTask);
             this.Controls.Add(this.pointTestCount);
             this.Controls.Add(this.zedGraphControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);

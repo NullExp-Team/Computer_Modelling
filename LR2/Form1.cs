@@ -170,7 +170,6 @@ namespace LR2
         private void firstTask_Click(object sender, EventArgs e)
         {
             Clear();
-
             Func<double, double> f1 = (x) =>
             {
                 if (x < n)
@@ -211,6 +210,7 @@ namespace LR2
                 PointTest(currentPointCount, new PointPair(0, 0), new PointPair(25, 16),
                 (point) => point.Y < f2(point.X));
             }
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
         }
 
         private void secondTask_Click(object sender, EventArgs e)
@@ -260,6 +260,8 @@ namespace LR2
                 PointTest(currentPointCount, new PointPair(10, 0), maxp,
                 (point) => point.Y < f2(point.X));
             }
+            // умножая на 3 мы получаем правило 3ς, Монте-Карло не про точность так что нам пофиг 
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
         }
 
         private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double fiStep, string title, Color color, bool lastToFirst)
@@ -295,14 +297,13 @@ namespace LR2
             }
             addCurve(title, list, color, SymbolType.None, lastToFirst);
 
-            
             return new PointPair4(maxX, maxY, minX, minY);
+
         }
         private void thirdTask_Click(object sender, EventArgs e)
         {
             isThird = true;
             Clear();
-
             double stepInDraw = 0.01;
             double rad = n;
 
@@ -318,12 +319,12 @@ namespace LR2
 
             PointTest(currentPointCount, new PointPair(0, 0), maxPoint, circleTest);
             isThird = false;
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
         }
 
         private void fourthTask_Click(object sender, EventArgs e)
         {
             Clear();
-
             double stepInDraw = 0.01;
             double a, b;
             if (n <= 10)
@@ -379,6 +380,7 @@ namespace LR2
                 point.Y -= maxPoint.T;
                 double ada = p(fi);
                 return r < ada;
+                absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
             };
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(maxPoint.X, maxPoint.Y), test);
@@ -419,6 +421,11 @@ namespace LR2
 
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
+        }
+
+        private void absoluteErrorLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

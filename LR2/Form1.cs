@@ -92,24 +92,30 @@ namespace LR2
         /// Если указаны yMin и yMax, на график будут добавлены только точки со значениями y в пределах этого диапазона.
         /// Название и цвет кривой задаются параметрами title и color соответственно.
         /// Если для параметра lastToFirst установлено значение true, первая и последняя точки будут соединены линией.
-        private void DrawFunction(Func<double, double> func, double xMin, double xMax, double? yMin, double? yMax, double xStep, string title, Color color, bool lastToFirst = false)
+        private PointPair DrawFunction(Func<double, double> func, double xMin, double xMax, double? yMin, double? yMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
             PointPairList list = new PointPairList();
+
+            double maxX = Double.MinValue, maxY = Double.MinValue;
 
             for (double x = xMin; x <= xMax; x += xStep)
             {
                 double y = func(x);
                 if (yMin == null || y >= yMin) list.Add(x, y);
                 if (yMax == null || y >= yMax) list.Add(x, y);
+                maxX = list.Last().X > maxX ? list.Last().X : maxX;
+                maxY = list.Last().Y > maxY ? list.Last().Y : maxY;
             }
 
             addCurve(title, list, color, SymbolType.None, lastToFirst);
+
+            return new PointPair(maxX, maxY);
         }
 
         /// Это перегрузка предыдущего метода DrawFunction, который не принимает параметры yMin и yMax и не фильтрует значения y.
-        private void DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
+        private PointPair DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
-            DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
+            return DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
         }
 
         /// этот метод генерирует набор случайных точек в указанном диапазоне и добавляет на график два набора точек,
@@ -242,14 +248,14 @@ namespace LR2
             
             if (n<11)
             {
-                DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
-                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+                PointPair maxp = DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
+                PointTest(currentPointCount, new PointPair(0, 0), maxp,
                 (point) => point.Y < f1(point.X));
             }
             else
             {
-                DrawFunction(f2, 15, 30, 0.01, "Task 2", Color.Chocolate);
-                PointTest(currentPointCount, new PointPair(10, 0), new PointPair(30, 20),
+                PointPair maxp = DrawFunction(f2, 15, 30, 0.01, "Task 2", Color.Chocolate);
+                PointTest(currentPointCount, new PointPair(10, 0), maxp,
                 (point) => point.Y < f2(point.X));
             }
         }

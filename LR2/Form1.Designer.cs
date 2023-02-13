@@ -163,6 +163,7 @@
             this.label4.Size = new System.Drawing.Size(182, 17);
             this.label4.TabIndex = 13;
             this.label4.Text = "Абсолютная погрешность:";
+            this.label4.Visible = false;
             // 
             // absoluteErrorLabel
             // 
@@ -172,6 +173,7 @@
             this.absoluteErrorLabel.Size = new System.Drawing.Size(16, 17);
             this.absoluteErrorLabel.TabIndex = 14;
             this.absoluteErrorLabel.Text = "0";
+            this.absoluteErrorLabel.Visible = false;
             // 
             // label6
             // 
@@ -181,6 +183,7 @@
             this.label6.Size = new System.Drawing.Size(204, 17);
             this.label6.TabIndex = 15;
             this.label6.Text = "Относительная погрешность:";
+            this.label6.Visible = false;
             // 
             // relativeErrorLabel
             // 
@@ -190,6 +193,7 @@
             this.relativeErrorLabel.Size = new System.Drawing.Size(16, 17);
             this.relativeErrorLabel.TabIndex = 16;
             this.relativeErrorLabel.Text = "0";
+            this.relativeErrorLabel.Visible = false;
             this.relativeErrorLabel.Click += new System.EventHandler(this.label7_Click);
             // 
             // Form1

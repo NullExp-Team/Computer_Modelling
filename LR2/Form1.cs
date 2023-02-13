@@ -17,7 +17,7 @@ namespace LR2
     {
         Random random = new Random();
 
-        public static int n = 11;
+        public static double n = 10.0;
         int currentPointCount { 
             get {
                 try
@@ -198,18 +198,17 @@ namespace LR2
         {
             Clear();
 
-            double sin(double x,int n)
+            double sin(double x,double n)
             {
                 double sum = 0;
                 for (int i = 1; i < n; i++)
                 {
                     sum += Math.Sqrt(11 - n * Math.Pow(Math.Sin(x), 2));
                 }
-
-                return sum;
+                return (5.0 / n) * sum;
             }
 
-            double cos(double x, int n)
+            double cos(double x, double n)
             {
                 double sum = 0;
                 for (int i = 1; i < n; i++)
@@ -217,7 +216,7 @@ namespace LR2
                     sum += Math.Sqrt(29 - n * Math.Pow(Math.Cos(x), 2));
                 }
 
-                return sum;
+                return (7.0 / n) * sum;
             }
 
             Func<double, double> f1 = (x) =>

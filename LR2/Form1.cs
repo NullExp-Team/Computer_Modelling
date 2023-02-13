@@ -15,6 +15,7 @@ namespace LR2
 {
     public partial class Form1 : Form
     {
+
         Random random = new Random();
 
         public static double n = 10.0;
@@ -221,20 +222,12 @@ namespace LR2
 
             Func<double, double> f1 = (x) =>
             {
-                if (x <= n)
-                {
-                    return sin(x, n);
-                }
-                else return 0;
+                return sin(x, n);
             };
 
             Func<double, double> f2 = (x) =>
             {
-                if (x >= n)
-                {
-                    return cos(x, n);
-                }
-                else return 0;
+                return cos(x, n);
             };
             
             if (n<11)
@@ -251,9 +244,54 @@ namespace LR2
             }
         }
 
+        private PointPair DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double fiStep, string title, Color color, bool lastToFirst)
+        {
+            PointPairList list = new PointPairList();
+
+            double minX = Double.MaxValue;
+
+            double maxX = Double.MinValue;
+            double maxY = Double.MinValue;
+
+            for (double fi = 0; fi <= 2*Math.PI; fi += fiStep)
+            {
+                PointPair point = func(fi);
+                list.Add(point.X, point.Y);
+                if (point.X < minX)
+                {
+                    minX = point.X;
+                }
+                maxX = point.X > maxX ? point.X : maxX;
+                maxY = point.Y > maxY ? point.Y : maxY;
+            }
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].X -= minX;
+            }
+
+            addCurve(title, list, color, SymbolType.None, lastToFirst);
+
+            return new PointPair(maxX, maxY);
+        }
         private void thirdTask_Click(object sender, EventArgs e)
         {
             Clear();
+
+            double stepInDraw = 0.01;
+            double rad = n;
+
+            Func<double, PointPair> circle = (fi) =>
+            {
+                return new PointPair(rad+rad*Math.Cos(fi), rad + rad * Math.Sin(fi));
+            };
+            Func<PointPair, bool> circleTest = (p) =>
+            {
+                return (Math.Pow((p.X - rad), 2) + Math.Pow((p.Y - rad), 2)) < rad * rad;
+            };
+
+            PointPair maxPoint = DrawPolarFunctionAndGetMaxPoint(circle, stepInDraw, "Task1", Color.Red, false);
+
+            PointTest(currentPointCount, new PointPair(0, 0), maxPoint, circleTest);
         }
 
         private void fourthTask_Click(object sender, EventArgs e)
@@ -264,6 +302,38 @@ namespace LR2
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        bool flagScale = true;
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
+            
+        }
+
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            GraphPane myPane = zedGraphControl1.GraphPane;
+
+            double koef = Convert.ToDouble(zedGraphControl1.Size.Height) / Convert.ToDouble(zedGraphControl1.Size.Width);
+            if (flagScale)
+            {
+                myPane.XAxis.Scale.Max = myPane.YAxis.Scale.Max / koef + n;
+                myPane.XAxis.Scale.Min = myPane.YAxis.Scale.Min / koef;
+                myPane.XAxis.Scale.MajorStep = myPane.YAxis.Scale.MajorStep / koef + n;
+            }
+            else
+            {
+                myPane.XAxis.Scale.Max = (myPane.YAxis.Scale.Max - n) * koef;
+                myPane.XAxis.Scale.Min = (myPane.YAxis.Scale.Min) * koef;
+                myPane.XAxis.Scale.MajorStep = (myPane.YAxis.Scale.MajorStep - n) * koef;
+            }
+            flagScale = !flagScale;
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
         }
     }
 }

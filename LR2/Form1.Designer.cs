@@ -115,7 +115,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1100, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 16);
+            this.label1.Size = new System.Drawing.Size(132, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Количество точек:";
             // 
@@ -124,7 +124,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1104, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(294, 16);
+            this.label2.Size = new System.Drawing.Size(300, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "Количество точек, лежащих внутри фигуры:";
             // 
@@ -133,7 +133,7 @@
             this.inPointsCountLabel.AutoSize = true;
             this.inPointsCountLabel.Location = new System.Drawing.Point(1107, 95);
             this.inPointsCountLabel.Name = "inPointsCountLabel";
-            this.inPointsCountLabel.Size = new System.Drawing.Size(14, 16);
+            this.inPointsCountLabel.Size = new System.Drawing.Size(16, 17);
             this.inPointsCountLabel.TabIndex = 10;
             this.inPointsCountLabel.Text = "0";
             // 
@@ -142,7 +142,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1100, 124);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(171, 16);
+            this.label3.Size = new System.Drawing.Size(179, 17);
             this.label3.TabIndex = 11;
             this.label3.Text = " Площадь (приближённо):";
             // 
@@ -151,7 +151,7 @@
             this.areaLabel.AutoSize = true;
             this.areaLabel.Location = new System.Drawing.Point(1107, 152);
             this.areaLabel.Name = "areaLabel";
-            this.areaLabel.Size = new System.Drawing.Size(14, 16);
+            this.areaLabel.Size = new System.Drawing.Size(16, 17);
             this.areaLabel.TabIndex = 12;
             this.areaLabel.Text = "0";
             // 
@@ -160,7 +160,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(1104, 184);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 16);
+            this.label4.Size = new System.Drawing.Size(182, 17);
             this.label4.TabIndex = 13;
             this.label4.Text = "Абсолютная погрешность:";
             // 
@@ -169,7 +169,7 @@
             this.absoluteErrorLabel.AutoSize = true;
             this.absoluteErrorLabel.Location = new System.Drawing.Point(1107, 215);
             this.absoluteErrorLabel.Name = "absoluteErrorLabel";
-            this.absoluteErrorLabel.Size = new System.Drawing.Size(14, 16);
+            this.absoluteErrorLabel.Size = new System.Drawing.Size(16, 17);
             this.absoluteErrorLabel.TabIndex = 14;
             this.absoluteErrorLabel.Text = "0";
             // 
@@ -178,7 +178,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1104, 245);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(198, 16);
+            this.label6.Size = new System.Drawing.Size(204, 17);
             this.label6.TabIndex = 15;
             this.label6.Text = "Относительная погрешность:";
             // 
@@ -187,7 +187,7 @@
             this.relativeErrorLabel.AutoSize = true;
             this.relativeErrorLabel.Location = new System.Drawing.Point(1107, 274);
             this.relativeErrorLabel.Name = "relativeErrorLabel";
-            this.relativeErrorLabel.Size = new System.Drawing.Size(14, 16);
+            this.relativeErrorLabel.Size = new System.Drawing.Size(16, 17);
             this.relativeErrorLabel.TabIndex = 16;
             this.relativeErrorLabel.Text = "0";
             this.relativeErrorLabel.Click += new System.EventHandler(this.label7_Click);
@@ -214,6 +214,8 @@
             this.Controls.Add(this.zedGraphControl1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

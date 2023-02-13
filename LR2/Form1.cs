@@ -165,13 +165,6 @@ namespace LR2
                     return (10 * ((x - 20) / (n - 20)));
                 }
             };
-
-            DrawFunction(f1, 0, 20, 0.01, "Task1", Color.Red, true);
-
-            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
-                (point) => point.Y < f1(point.X)
-            );
-
             Func<double, double> f2 = (x) =>
             {
                 //Эту фигню самостоятельно подбирать (это точка пересечения функций), т.к. нужно найти фигуру, которая ограничина функциями,
@@ -187,11 +180,18 @@ namespace LR2
                 }
             };
 
-            DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1", Color.Purple, true);
-
-            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
-            (point) => point.Y < f2(point.X)
-            );
+            if (n<11)
+            {
+                DrawFunction(f1, 0, 20, 0.01, "Task1", Color.Red, true);
+                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+                (point) => point.Y < f1(point.X));
+            }
+            else
+            {
+                DrawFunction(f2, 0, 40, 0, 100, 0.01, "Task1", Color.Purple, true);
+                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+                (point) => point.Y < f2(point.X));
+            }
         }
 
         private void secondTask_Click(object sender, EventArgs e)
@@ -201,7 +201,7 @@ namespace LR2
             double sin(double x,double n)
             {
                 double sum = 0;
-                for (int i = 1; i < n; i++)
+                for (int i = 1; i <= n; i++)
                 {
                     sum += Math.Sqrt(11 - n * Math.Pow(Math.Sin(x), 2));
                 }
@@ -211,7 +211,7 @@ namespace LR2
             double cos(double x, double n)
             {
                 double sum = 0;
-                for (int i = 1; i < n; i++)
+                for (int i = 1; i <= n; i++)
                 {
                     sum += Math.Sqrt(29 - n * Math.Pow(Math.Cos(x), 2));
                 }
@@ -223,19 +223,32 @@ namespace LR2
             {
                 if (x <= n)
                 {
-                    return sin(x,n);
+                    return sin(x, n);
                 }
-                else 
-                {
-                    return cos(x,n);
-                }
+                else return 0;
             };
 
-            DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
-
-            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
-            (point) => point.Y < f1(point.X));
-
+            Func<double, double> f2 = (x) =>
+            {
+                if (x >= n)
+                {
+                    return cos(x, n);
+                }
+                else return 0;
+            };
+            
+            if (n<11)
+            {
+                DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
+                PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
+                (point) => point.Y < f1(point.X));
+            }
+            else
+            {
+                DrawFunction(f2, 15, 30, 0.01, "Task 2", Color.Chocolate);
+                PointTest(currentPointCount, new PointPair(10, 0), new PointPair(30, 20),
+                (point) => point.Y < f2(point.X));
+            }
         }
 
         private void thirdTask_Click(object sender, EventArgs e)

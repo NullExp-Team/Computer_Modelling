@@ -18,7 +18,7 @@ namespace LR2
 
         Random random = new Random();
 
-        public static double n = 2;
+        public static double n = 19;
         bool isThird = false;
         int currentPointCount { 
             get {
@@ -49,9 +49,10 @@ namespace LR2
         private void Setup()
         {
             GraphPane plane = zedGraphControl1.GraphPane;
-            plane.Title.Text = "NullExp Lab2";
+            plane.Title.Text = "Lab2";
             plane.XAxis.Title.Text = "Ось X";
             plane.YAxis.Title.Text = "Ось Y";
+            label6.Text = Math.PI.ToString();
         }
 
 
@@ -139,11 +140,13 @@ namespace LR2
             }
           
             
-            var inLine = plane.AddCurve("", inPoints, Color.Green, SymbolType.Circle);
+            var inLine = plane.AddCurve("", inPoints, Color.Blue, SymbolType.Circle);
             inLine.Line.IsVisible = false;
             inLine.Symbol.Size = 4;
 
-            var outLine = plane.AddCurve("", outPoints, Color.Black, SymbolType.Circle);
+            inLine.Symbol.Fill.Type = FillType.Solid;
+
+            var outLine = plane.AddCurve("", outPoints, Color.Gray, SymbolType.Circle);
             outLine.Line.IsVisible = false;
             outLine.Symbol.Size = 4;
 
@@ -151,16 +154,16 @@ namespace LR2
 
             double k = inPoints.Count() * 1.0 / countOfPoints;
 
-            double area = k * (maxPoint.X - minPoint.X) * (maxPoint.Y - minPoint.Y);
+            double area = Math.Round(k * (maxPoint.X - minPoint.X) * (maxPoint.Y - minPoint.Y),2);
 
             if (!isThird)
             {
-                label3.Text = " Площадь (приближённо):";
+                label3.Text = "Приближённая площадь";
                 areaLabel.Text = area.ToString();
             }
             else
             {
-                label3.Text = " Пи (приближённо):";
+                label3.Text = "Приближённое Пи:";
                 areaLabel.Text = ((area/n)/n).ToString();
             }
 
@@ -200,13 +203,13 @@ namespace LR2
 
             if (n<11)
             {
-                DrawFunction(f1, 0, 20, 0.01, "Task1", Color.Red, true);
+                DrawFunction(f1, 0, 20, 0.01, "1", Color.Red, true);
                 PointTest(currentPointCount, new PointPair(0, 0), new PointPair(20, 10),
                 (point) => point.Y < f1(point.X));
             }
             else
             {
-                DrawFunction(f2, 0, 50, 0, 100, 0.01, "Task1", Color.Purple, true);
+                DrawFunction(f2, 0, 50, 0, 100, 0.01, "1", Color.Orange, true);
                 PointTest(currentPointCount, new PointPair(0, 0), new PointPair(25, 16),
                 (point) => point.Y < f2(point.X));
             }
@@ -250,13 +253,13 @@ namespace LR2
             
             if (n<11)
             {
-                PointPair maxp = DrawFunction(f1, 0, 20, 0.01, "Task 2", Color.Chocolate);
+                PointPair maxp = DrawFunction(f1, 0, 20, 0.01, " 2", Color.Red);
                 PointTest(currentPointCount, new PointPair(0, 0), maxp,
                 (point) => point.Y < f1(point.X));
             }
             else
             {
-                PointPair maxp = DrawFunction(f2, 10, 30, 0.01, "Task 2", Color.Chocolate);
+                PointPair maxp = DrawFunction(f2, 10, 30, 0.01, " 2", Color.Red);
                 PointTest(currentPointCount, new PointPair(10, 0), maxp,
                 (point) => point.Y < f2(point.X));
             }
@@ -315,7 +318,7 @@ namespace LR2
             {
                 return (Math.Pow((p.X - rad), 2) + Math.Pow((p.Y - rad), 2)) < rad * rad;
             };
-            PointPair maxPoint = DrawPolarFunctionAndGetMaxPoint(circle, stepInDraw, "Task1", Color.Red, false);
+            PointPair maxPoint = DrawPolarFunctionAndGetMaxPoint(circle, stepInDraw, "3", Color.Purple, false);
 
             PointTest(currentPointCount, new PointPair(0, 0), maxPoint, circleTest);
             isThird = false;
@@ -345,7 +348,7 @@ namespace LR2
                 return new PointPair(p(fi) * Math.Cos(fi), p(fi) * Math.Sin(fi));
             };
 
-            PointPair4 maxPoint = DrawPolarFunctionAndGetMaxPoint(func, stepInDraw, "Task1", Color.Red, false);
+            PointPair4 maxPoint = DrawPolarFunctionAndGetMaxPoint(func, stepInDraw, "3", Color.DeepPink, false);
 
             Func<PointPair, bool> test = (point) =>
             {
@@ -379,8 +382,10 @@ namespace LR2
                 point.X -= maxPoint.Z;
                 point.Y -= maxPoint.T;
                 double ada = p(fi);
-                return r < ada;
                 absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
+                return r < ada;
+
+
             };
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(maxPoint.X, maxPoint.Y), test);
@@ -424,6 +429,51 @@ namespace LR2
         }
 
         private void absoluteErrorLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void areaLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inPointsCountLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pointTestCount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }

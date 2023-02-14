@@ -18,7 +18,7 @@ namespace LR2
 
         Random random = new Random();
 
-        public static double n = 10.0;
+        public static double n = 2;
         bool isThird = false;
         int currentPointCount { 
             get {
@@ -210,7 +210,7 @@ namespace LR2
                 PointTest(currentPointCount, new PointPair(0, 0), new PointPair(25, 16),
                 (point) => point.Y < f2(point.X));
             }
-            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
         }
 
         private void secondTask_Click(object sender, EventArgs e)
@@ -261,7 +261,7 @@ namespace LR2
                 (point) => point.Y < f2(point.X));
             }
             // умножая на 3 мы получаем правило 3ς, Монте-Карло не про точность так что нам пофиг 
-            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
         }
 
         private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double fiStep, string title, Color color, bool lastToFirst)
@@ -319,7 +319,7 @@ namespace LR2
 
             PointTest(currentPointCount, new PointPair(0, 0), maxPoint, circleTest);
             isThird = false;
-            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
+            absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
         }
 
         private void fourthTask_Click(object sender, EventArgs e)
@@ -380,7 +380,7 @@ namespace LR2
                 point.Y -= maxPoint.T;
                 double ada = p(fi);
                 return r < ada;
-                absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(n)), 4).ToString();
+                absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
             };
 
             PointTest(currentPointCount, new PointPair(0, 0), new PointPair(maxPoint.X, maxPoint.Y), test);

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -126,6 +127,92 @@ namespace LR3
 
             return new PointPair4(maxX, maxY, minX, minY);
 
+        }
+
+        public delegate double Function(double x, double y);
+        
+        //Рунге-Кутта 3 порядка
+        public static double RungeKutta3(Function f, double x0, double y0, double h, double x)
+        {
+            double xnew, ynew, k1, k2, k3, p1 = 1 / 3, p2 = 2 / 3, result = double.NaN;
+
+            if (x == x0)
+                result = y0;
+           
+            else if (x > x0)
+            {
+                do
+                {
+                    if (h > x - x0) h = x - x0;
+                    k1 = h * f(x0, y0);
+                    k2 = h * f(x0 + Math.Round(p1, 2) * h, y0 + Math.Round(p1, 2) * k1);
+                    k3 = h * f(x0 + Math.Round(p2, 2) * h, y0 + Math.Round(p2, 2) * k2);
+                    ynew = y0 + (k1 + 3 * k3) / 4;
+                    xnew = x0 + h;
+                    x0 = xnew;
+                    y0 = ynew;
+                } while (x0 < x);
+                result = ynew;
+            }
+            return result;
+        }
+
+        //Рунге-Кутта 4 порядка
+        public static double RungeKutta4(Function f, double x0, double y0, double h, double x)
+        {
+            double xnew, ynew, k1, k2, k3, k4, result = double.NaN;
+
+            if (x == x0)
+                result = y0;
+
+            else if (x > x0)
+            {
+                do
+                {
+                    if (h > x - x0) h = x - x0;
+                    k1 = h * f(x0, y0);
+                    k2 = h * f(x0 + 0.5 * h, y0 + 0.5 * k1);
+                    k3 = h * f(x0 + 0.5 * h, y0 + 0.5 * k2);
+                    k4 = h * f(x0 + h, y0 + k3);
+                    ynew = y0 + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                    xnew = x0 + h;
+                    x0 = xnew;
+                    y0 = ynew;
+                } while (x0 < x);
+                result = ynew;
+            }
+            return result;
+        }
+
+        //рандомный пример
+        static double f(double x, double y)
+        {
+            return y * Math.Cos(x);
+        }
+
+        private void Mkmethod_Click(object sender, EventArgs e)
+        {
+            //не работает!!!!!!!!!
+
+            //гиренко разберись я запутался в х и у ааа
+            Clear();
+
+            Func<double, double> f1 = (x) =>
+            {
+                double h=0.001, x0 = 0.0, y0 = 1.0;
+                double result = y0;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    x = 0.1 * i;
+                    result = RungeKutta3(f, x0, result, h, x);
+                    x0 = x;
+                }
+
+                return result;
+            };
+
+            DrawFunction(f1, 0.0, 20.0, 0.01, "Task 1", Color.Red);
         }
     }
 }

@@ -20,6 +20,12 @@ namespace LR3
             Setup();
         }
 
+        enum RungeKuttaOrder
+        {
+            thirdOrderAccuracy,
+            fourthOrderAccuracy,
+        }
+
         private void Setup()
         {
             GraphPane plane = zedGraphControl1.GraphPane;
@@ -129,6 +135,9 @@ namespace LR3
 
         }
 
+        
+        
+        
         public delegate double Function(double x, double y);
         
         //Рунге-Кутта 3 порядка
@@ -190,6 +199,22 @@ namespace LR3
             return y * Math.Cos(x);
         }
 
+        private void DrawDiffFunction(Function f, double x0, double y0, double h, double xMin, double xMax, string title, Color color, double xStep, RungeKuttaOrder orderAccuracy = RungeKuttaOrder.thirdOrderAccuracy)
+        {
+            double result = y0;
+
+            PointPairList list = new PointPairList();
+
+            for (double x = xMin; x < xMax; x+= xStep)
+            {
+                result = orderAccuracy == RungeKuttaOrder.thirdOrderAccuracy ?  RungeKutta3(f, x0, result, h, x) : RungeKutta4(f, x0, result, h, x);
+                list.Add(new PointPair(x, result));
+                x0 = x;
+            }
+
+            AddCurve(title, list, color);
+        }
+
         private void Mkmethod_Click(object sender, EventArgs e)
         {
             //не работает!!!!!!!!!
@@ -197,22 +222,10 @@ namespace LR3
             //гиренко разберись я запутался в х и у ааа
             Clear();
 
-            Func<double, double> f1 = (x) =>
-            {
-                double h=0.001, x0 = 0.0, y0 = 1.0;
-                double result = y0;
 
-                for (int i = 0; i < 20; i++)
-                {
-                    x = 0.1 * i;
-                    result = RungeKutta3(f, x0, result, h, x);
-                    x0 = x;
-                }
+            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "ver3", Color.Red, 0.1);
+            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "ver4", Color.Purple, 0.1, RungeKuttaOrder.fourthOrderAccuracy);
 
-                return result;
-            };
-
-            DrawFunction(f1, 0.0, 20.0, 0.01, "Task 1", Color.Red);
         }
     }
 }

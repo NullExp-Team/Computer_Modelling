@@ -20,6 +20,8 @@ namespace LR3
             Setup();
         }
 
+        double error3;
+        double error4;
         enum RungeKuttaOrder
         {
             thirdOrderAccuracy,
@@ -97,41 +99,22 @@ namespace LR3
             return DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
         }
 
-        private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double fiStep, string title, Color color, bool lastToFirst = false)
+        private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double minFi, double maxFi, double fiStep,  string title, Color color, bool lastToFirst = false)
         {
             PointPairList list = new PointPairList();
-
-            double minX = Double.MaxValue;
-            double minY = Double.MaxValue;
 
             double maxX = Double.MinValue;
             double maxY = Double.MinValue;
 
-            for (double fi = 0; fi <= 2 * Math.PI; fi += fiStep)
+            for (double fi = minFi; fi <= maxFi; fi += fiStep)
             {
                 PointPair point = func(fi);
                 list.Add(point.X, point.Y);
-                if (point.X < minX)
-                {
-                    minX = point.X;
-                }
-                if (point.Y < minY)
-                {
-                    minY = point.Y;
-                }
-            }
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].X -= minX;
-                list[i].Y -= minY;
-
-                maxX = list[i].X > maxX ? list[i].X : maxX;
-                maxY = list[i].Y > maxY ? list[i].Y : maxY;
             }
 
             AddCurve(title, list, color, SymbolType.None, lastToFirst);
 
-            return new PointPair4(maxX, maxY, minX, minY);
+            return new PointPair4(maxX, maxY, 0, 0);
 
         }
 
@@ -139,20 +122,27 @@ namespace LR3
         
         
         public delegate double Function(double x, double y);
-        
+
+        public delegate double DoubleFunction(double x, double y, double t);
+
+        public delegate double RungeKuttaFunction(Function f, double x0, double y0, double x);
+
+        public delegate PointPair DoubleRungeKuttaFunction(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double t0, double t);
+
         //Рунге-Кутта 3 порядка
-        public static double RungeKutta3(Function f, double x0, double y0, double h, double x)
+        public static double RungeKutta3(Function f, double x0, double y0, double x)
         {
             double xnew, ynew, k1, k2, k3, p1 = 1 / 3, p2 = 2 / 3, result = double.NaN;
 
             if (x == x0)
+            {
                 result = y0;
-           
+            }
             else if (x > x0)
             {
                 do
                 {
-                    if (h > x - x0) h = x - x0;
+                    double h = x - x0;
                     k1 = h * f(x0, y0);
                     k2 = h * f(x0 + Math.Round(p1, 2) * h, y0 + Math.Round(p1, 2) * k1);
                     k3 = h * f(x0 + Math.Round(p2, 2) * h, y0 + Math.Round(p2, 2) * k2);
@@ -167,7 +157,7 @@ namespace LR3
         }
 
         //Рунге-Кутта 4 порядка
-        public static double RungeKutta4(Function f, double x0, double y0, double h, double x)
+        public static double RungeKutta4(Function f, double x0, double y0, double x)
         {
             double xnew, ynew, k1, k2, k3, k4, result = double.NaN;
 
@@ -178,7 +168,7 @@ namespace LR3
             {
                 do
                 {
-                    if (h > x - x0) h = x - x0;
+                    double h = x - x0;
                     k1 = h * f(x0, y0);
                     k2 = h * f(x0 + 0.5 * h, y0 + 0.5 * k1);
                     k3 = h * f(x0 + 0.5 * h, y0 + 0.5 * k2);
@@ -193,21 +183,91 @@ namespace LR3
             return result;
         }
 
-        //рандомный пример
-        static double f(double x, double y)
+        //Рунге-Кутта 3 порядка
+        public static PointPair DoubleRungeKutta3(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double t0, double t)
         {
-            return Math.Cos(x);
+            return new PointPair(0, 0);
+            //double xnew, ynew, k1, k2, k3, p1 = 1 / 3, p2 = 2 / 3, result = double.NaN;
+
+            //if (x == x0)
+            //{
+            //    result = y0;
+            //}
+            //else if (x > x0)
+            //{
+            //    do
+            //    {
+            //        double h = x - x0;
+            //        k1 = h * f(x0, y0);
+            //        k2 = h * f(x0 + Math.Round(p1, 2) * h, y0 + Math.Round(p1, 2) * k1);
+            //        k3 = h * f(x0 + Math.Round(p2, 2) * h, y0 + Math.Round(p2, 2) * k2);
+            //        ynew = y0 + (k1 + 3 * k3) / 4;
+            //        xnew = x0 + h;
+            //        x0 = xnew;
+            //        y0 = ynew;
+            //    } while (x0 < x);
+            //    result = ynew;
+            //}
+            //return result;
         }
 
-        private void DrawDiffFunction(Function f, double x0, double y0, double h, double xMin, double xMax, string title, Color color, double xStep, RungeKuttaOrder orderAccuracy = RungeKuttaOrder.thirdOrderAccuracy)
+        //Рунге-Кутта 4 порядка
+        public static PointPair DoubleRungeKutta4(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double t0, double t)
         {
-            double result = y0;
+            double xnew, ynew, l1, l2, l3, l4, k1, k2, k3, k4;
 
+            if (t == t0)
+            {
+                return new PointPair(x0, y0);
+            }
+            else
+            {
+                
+                // неправильно он считает функцию
+                double h = t - t0;
+                k1 = h * f1(x0, y0, t0);
+                l1 = h * f2(x0, y0, t0);
+                k2 = h * f1(x0 + 0.5 * k1, y0 + 0.5 * l1, t0 + 0.5 * h);
+                l2 = h * f2(x0 + 0.5 * k1, y0 + 0.5 * l1, t0 + 0.5 * h);
+                k3 = h * f1(x0 + 0.5 * k2, y0 + 0.5 * l2, t0 + 0.5 * h);
+                l3 = h * f2(x0 + 0.5 * k2, y0 + 0.5 * l2, t0 + 0.5 * h);
+                k4 = h * f1(x0 + k3, y0 + l3, t0 + h);
+                l4 = h * f2(x0 + k3, y0 + l3, t0 + h);
+                xnew = x0 + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                ynew = y0 + (l1 + 2 * l2 + 2 * l3 + l4) / 6;
+                
+                return new PointPair(xnew, ynew);
+            }
+        }
+
+        private void DrawDiffFunction(Function f, double x0, double y0, double h, double xMax, string title, Color color, RungeKuttaOrder orderAccuracy = RungeKuttaOrder.thirdOrderAccuracy)
+        {
             PointPairList list = new PointPairList();
 
-            for (double x = xMin; x < xMax; x+= xStep)
+            RungeKuttaFunction choosenOrder = RungeKutta3;
+            ref double error = ref error3;
+            switch (orderAccuracy)
             {
-                result = orderAccuracy == RungeKuttaOrder.thirdOrderAccuracy ? RungeKutta3(f, x0, result, h, x) : RungeKutta4(f, x0, result, h, x);
+                case RungeKuttaOrder.thirdOrderAccuracy:
+                    choosenOrder = RungeKutta3;
+                    error = ref error3;
+                    break;
+                case RungeKuttaOrder.fourthOrderAccuracy:
+                    choosenOrder = RungeKutta4;
+                    error = ref error4;
+                    break;
+            }
+
+            double result = y0;
+            error = 0;
+            for (double x = x0; x < xMax; x+= h)
+            {
+                result = choosenOrder(f, x0, result, x);
+                double realResult = f1(x);
+                if (Math.Abs(realResult-result) > error)
+                {
+                    error = Math.Abs(realResult - result);
+                }
                 list.Add(new PointPair(x, result));
                 x0 = x;
             }
@@ -215,17 +275,98 @@ namespace LR3
             AddCurve(title, list, color);
         }
 
+        private void DrawDoubleDiffFunction(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double h, double xMax, string title, Color color, RungeKuttaOrder orderAccuracy, double t0)
+        {
+            PointPairList list = new PointPairList();
+
+            DoubleRungeKuttaFunction choosenOrder = null;
+            ref double error = ref error3;
+            switch (orderAccuracy)
+            {
+                case RungeKuttaOrder.thirdOrderAccuracy:
+                    choosenOrder = DoubleRungeKutta3;
+                    error = ref error3;
+                    break;
+                case RungeKuttaOrder.fourthOrderAccuracy:
+                    choosenOrder = DoubleRungeKutta4;
+                    error = ref error4;
+                    break;
+            }
+
+            error = 0;
+            for (double t = t0; t < xMax; t += h)
+            {
+                list.Add(choosenOrder(f1, f2, x0, y0, t0, t));
+                PointPair realResult = xy1(t);
+                double nowError = Math.Sqrt(Math.Pow(realResult.X- list.Last().X, 2)+ Math.Pow(realResult.Y - list.Last().Y, 2));
+                if (nowError > error)
+                {
+                    error = nowError;
+                }
+                x0 = list.Last().X;
+                y0 = list.Last().Y;
+                t0 = t;
+            }//{( 88103,187603503, 44052,5938017515 )}
+            //{( 485165196,409771, 970330390,819543 )}
+
+            AddCurve(title, list, color);
+        }
+
+        //рандомный пример
+        static double fSH1(double x, double y)
+        {
+            return y * Math.Cos(x); //1
+        }
+        static double f1(double x)
+        {
+            return -Math.Exp(Math.Sin(x) - Math.Sin(1)); //1
+        }
+   
+        static PointPair xy1(double t)
+        {
+            return new PointPair(Math.Exp(2 * t) + 1, 2 * Math.Exp(2 * t));
+        }
+        static double xSh1(double x, double y, double t)
+        {
+            return y;
+        }
+        static double ySh1(double x, double y, double t)
+        {
+            return 2 * y;
+        }
+
+        bool flag = true;
         private void Mkmethod_Click(object sender, EventArgs e)
         {
+          
             Clear();
-            Func<double, double> f1 = (x) =>
+            try
             {
-                return Math.Cos(x);
-            };
+                double step = Convert.ToDouble(textBox1.Text.Replace('.',','));
+                if (flag)
+                {
+                    DrawFunction(f1, 0, 10, step, "Дефолтная функция", Color.Blue);
+                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 3 порядка", Color.Red);
+                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 4 порядка", Color.Purple,RungeKuttaOrder.fourthOrderAccuracy);
+                    textBox2.Text = error3.ToString();
+                    textBox3.Text = error4.ToString();
+                } else
+                {
+                    const double x0 = 2, y0 = 2, t0 = 0, maxT = 10;
+                    DrawPolarFunctionAndGetMaxPoint(xy1, t0, maxT, step, "Дефолтная функция", Color.Blue);
+                    DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0);
+                    textBox2.Text = "";
+                    textBox3.Text = error4.ToString();
+                }
+                flag = !flag;
+            } catch
+            {
+                textBox2.Text = "Неправильный формат";
+            }
 
-            DrawFunction(f1, 0, 10, 0.1, "Дефолтная функция", Color.Blue);
-            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "Рунге-Кутта 3 порядка", Color.Red, 0.1);
-            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "Рунге-Кутта 4 порядка", Color.Purple, 0.1, RungeKuttaOrder.fourthOrderAccuracy);
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)

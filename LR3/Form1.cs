@@ -196,7 +196,7 @@ namespace LR3
         //рандомный пример
         static double f(double x, double y)
         {
-            return y * Math.Cos(x);
+            return Math.Cos(x);
         }
 
         private void DrawDiffFunction(Function f, double x0, double y0, double h, double xMin, double xMax, string title, Color color, double xStep, RungeKuttaOrder orderAccuracy = RungeKuttaOrder.thirdOrderAccuracy)
@@ -207,7 +207,7 @@ namespace LR3
 
             for (double x = xMin; x < xMax; x+= xStep)
             {
-                result = orderAccuracy == RungeKuttaOrder.thirdOrderAccuracy ?  RungeKutta3(f, x0, result, h, x) : RungeKutta4(f, x0, result, h, x);
+                result = orderAccuracy == RungeKuttaOrder.thirdOrderAccuracy ? RungeKutta3(f, x0, result, h, x) : RungeKutta4(f, x0, result, h, x);
                 list.Add(new PointPair(x, result));
                 x0 = x;
             }
@@ -217,15 +217,20 @@ namespace LR3
 
         private void Mkmethod_Click(object sender, EventArgs e)
         {
-            //не работает!!!!!!!!!
-
-            //гиренко разберись я запутался в х и у ааа
             Clear();
+            Func<double, double> f1 = (x) =>
+            {
+                return Math.Cos(x);
+            };
 
+            DrawFunction(f1, 0, 10, 0.1, "Дефолтная функция", Color.Blue);
+            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "Рунге-Кутта 3 порядка", Color.Red, 0.1);
+            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "Рунге-Кутта 4 порядка", Color.Purple, 0.1, RungeKuttaOrder.fourthOrderAccuracy);
+        }
 
-            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "ver3", Color.Red, 0.1);
-            DrawDiffFunction(f, 0, 1, 0.1, 0, 10, "ver4", Color.Purple, 0.1, RungeKuttaOrder.fourthOrderAccuracy);
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

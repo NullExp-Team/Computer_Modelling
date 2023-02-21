@@ -31,7 +31,7 @@ namespace LR3
         private void Setup()
         {
             GraphPane plane = zedGraphControl1.GraphPane;
-            plane.Title.Text = "NullExp Lab3";
+            plane.Title.Text = "RungeKutta";
             plane.XAxis.Title.Text = "Ось X";
             plane.YAxis.Title.Text = "Ось Y";
         }
@@ -186,29 +186,26 @@ namespace LR3
         //Рунге-Кутта 3 порядка
         public static PointPair DoubleRungeKutta3(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double t0, double t)
         {
-            return new PointPair(0, 0);
-            //double xnew, ynew, k1, k2, k3, p1 = 1 / 3, p2 = 2 / 3, result = double.NaN;
+            double xnew, ynew, l1, l2, l3, k1, k2, k3;
 
-            //if (x == x0)
-            //{
-            //    result = y0;
-            //}
-            //else if (x > x0)
-            //{
-            //    do
-            //    {
-            //        double h = x - x0;
-            //        k1 = h * f(x0, y0);
-            //        k2 = h * f(x0 + Math.Round(p1, 2) * h, y0 + Math.Round(p1, 2) * k1);
-            //        k3 = h * f(x0 + Math.Round(p2, 2) * h, y0 + Math.Round(p2, 2) * k2);
-            //        ynew = y0 + (k1 + 3 * k3) / 4;
-            //        xnew = x0 + h;
-            //        x0 = xnew;
-            //        y0 = ynew;
-            //    } while (x0 < x);
-            //    result = ynew;
-            //}
-            //return result;
+            if (t == t0)
+            {
+                return new PointPair(x0, y0);
+            }
+            else
+            {
+                double h = t - t0;
+                k1 = h * f1(x0, y0, t0);
+                l1 = h * f2(x0, y0, t0);
+                k2 = h * f1(x0 + Math.Round(1.0 / 3.0, 2) * k1, y0 + Math.Round(1.0 / 3.0, 2) * l1, t0 + Math.Round(1.0 / 3.0, 2) * h);
+                l2 = h * f2(x0 + Math.Round(1.0 / 3.0, 2) * k1, y0 + Math.Round(1.0 / 3.0, 2) * l1, t0 + Math.Round(1.0 / 3.0, 2) * h);
+                k3 = h * f1(x0 + Math.Round(2.0 / 3.0, 2) * k2, y0 + Math.Round(2.0 / 3.0, 2) * l2, t0 + Math.Round(2.0 / 3.0, 2) * h);
+                l3 = h * f2(x0 + Math.Round(2.0 / 3.0, 2) * k2, y0 + Math.Round(2.0 / 3.0, 2) * l2, t0 + Math.Round(2.0 / 3.0, 2) * h);
+                xnew = x0 + (k1 + 3 * k3) / 4;
+                ynew = y0 + (l1 + 3 * l3) / 4;
+
+                return new PointPair(xnew, ynew);
+            }
         }
 
         //Рунге-Кутта 4 порядка
@@ -222,8 +219,6 @@ namespace LR3
             }
             else
             {
-                
-                // неправильно он считает функцию
                 double h = t - t0;
                 k1 = h * f1(x0, y0, t0);
                 l1 = h * f2(x0, y0, t0);
@@ -260,6 +255,7 @@ namespace LR3
 
             double result = y0;
             error = 0;
+
             for (double x = x0; x < xMax; x+= h)
             {
                 result = choosenOrder(f, x0, result, x);
@@ -275,7 +271,7 @@ namespace LR3
             AddCurve(title, list, color);
         }
 
-        private void DrawDoubleDiffFunction(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double h, double xMax, string title, Color color, RungeKuttaOrder orderAccuracy, double t0)
+        private void DrawDoubleDiffFunction(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double h, double xMax, string title, Color color, RungeKuttaOrder orderAccuracy, double t0, Func<double, PointPair> fun)
         {
             PointPairList list = new PointPairList();
 
@@ -297,7 +293,7 @@ namespace LR3
             for (double t = t0; t < xMax; t += h)
             {
                 list.Add(choosenOrder(f1, f2, x0, y0, t0, t));
-                PointPair realResult = xy1(t);
+                PointPair realResult = fun(t);
                 double nowError = Math.Sqrt(Math.Pow(realResult.X- list.Last().X, 2)+ Math.Pow(realResult.Y - list.Last().Y, 2));
                 if (nowError > error)
                 {
@@ -306,13 +302,12 @@ namespace LR3
                 x0 = list.Last().X;
                 y0 = list.Last().Y;
                 t0 = t;
-            }//{( 88103,187603503, 44052,5938017515 )}
-            //{( 485165196,409771, 970330390,819543 )}
+            }
 
             AddCurve(title, list, color);
         }
 
-        //рандомный пример
+    
         static double fSH1(double x, double y)
         {
             return y * Math.Cos(x); //1
@@ -335,33 +330,48 @@ namespace LR3
             return 2 * y;
         }
 
-        bool flag = true;
+        static PointPair xy2(double t)
+        {
+            return new PointPair(4*Math.Exp(- t) - Math.Exp(2*t), Math.Exp(-t) - Math.Exp(2 * t));
+        }
+
+        static double xSh2(double x, double y, double t)
+        {
+            return -2*x+4*y;
+        }
+        static double ySh2(double x, double y, double t)
+        {
+            return -x + 3*y;
+        }
+
+
         private void Mkmethod_Click(object sender, EventArgs e)
         {
           
             Clear();
             try
             {
-                double step = Convert.ToDouble(textBox1.Text.Replace('.',','));
-                if (flag)
-                {
-                    DrawFunction(f1, 0, 10, step, "Дефолтная функция", Color.Blue);
-                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 3 порядка", Color.Red);
-                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 4 порядка", Color.Purple,RungeKuttaOrder.fourthOrderAccuracy);
-                    textBox2.Text = error3.ToString();
-                    textBox3.Text = error4.ToString();
-                } else
-                {
-                    const double x0 = 2, y0 = 2, t0 = 0, maxT = 10;
-                    DrawPolarFunctionAndGetMaxPoint(xy1, t0, maxT, step, "Дефолтная функция", Color.Blue);
-                    DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0);
-                    textBox2.Text = "";
-                    textBox3.Text = error4.ToString();
-                }
-                flag = !flag;
+                //double step = Convert.ToDouble(textBox1.Text.Replace('.',','));
+             
+                    //DrawFunction(f1, 0, 10, step, "Функция", Color.Blue);
+                    //DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 3 порядка", Color.Red);
+                    //DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 4 порядка", Color.Purple,RungeKuttaOrder.fourthOrderAccuracy);
+                    //textBox2.Text = error3.ToString();
+                    //textBox3.Text = error4.ToString();
+
+                Clear();
+                double step = Convert.ToDouble(textBox1.Text.Replace('.', ','));
+                const double x0 = 3, y0 = 0, t0 = 0, maxT = 1;
+                DrawPolarFunctionAndGetMaxPoint(xy2, t0, maxT, step, "Функция", Color.Blue);
+                DrawDoubleDiffFunction(xSh2, ySh2, x0, y0, step, maxT, "Рунге-Кутта 3 порядка", Color.Purple, RungeKuttaOrder.thirdOrderAccuracy, t0, xy2);
+                DrawDoubleDiffFunction(xSh2, ySh2, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0, xy2);
+                textBox2.Text = error3.ToString();
+                textBox3.Text = error4.ToString();
+
+
             } catch
             {
-                textBox2.Text = "Неправильный формат";
+                textBox2.Text = "Invalid format";
             }
 
 
@@ -372,6 +382,30 @@ namespace LR3
         private void button1_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {   
+            try
+            {
+                Clear();
+                double step = Convert.ToDouble(textBox1.Text.Replace('.', ','));
+                const double x0 = 2, y0 = 2, t0 = 0, maxT = 1;
+                DrawPolarFunctionAndGetMaxPoint(xy1, t0, maxT, step, "Функция", Color.Blue);
+                DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 3 порядка", Color.Purple, RungeKuttaOrder.thirdOrderAccuracy, t0, xy1);
+                DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0, xy1);
+                textBox2.Text = error3.ToString();
+                textBox3.Text = error4.ToString();
+            } catch
+            {
+                textBox2.Text = "Invalid format";
+            }
+   
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

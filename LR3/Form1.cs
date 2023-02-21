@@ -186,29 +186,26 @@ namespace LR3
         //Рунге-Кутта 3 порядка
         public static PointPair DoubleRungeKutta3(DoubleFunction f1, DoubleFunction f2, double x0, double y0, double t0, double t)
         {
-            return new PointPair(0, 0);
-            //double xnew, ynew, k1, k2, k3, p1 = 1 / 3, p2 = 2 / 3, result = double.NaN;
+            double xnew, ynew, l1, l2, l3, k1, k2, k3;
 
-            //if (x == x0)
-            //{
-            //    result = y0;
-            //}
-            //else if (x > x0)
-            //{
-            //    do
-            //    {
-            //        double h = x - x0;
-            //        k1 = h * f(x0, y0);
-            //        k2 = h * f(x0 + Math.Round(p1, 2) * h, y0 + Math.Round(p1, 2) * k1);
-            //        k3 = h * f(x0 + Math.Round(p2, 2) * h, y0 + Math.Round(p2, 2) * k2);
-            //        ynew = y0 + (k1 + 3 * k3) / 4;
-            //        xnew = x0 + h;
-            //        x0 = xnew;
-            //        y0 = ynew;
-            //    } while (x0 < x);
-            //    result = ynew;
-            //}
-            //return result;
+            if (t == t0)
+            {
+                return new PointPair(x0, y0);
+            }
+            else
+            {
+                double h = t - t0;
+                k1 = h * f1(x0, y0, t0);
+                l1 = h * f2(x0, y0, t0);
+                k2 = h * f1(x0 + Math.Round(1.0 / 3.0, 2) * k1, y0 + Math.Round(1.0 / 3.0, 2) * l1, t0 + Math.Round(1.0 / 3.0, 2) * h);
+                l2 = h * f2(x0 + Math.Round(1.0 / 3.0, 2) * k1, y0 + Math.Round(1.0 / 3.0, 2) * l1, t0 + Math.Round(1.0 / 3.0, 2) * h);
+                k3 = h * f1(x0 + Math.Round(2.0 / 3.0, 2) * k2, y0 + Math.Round(2.0 / 3.0, 2) * l2, t0 + Math.Round(2.0 / 3.0, 2) * h);
+                l3 = h * f2(x0 + Math.Round(2.0 / 3.0, 2) * k2, y0 + Math.Round(2.0 / 3.0, 2) * l2, t0 + Math.Round(2.0 / 3.0, 2) * h);
+                xnew = x0 + (k1 + 3 * k3) / 4;
+                ynew = y0 + (l1 + 3 * l3) / 4;
+               
+                return new PointPair(xnew, ynew);
+            }
         }
 
         //Рунге-Кутта 4 порядка
@@ -222,8 +219,6 @@ namespace LR3
             }
             else
             {
-                
-                // неправильно он считает функцию
                 double h = t - t0;
                 k1 = h * f1(x0, y0, t0);
                 l1 = h * f2(x0, y0, t0);
@@ -324,54 +319,64 @@ namespace LR3
    
         static PointPair xy1(double t)
         {
-            return new PointPair(Math.Exp(2 * t) + 1, 2 * Math.Exp(2 * t));
+            return new PointPair(4*Math.Exp(- t) - Math.Exp(2*t), Math.Exp(-t) - Math.Exp(2 * t));
         }
         static double xSh1(double x, double y, double t)
         {
-            return y;
+            return -2 * x + 4 * y;
+            //return y;
         }
         static double ySh1(double x, double y, double t)
         {
-            return 2 * y;
+            return -x + 3 * y;
+            //return 2 * y;
         }
 
         bool flag = true;
         private void Mkmethod_Click(object sender, EventArgs e)
         {
-          
             Clear();
             try
             {
-                double step = Convert.ToDouble(textBox1.Text.Replace('.',','));
-                if (flag)
-                {
-                    DrawFunction(f1, 0, 10, step, "Дефолтная функция", Color.Blue);
-                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 3 порядка", Color.Red);
-                    DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 4 порядка", Color.Purple,RungeKuttaOrder.fourthOrderAccuracy);
-                    textBox2.Text = error3.ToString();
-                    textBox3.Text = error4.ToString();
-                } else
-                {
-                    const double x0 = 2, y0 = 2, t0 = 0, maxT = 10;
-                    DrawPolarFunctionAndGetMaxPoint(xy1, t0, maxT, step, "Дефолтная функция", Color.Blue);
-                    DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0);
-                    textBox2.Text = "";
-                    textBox3.Text = error4.ToString();
-                }
-                flag = !flag;
+                double step = Convert.ToDouble(textBox1.Text.Replace('.', ','));
+                DrawFunction(f1, 0, 10, step, "Дефолтная функция", Color.Blue);
+                DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 3 порядка", Color.Red);
+                DrawDiffFunction(fSH1, 1, -1, step, 10, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy);
+                textBox2.Text = error3.ToString();
+                textBox3.Text = error4.ToString();
             } catch
             {
                 textBox2.Text = "Неправильный формат";
             }
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Clear();
+            try
+            {
+                double step = Convert.ToDouble(textBox1.Text.Replace('.', ','));
+                const double x0 = 3, y0 = 0, t0 = 0, maxT = 2;
+                DrawPolarFunctionAndGetMaxPoint(xy1, t0, maxT, step, "Дефолтная функция", Color.Blue);
+                DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 3 порядка", Color.Purple, RungeKuttaOrder.thirdOrderAccuracy, t0);
+                DrawDoubleDiffFunction(xSh1, ySh1, x0, y0, step, maxT, "Рунге-Кутта 4 порядка", Color.Purple, RungeKuttaOrder.fourthOrderAccuracy, t0);
+                textBox2.Text = error3.ToString();
+                textBox3.Text = error4.ToString();
+            }
+            catch
+            {
+                textBox2.Text = "Неправильный формат";
+            }
         }
     }
 }

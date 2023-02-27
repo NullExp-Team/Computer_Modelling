@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection.Emit;
 using System.Text;
@@ -198,7 +199,7 @@ namespace LR3
         {
             Setup();
             //3485
-            var generator = new Generator(rand.Next(1000,9999));
+            var generator = new Generator(rand.Next(1000, 9999));
 
             List<double> parts = new List<double>();
             for (int i = 0; i < k; i++)
@@ -208,7 +209,7 @@ namespace LR3
 
             double oldValue = Double.MaxValue;
             for (long i = 1; i <= n; i++)
-            {   
+            {
                 double newValue = generator.GetNumber();
                 int partIndex = Convert.ToInt32(Math.Floor(newValue * k));
                 parts[partIndex]++;
@@ -230,5 +231,90 @@ namespace LR3
             AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
         }
 
+        static ulong RotateShift(ulong value, int shift)
+        {
+            int len = (int)Math.Log10(value) + 1;
+            shift %= len;
+            if (shift < 0) shift += len;
+            ulong pow = (ulong)Math.Pow(10, shift);
+
+            return (value % pow) * (ulong)Math.Pow(10, len - shift) + value / pow;
+        }
+
+        static int bin_to_dec(string a)
+        {
+            double b = 0;
+
+            for (double i = a.Length - 1; i >= 0; i--)
+                b += Convert.ToDouble(a.Substring(Convert.ToInt16(i), 1)) * Math.Pow(2, i);
+
+            return Convert.ToInt32(b);
+        }
+
+        class GeneratorDV
+        {
+            protected int val = 0;
+
+            public GeneratorDV(int initialValue)
+            {
+                val = initialValue;
+            }
+
+            public double getdv()
+            {
+                string r02 = Convert.ToString(val, 2);
+                long r022 = Convert.ToInt64(r02);
+
+                ulong r0z = RotateShift((ulong)r022, -2);
+                ulong r0zz = RotateShift((ulong)r022, 2);
+
+                string r0zs = Convert.ToString(r0z);
+                string r0zzs = Convert.ToString(r0zz);
+
+                int r0zdec = bin_to_dec(r0zs);
+                int r0zzdec = bin_to_dec(r0zzs);
+
+                val = r0zdec + r0zzdec;
+                double r1doub = Convert.ToDouble(val) / 1000;
+
+                return r1doub;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Setup();
+            //rand.Next(100, 500)
+            var generator = new GeneratorDV(rand.Next(100, 500));
+
+            List<double> parts = new List<double>();
+            for (int i = 0; i < k; i++)
+            {
+                parts.Add(0);
+            }
+
+            double oldValue = Double.MaxValue;
+            for (long i = 1; i <= n; i++)
+            {
+                double newValue = generator.getdv();
+                int partIndex = Convert.ToInt32(Math.Floor(newValue * k));
+                if (newValue < 1) 
+                    parts[partIndex]++;
+                oldValue = newValue;
+            }
+            for (int i = 0; i < k; i++)
+            {
+                parts[i] /= n;
+            }
+
+            PointPairList list = new PointPairList();
+            for (int i = 0; i < k; i++)
+            {
+                list.Add(Convert.ToDouble(i) / k, parts[i]);
+                list.Add(Convert.ToDouble(i + 1) / k, parts[i]);
+            }
+
+            AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
+        }
     }
 }

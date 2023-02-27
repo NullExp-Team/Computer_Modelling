@@ -68,7 +68,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(76, 20);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "6";
+            this.textBox1.Text = "2";
             // 
             // label1
             // 
@@ -134,7 +134,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(208, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "1 метод (серед. квадратов)";
+            this.button2.Text = "1 метод (Cеред. квадратов)";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -144,8 +144,9 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(208, 23);
             this.button3.TabIndex = 12;
-            this.button3.Text = "3 метод (перемешивания)";
+            this.button3.Text = "3 метод (Перемешивания)";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -181,7 +182,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(208, 23);
             this.button5.TabIndex = 16;
-            this.button5.Text = "2 метод (серед. произведений)";
+            this.button5.Text = "2 метод (Cеред. произведений)";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // Form1

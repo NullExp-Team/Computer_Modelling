@@ -121,9 +121,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(866, 83);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(208, 23);
             this.button1.TabIndex = 10;
-            this.button1.Text = "1 метод";
+            this.button1.Text = "1 метод (обычный рандом)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -131,9 +131,9 @@
             // 
             this.button2.Location = new System.Drawing.Point(866, 112);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(208, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "2 метод";
+            this.button2.Text = "2 метод (серед.произведений)";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -141,18 +141,18 @@
             // 
             this.button3.Location = new System.Drawing.Point(866, 141);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(208, 23);
             this.button3.TabIndex = 12;
-            this.button3.Text = "3 метод";
+            this.button3.Text = "3 метод (перемешивания)";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(866, 171);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(208, 23);
             this.button4.TabIndex = 13;
-            this.button4.Text = "4 метод";
+            this.button4.Text = "4 метод (Линейный конгруэнтный)";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // label4

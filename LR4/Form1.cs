@@ -20,7 +20,9 @@ namespace LR3
         {
             InitializeComponent();
             Setup();
+            
         }
+
         long n = 1000000;
         int k = 5;
         double a = 0;
@@ -315,6 +317,34 @@ namespace LR3
             }
 
             AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
+        }
+
+    
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Setup();
+
+            int MidSquare(int seed) // метод серединных произведений
+            {
+                int square = seed * seed; // возводим число в квадрат
+                string squareStr = square.ToString("D8"); // преобразуем квадрат в строку с ведущими нулями
+                string middleStr = squareStr.Substring(2, 4); // берем серединные четыре цифры из строки
+                int middle = int.Parse(middleStr); // преобразуем серединные цифры обратно в число
+                return middle; // возвращаем результат
+            }
+
+            int init = rand.Next(0, 10000);
+
+            RandFunction f = (double previous) => {
+                int prev = previous == double.MaxValue ? init : (int)(previous * 10000);
+                int random = MidSquare(prev); 
+                double result = (double)random / 10000; // делим результат на степень десятки, равную количеству цифр в числе
+                return result; // возвращаем результат
+            };
+
+            DrawDiagram(f);
+
         }
     }
 }

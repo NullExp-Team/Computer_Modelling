@@ -193,15 +193,8 @@ namespace LR3
         }
         private double drawNSK(double previous)
         {
-            var generator = new Generator(Convert.ToInt32(textBox5.Text));
-            //double[] num = new double[5];
-            for (int i = 0; i < 5; i++)
-            {
-                double k = generator.GetNumber() / 10000;
-                //num[i] = k;
-                return k;
-            }
-            return 0;
+            var generator = new Generator(rand.Next(1000,9999));
+            return generator.GetNumber() / 10000;
         }
 
         private void button2_Click(object sender, EventArgs e)

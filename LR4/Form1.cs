@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,7 +38,8 @@ namespace LR3
                 a = Convert.ToDouble(textBox2.Text);
                 b = Convert.ToDouble(textBox3.Text);
                 k = Convert.ToInt32(textBox4.Text);
-            } catch
+            }
+            catch
             {
                 n = 1000000;
                 a = 0;
@@ -104,7 +106,7 @@ namespace LR3
             return DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
         }
 
-        private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double minFi, double maxFi, double fiStep,  string title, Color color, bool lastToFirst = false)
+        private PointPair4 DrawPolarFunctionAndGetMaxPoint(Func<double, PointPair> func, double minFi, double maxFi, double fiStep, string title, Color color, bool lastToFirst = false)
         {
             PointPairList list = new PointPairList();
 
@@ -149,8 +151,8 @@ namespace LR3
             PointPairList list = new PointPairList();
             for (int i = 0; i < k; i++)
             {
-                list.Add(Convert.ToDouble(i) /k , parts[i]);
-                list.Add(Convert.ToDouble(i+1) / k, parts[i]);
+                list.Add(Convert.ToDouble(i) / k, parts[i]);
+                list.Add(Convert.ToDouble(i + 1) / k, parts[i]);
             }
 
             AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
@@ -170,5 +172,43 @@ namespace LR3
             Setup();
             DrawDiagram(SimpleRand);
         }
+        class Generator
+        {
+            protected int val = 0;
+
+            public Generator(int initialValue)
+            {
+                val = initialValue;
+            }
+
+            public double GetNumber()
+            {
+                string stepValue = Convert.ToInt32(Math.Pow(val, 2)).ToString();
+                int startIndex = stepValue.Length / 4;
+                int len = val.ToString().Length;
+                val = int.Parse(stepValue.Substring(startIndex, len));
+                double newval = Convert.ToDouble(val);
+                return newval;
+            }
+        }
+        private double drawNSK(double previous)
+        {
+            var generator = new Generator(Convert.ToInt32(textBox5.Text));
+            //double[] num = new double[5];
+            for (int i = 0; i < 5; i++)
+            {
+                double k = generator.GetNumber() / 10000;
+                //num[i] = k;
+                return k;
+            }
+            return 0;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Setup();
+            DrawDiagram(drawNSK);
+        }
+
     }
 }

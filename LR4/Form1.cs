@@ -172,6 +172,7 @@ namespace LR3
             Setup();
             DrawDiagram(SimpleRand);
         }
+
         class Generator
         {
             protected int val = 0;
@@ -187,20 +188,46 @@ namespace LR3
                 int startIndex = stepValue.Length / 4;
                 int len = val.ToString().Length;
                 val = int.Parse(stepValue.Substring(startIndex, len));
-                double newval = Convert.ToDouble(val);
+                double newval = Convert.ToDouble(val) / 10000;
+
                 return newval;
             }
-        }
-        private double drawNSK(double previous)
-        {
-            var generator = new Generator(rand.Next(1000,9999));
-            return generator.GetNumber() / 10000;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Setup();
-            DrawDiagram(drawNSK);
+            //3485
+            var generator = new Generator(rand.Next(1000,9999));
+
+            List<double> parts = new List<double>();
+            for (int i = 0; i < k; i++)
+            {
+                parts.Add(0);
+            }
+
+            double oldValue = Double.MaxValue;
+            for (long i = 1; i <= n; i++)
+            {   
+                double newValue = generator.GetNumber();
+                int partIndex = Convert.ToInt32(Math.Floor(newValue * k));
+                parts[partIndex]++;
+
+                oldValue = newValue;
+            }
+            for (int i = 0; i < k; i++)
+            {
+                parts[i] /= n;
+            }
+
+            PointPairList list = new PointPairList();
+            for (int i = 0; i < k; i++)
+            {
+                list.Add(Convert.ToDouble(i) / k, parts[i]);
+                list.Add(Convert.ToDouble(i + 1) / k, parts[i]);
+            }
+
+            AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
         }
 
     }

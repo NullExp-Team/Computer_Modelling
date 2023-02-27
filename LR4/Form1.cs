@@ -334,7 +334,7 @@ namespace LR3
                 return middle; // возвращаем результат
             }
 
-            int init = rand.Next(0, 10000);
+            int init = rand.Next(1000, 9999);
 
             RandFunction f = (double previous) => {
                 int prev = previous == double.MaxValue ? init : (int)(previous * 10000);
@@ -345,6 +345,37 @@ namespace LR3
 
             DrawDiagram(f);
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Setup();
+            // Коэффициенты для линейного конгруэнтного метода
+            int a = 1664525;
+            int b = 1013904223;
+            int m = (int) Math.Pow(2, 32) - 1;
+
+            double LCG(double previous)
+            {
+                // Вычисляем следующее случайное значение по формуле
+                double next = (a * (previous*m) + b) % m;
+
+                // Добавляем m и берем остаток от деления снова для положительного результата
+                next = (next + m) % m;
+
+                // Нормализуем значение в диапазон от 0 до 1
+                return next / m;
+            }
+            int init = rand.Next(1000, 9999);
+
+            RandFunction f = (double previous) =>
+            {
+                double prev = previous == double.MaxValue ? init : previous;
+                double result = LCG(prev);
+                return result; 
+            };
+
+            DrawDiagram(f);
         }
     }
 }

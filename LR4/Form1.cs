@@ -233,14 +233,15 @@ namespace LR3
             AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
         }
 
-        static ulong RotateShift(ulong value, int shift)
+        static String RotateShift(String value, int shift)
         {
-            int len = (int)Math.Log10(value) + 1;
-            shift %= len;
-            if (shift < 0) shift += len;
-            ulong pow = (ulong)Math.Pow(10, shift);
-
-            return (value % pow) * (ulong)Math.Pow(10, len - shift) + value / pow;
+            if (shift < 0)
+            {
+                return (value.Substring(10 + shift, -shift) + value.Substring(0, 10 + shift));
+            } else
+            {
+                return (value.Substring(shift) + value.Substring(0, shift));
+            }
         }
 
         static int bin_to_dec(string a)
@@ -248,7 +249,7 @@ namespace LR3
             double b = 0;
 
             for (double i = a.Length - 1; i >= 0; i--)
-                b += Convert.ToDouble(a.Substring(Convert.ToInt16(i), 1)) * Math.Pow(2, i);
+                b += Convert.ToDouble(a.Substring(Convert.ToInt16(a.Length - 1 - i), 1)) * Math.Pow(2, i);
 
             return Convert.ToInt32(b);
         }
@@ -265,19 +266,25 @@ namespace LR3
             public double getdv()
             {
                 string r02 = Convert.ToString(val, 2);
-                long r022 = Convert.ToInt64(r02);
+                int r = r02.Length;
+                for (int i = 1; i <= 10-r; i++)
+                {
+                    r02 = "0" + r02;
+                }
+                if (r > 10)
+                {
+                    r02 = r02.Substring(0, 10);
+                }
 
-                ulong r0z = RotateShift((ulong)r022, -2);
-                ulong r0zz = RotateShift((ulong)r022, 2);
+                string r0z = RotateShift(r02, -2);
+                string r0zz = RotateShift(r02, 2);
 
-                string r0zs = Convert.ToString(r0z);
-                string r0zzs = Convert.ToString(r0zz);
-
-                int r0zdec = bin_to_dec(r0zs);
-                int r0zzdec = bin_to_dec(r0zzs);
+                int r0zdec = bin_to_dec(r0z);
+                int r0zzdec = bin_to_dec(r0zz);
 
                 val = r0zdec + r0zzdec;
-                double r1doub = Convert.ToDouble(val) / 1000;
+                
+                double r1doub = Convert.ToDouble(val % 1000) / Math.Pow(10, (val % 1000).ToString().Length);
 
                 return r1doub;
             }
@@ -287,7 +294,7 @@ namespace LR3
         {
             Setup();
             //rand.Next(100, 500)
-            var generator = new GeneratorDV(rand.Next(100, 500));
+            var generator = new GeneratorDV(rand.Next(1, 1023));
 
             List<double> parts = new List<double>();
             for (int i = 0; i < k; i++)

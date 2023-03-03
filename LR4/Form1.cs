@@ -332,25 +332,67 @@ namespace LR3
         {
             Setup();
 
-            int MidSquare(int seed) // метод серединных произведений
-            {
-                int square = seed * seed; // возводим число в квадрат
-                string squareStr = square.ToString("D8"); // преобразуем квадрат в строку с ведущими нулями
-                string middleStr = squareStr.Substring(2, 4); // берем серединные четыре цифры из строки
-                int middle = int.Parse(middleStr); // преобразуем серединные цифры обратно в число
-                return middle; // возвращаем результат
-            }
+            //int MidSquare(int seed) // метод серединных произведений
+            //{
+            //    int square = seed * seed; // возводим число в квадрат
+            //    string squareStr = square.ToString("D8"); // преобразуем квадрат в строку с ведущими нулями
+            //    string middleStr = squareStr.Substring(2, 4); // берем серединные четыре цифры из строки
+            //    int middle = int.Parse(middleStr); // преобразуем серединные цифры обратно в число
+            //    return middle; // возвращаем результат
+            //}
 
             int init = rand.Next(1000, 9999);
 
-            RandFunction f = (double previous) => {
-                int prev = previous == double.MaxValue ? init : (int)(previous * 10000);
-                int random = MidSquare(prev); 
-                double result = (double)random / 10000; // делим результат на степень десятки, равную количеству цифр в числе
-                return result; // возвращаем результат
+            // Задаем начальные значения R0 и R1
+            int r0 = init;
+            int r1 = 5678;
+         
+
+            double MiddleSquare(double seed)
+            {
+                // Вычисляем произведение R0 и R1
+                int r2 = r0 * r1;
+
+                // Преобразуем произведение в строку
+                string s2 = r2.ToString();
+
+                // Добавляем нули слева и справа, если длина строки меньше 8 символов
+                while (s2.Length < 8)
+                {
+                    s2 = "0" + s2 + "0";
+                }
+
+                // Извлекаем середину строки (4 символа)
+                string s2star = s2.Substring(2, 4);
+
+                // Преобразуем середину в число
+                int r2star = int.Parse(s2star);
+
+                // Делим середину на 10000, чтобы получить число от 0 до 1
+                double randomNumber = (double)r2star / 10000;
+
+
+                // Обновляем значение R0 равным середине
+                r0 = r2star;
+
+                return randomNumber;
+            }
+            
+            
+
+            //RandFunction f = (double previous) => {
+            //    int prev = previous == double.MaxValue ? init : (int)(previous * 10000);
+            //    int random = MidSquare(prev); 
+            //    double result = (double)random / 10000; // делим результат на степень десятки, равную количеству цифр в числе
+            //    return result; // возвращаем результат
+            //};
+
+
+            RandFunction f2 = (double previous) => {
+                return MiddleSquare(previous);
             };
 
-            DrawDiagram(f);
+                DrawDiagram(f2);
 
         }
 

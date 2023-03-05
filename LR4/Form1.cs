@@ -33,7 +33,7 @@ namespace LR3
             GraphPane plane = zedGraphControl1.GraphPane;
             plane.Title.Text = "NullExp Lab4";
             plane.XAxis.Title.Text = "Значение";
-            plane.YAxis.Title.Text = "Вероятность";
+            plane.YAxis.Title.Text = "Количество";
 
             try
             {
@@ -59,7 +59,6 @@ namespace LR3
             zedGraphControl1.GraphPane.YAxis.MinorGrid.IsVisible = false;
             zedGraphControl1.GraphPane.XAxis.MinorGrid.IsVisible = false;
 
-
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
@@ -76,6 +75,7 @@ namespace LR3
 
             plane.AddCurve(title, pointCloned, color, symbolType);
 
+            zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
 
@@ -146,18 +146,15 @@ namespace LR3
 
                 oldValue = newValue;
             }
-            for (int i = 0; i < k; i++)
-            {
-                parts[i] /= n;
-            }
 
             PointPairList list = new PointPairList();
+            list.Add(0, 0);
             for (int i = 0; i < k; i++)
             {
                 list.Add(Convert.ToDouble(i) / k, parts[i]);
                 list.Add(Convert.ToDouble(i + 1) / k, parts[i]);
             }
-
+            list.Add(1, 0);
             AddCurve("Диаграмма", list, Color.Blue, SymbolType.Circle, false);
         }
 
@@ -190,7 +187,12 @@ namespace LR3
                 string stepValue = Convert.ToInt32(Math.Pow(val, 2)).ToString();
                 int startIndex = stepValue.Length / 4;
                 int len = val.ToString().Length;
-                val = int.Parse(stepValue.Substring(startIndex, len));
+                String strVal = stepValue.Substring(startIndex, len);
+                if (strVal.Length < 4)
+                {
+                    strVal = "1" + new String('1', 3 - strVal.Length) + strVal;
+                }
+                val = int.Parse(strVal);
                 double newval = Convert.ToDouble(val) / 10000;
 
                 return newval;
@@ -217,10 +219,6 @@ namespace LR3
                 parts[partIndex]++;
 
                 oldValue = newValue;
-            }
-            for (int i = 0; i < k; i++)
-            {
-                parts[i] /= n;
             }
 
             PointPairList list = new PointPairList();
@@ -310,10 +308,6 @@ namespace LR3
                 if (newValue < 1) 
                     parts[partIndex]++;
                 oldValue = newValue;
-            }
-            for (int i = 0; i < k; i++)
-            {
-                parts[i] /= n;
             }
 
             PointPairList list = new PointPairList();

@@ -71,10 +71,9 @@ print(f"Среднее время выполнения задания: {np.mean(
 print(f"Максимальное время ожидания задания: {(max(np.array(completion_times) - np.array(start_times))):.2f} ч.")
 
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot(range(n), start_times, label='Время начала')
-ax.plot(range(n), end_times, label='Время окончания')
+ax.plot(range(n), intervals, label='Время между заданиями')
 ax.set_xlabel('Номер задания')
 ax.set_ylabel('Время')
-ax.set_title('Зависимость времени начала и окончания заданий от их номера')
+
 ax.legend()
 plt.show()

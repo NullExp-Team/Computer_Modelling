@@ -38,8 +38,6 @@ namespace LR3
             try
             {
                 n = Convert.ToInt64(Math.Pow(10, Convert.ToInt64(textBox1.Text)));
-                a = Convert.ToDouble(textBox2.Text);
-                b = Convert.ToDouble(textBox3.Text);
                 k = Convert.ToInt32(textBox4.Text);
             }
             catch
@@ -335,11 +333,11 @@ namespace LR3
             //    return middle; // возвращаем результат
             //}
 
-            int init = rand.Next(1000, 9999);
+            int init = 5167;
 
             // Задаем начальные значения R0 и R1
             int r0 = init;
-            int r1 = 5678;
+            int r1 = 3729;
          
 
             double MiddleSquare(double seed)
@@ -359,6 +357,8 @@ namespace LR3
                 // Извлекаем середину строки (4 символа)
                 string s2star = s2.Substring(2, 4);
 
+                r1 = int.Parse(s2.Substring(4, 4)); 
+
                 // Преобразуем середину в число
                 int r2star = int.Parse(s2star);
 
@@ -367,7 +367,7 @@ namespace LR3
 
 
                 // Обновляем значение R0 равным середине
-                r0 = r2star;
+                //r0 = r2star;
 
                 return randomNumber;
             }
@@ -386,7 +386,7 @@ namespace LR3
                 return MiddleSquare(previous);
             };
 
-                DrawDiagram(f2);
+            DrawDiagram(f2);
 
         }
 
@@ -409,6 +409,7 @@ namespace LR3
                 // Нормализуем значение в диапазон от 0 до 1
                 return next / m;
             }
+
             int init = rand.Next(1000, 9999);
 
             RandFunction f = (double previous) =>

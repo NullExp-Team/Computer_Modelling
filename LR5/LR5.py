@@ -25,7 +25,6 @@ end_times = np.zeros(n)
 break_start_times = np.zeros(n)
 break_end_times = np.zeros(n)
 
-# Начальное время равно 0
 current_time = 0
 total_time = 0
 completion_times = []
@@ -69,8 +68,7 @@ print(f"Общее время работы станка: {total_time:.2f} ч.")
 print(f"Процент времени простоя станка: {(1 - total_time/500)*100:.2f}%")
 print(f"Среднее время между заданиями: {np.mean(intervals):.2f} ч.")
 print(f"Среднее время выполнения задания: {np.mean(task_times):.2f} ч.")
-k=round((max(np.array(completion_times) - np.array(start_times))),2)
-print(f"Максимальное время ожидания задания: {k} ч.")
+print(f"Максимальное время ожидания задания: {(max(np.array(completion_times) - np.array(start_times))):.2f} ч.")
 
 fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(range(n), start_times, label='Время начала')

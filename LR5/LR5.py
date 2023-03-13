@@ -88,8 +88,6 @@ root = tk.Tk()
 
 root.geometry('1600x700')
 
-flag=False
-
 label_n = tk.Label(root, text="Введите количество деталей:")
 label_n.pack()
 entry_n = tk.Entry(root)

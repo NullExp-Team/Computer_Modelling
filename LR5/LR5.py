@@ -76,7 +76,8 @@ def plot_graph():
     canvas = FigureCanvasTkAgg(fig, master=root)
     canvas.draw()
     canvas.get_tk_widget().pack()
- 
+    canvas.get_tk_widget().place(x=400,y=100)
+
     Ottext.delete("1.0",tk.END)
     Ottext.insert(tk.END, "Общее время работы станка: {:.2f} ч.\n".format(total_time))
     Ottext.insert(tk.END, "Процент времени простоя станка: {:.2f}%\n".format((1 - total_time/500)*100))

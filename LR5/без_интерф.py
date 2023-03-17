@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from enum import Enum 
 
+
 def intervalsToTimeArray(arr):
     newArr = np.zeros(len(arr))
     for i in range(len(arr)):
@@ -53,7 +54,7 @@ while True:
             current_time =  intervals[task_number]
         
         start_task_time[task_number] = current_time
-        intervals_between_start_task[task_number] = current_time - intervals_between_start_task[task_number-1]
+        intervals_between_start_task[task_number] = start_task_time[task_number] - start_task_time[task_number-1]
 
         state = States.setup
     elif state == States.setup:
@@ -90,14 +91,20 @@ exit_string += f"Среднее время выполнения задания: 
 exit_string += f"Максимальное между заданиями:{(max(intervals_between_start_task[1:])):.2f} ч." + '            '
 exit_string += f"Количество поломок станка: {break_number-1} "
 
-fig, ax = plt.subplots(figsize=(13, 5))
-ax.text(-100, max(np.array(intervals))*1.06, exit_string)
-ax.set_facecolor((1,1,1))
-fig.set_facecolor((0.8,0.8,0.8))
-fig.set_edgecolor((0,1,0))
-ax.set_xlabel('№ задания')
-ax.set_ylabel('Время выполнения')
 
+root = tk.Tk()
 
-ax.legend()
-plt.show()
+root.geometry('1600x700')
+
+label_n = tk.Label(root, text="Введите количество деталей:")
+label_n.pack()
+entry_n = tk.Entry(root)
+entry_n.pack()
+
+button_plot = tk.Button(root, text="Построить график", command=plot_graph)
+button_plot.pack()
+
+Ottext=st.ScrolledText(root)
+Ottext.place(x=0,y=0,width=400,height=150)
+
+root.mainloop()

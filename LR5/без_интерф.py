@@ -42,6 +42,7 @@ current_time = 0
 state = States.waiting
 task_number = 0
 break_number = 0
+k=0
 while True:
     if state == States.waiting:
         if (task_number == len(intervals)):
@@ -61,6 +62,7 @@ while True:
         if (current_time + setup_times[task_number] > break_intervals[break_number]):
             current_time = break_intervals[break_number]
             state = States.repair
+            k+=1
         else:
             current_time += setup_times[task_number]
             state = States.execute
@@ -69,6 +71,7 @@ while True:
         if (current_time + task_times[task_number] > break_intervals[break_number]):
             current_time = break_intervals[break_number]
             state = States.repair
+            k+=1
         else:
             current_time += task_times[task_number]
 
@@ -87,6 +90,7 @@ print(f"Времени простоя станка: {time_of_non_work:.2f} ч.")
 print(f"Среднее время между заданиями: {np.mean(intervals_between_start_task[1:]):.2f} ч.")
 print(f"Среднее время выполнения задания: {np.mean(execute_time):.2f} ч.")
 print(f"Максимальное между заданиями: {(max(intervals_between_start_task[1:])):.2f} ч.")
+print(f"Количество поломок: {k}")
 
 fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(range(n), intervals, label='Время между заданиями')

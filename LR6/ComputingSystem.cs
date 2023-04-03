@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 public class Task
 {
-    public int timeLeft;
+    public int? timeLeft;
 
-    public Task(int timeLeft)
+    public Task(int? timeLeft)
     {
         this.timeLeft = timeLeft;
     }
@@ -39,7 +39,7 @@ public class Computer
 
     public void AddTask()
     {
-        Task task = new Task(random.Next(processingTime - processingTimeError, processingTime + processingTimeError));
+        Task task = new Task(null);
         Enqueue(task);
     }
 
@@ -57,9 +57,12 @@ public class Computer
         while (time > 0 && !IsEmpty())
         {
             Task task = queue.Peek();
+
+            if (task.timeLeft == null) task.timeLeft = random.Next(processingTime - processingTimeError, processingTime + processingTimeError);
+
             if (task.timeLeft < time)
             {
-                time -= task.timeLeft;
+                time -= Convert.ToDouble(task.timeLeft) ;
                 tasks.Add(Dequeue());
             } else
             {
@@ -103,6 +106,11 @@ public class Computer
         }
     }
 
+    public void Restart()
+    {
+        queue.Clear();
+        time = 0;
+    }
 
 
     public string ToString()
@@ -236,9 +244,9 @@ public class ComputingSystem
 
     public void Restart()
     {
-        computer1.queue.Clear();
-        computer2.queue.Clear();
-        computer3.queue.Clear();
+        computer1.Restart();
+        computer2.Restart();
+        computer3.Restart();
         time = 0;
         taskCount = 0;
         completedTaskCount = 0;

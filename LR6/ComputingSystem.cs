@@ -264,6 +264,7 @@ public class ComputingSystem
         time = 0;
         taskCount = 0;
         completedTaskCount = 0;
+        allTime = 0;
     }
 
     public void InstantlyFinish()

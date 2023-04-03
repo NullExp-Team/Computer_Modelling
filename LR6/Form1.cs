@@ -111,6 +111,12 @@ namespace LR6
         {
             system.Process(0.1);
 
+            if(system.completedTaskCount == system.settings.maxTasks)
+            {
+                timer1.Stop();
+                button1.Text = "Запустить";
+            }
+
             label16.Text = system.ToString();
         }
 

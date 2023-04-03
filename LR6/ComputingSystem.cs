@@ -168,7 +168,7 @@ public class ComputingSystemSettings
 public class ComputingSystem
 {
 
-    ComputingSystemSettings settings;
+    public ComputingSystemSettings settings;
     public Computer computer1;
     public Computer computer2;
     public Computer computer3;

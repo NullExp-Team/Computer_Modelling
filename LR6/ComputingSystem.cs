@@ -19,6 +19,7 @@ public class Computer
     public double time;
     public int processingTime;
     public int processingTimeError;
+    public int completedTaskCount;
 
     private Random random;
 
@@ -29,6 +30,7 @@ public class Computer
         time = 0;
         this.processingTime = processingTime;
         this.processingTimeError = processingTimeError;
+
         random = new Random();
     }
 
@@ -86,7 +88,10 @@ public class Computer
     {
         if (queue.Count > 0)
         {
+
+            completedTaskCount += 1;
             return queue.Dequeue();
+            
         }
         else
         {
@@ -110,9 +115,10 @@ public class Computer
     {
         queue.Clear();
         time = 0;
+        completedTaskCount = 0;
     }
 
-
+    override
     public string ToString()
     {
         string str = "";
@@ -168,6 +174,7 @@ public class ComputingSystem
     public Computer computer3;
  
     private  Random random;
+    public double allTime;
     public double time;
     public double timeLeft;
     public int completedTaskCount;
@@ -183,6 +190,7 @@ public class ComputingSystem
         computer3 = new Computer(3, settings.processingTime3, settings.processingTime3Error);
         time = 0;
         timeLeft = 0;
+        allTime = 0;
         taskCount = 0;
         completedTaskCount = 0;
         random = new Random();
@@ -193,7 +201,7 @@ public class ComputingSystem
         if(taskCount < settings.maxTasks)
         {
             time += progress;
-            while(timeLeft < time && taskCount < settings.maxTasks) { 
+            while (timeLeft < time && taskCount < settings.maxTasks) { 
                 time -= timeLeft;
 
                 double taskType = random.NextDouble();
@@ -216,6 +224,12 @@ public class ComputingSystem
 
                 timeLeft = random.Next(settings.taskInterval - settings.taskIntervalError, settings.taskInterval + settings.taskIntervalError);
             }
+        }
+
+        if (completedTaskCount < settings.maxTasks)
+        {
+            allTime += progress;
+            allTime = Math.Round(allTime,2);
         }
 
         var tasks1 = computer1.Process(progress);
@@ -276,6 +290,7 @@ public class ComputingSystem
         computer3.processingTimeError = settings.processingTime3Error;
     }
 
+    override
     public string ToString()
     {
         string str = "";
@@ -283,9 +298,13 @@ public class ComputingSystem
         str += computer1.ToString();
         str += computer2.ToString();
         str += computer3.ToString();
-
+        str += "Сomputer1 Completed tasks: " + computer1.completedTaskCount + "\n";
+        str += "Сomputer2 Completed tasks: " + computer2.completedTaskCount + "\n";
+        str += "Сomputer3 Completed tasks: " + computer3.completedTaskCount + "\n";
         str += "Completed tasks: " + completedTaskCount + "\n";
-       
+        str += "All work time: " + allTime + "\n";
+
+
         return str;
     }
 

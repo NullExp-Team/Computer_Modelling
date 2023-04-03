@@ -96,7 +96,7 @@ namespace LR6
                 //
 
 
-                //timer1.Interval = 1000 / Convert.ToInt32(textBox12.Text);
+                timer1.Interval = 1000 / Convert.ToInt32(textBox12.Text);
 
             }
             catch

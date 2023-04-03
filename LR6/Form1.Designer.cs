@@ -63,6 +63,7 @@ namespace LR6
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -110,7 +111,7 @@ namespace LR6
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(832, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(193, 17);
+            this.label1.Size = new System.Drawing.Size(192, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Интервал между заданиями";
             // 
@@ -146,7 +147,8 @@ namespace LR6
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(76, 22);
             this.textBox3.TabIndex = 11;
-            this.textBox3.Text = "0.3";
+            this.textBox3.Text = "0,3";
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label3
             // 
@@ -163,14 +165,14 @@ namespace LR6
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(76, 22);
             this.textBox4.TabIndex = 9;
-            this.textBox4.Text = "0.4";
+            this.textBox4.Text = "0,4";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(832, 148);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(255, 17);
+            this.label4.Size = new System.Drawing.Size(247, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Вероятности поступания в 1 и 2 ЭВМ";
             // 
@@ -200,14 +202,14 @@ namespace LR6
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(76, 22);
             this.textBox6.TabIndex = 15;
-            this.textBox6.Text = "0.4";
+            this.textBox6.Text = "0,4";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(832, 194);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(238, 17);
+            this.label10.Size = new System.Drawing.Size(232, 16);
             this.label10.TabIndex = 14;
             this.label10.Text = "Вероятность перехода во 2-ю ЭВМ";
             // 
@@ -242,7 +244,7 @@ namespace LR6
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(832, 239);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(144, 17);
+            this.label8.Size = new System.Drawing.Size(139, 16);
             this.label8.TabIndex = 16;
             this.label8.Text = "Время работы ЭВМ1";
             // 
@@ -277,7 +279,7 @@ namespace LR6
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(832, 284);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 17);
+            this.label11.Size = new System.Drawing.Size(139, 16);
             this.label11.TabIndex = 20;
             this.label11.Text = "Время работы ЭВМ2";
             // 
@@ -312,7 +314,7 @@ namespace LR6
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(832, 329);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(144, 17);
+            this.label13.Size = new System.Drawing.Size(139, 16);
             this.label13.TabIndex = 24;
             this.label13.Text = "Время работы ЭВМ3";
             // 
@@ -329,7 +331,7 @@ namespace LR6
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(832, 374);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(196, 17);
+            this.label14.Size = new System.Drawing.Size(195, 16);
             this.label14.TabIndex = 28;
             this.label14.Text = "Количество шагов в секунду";
             // 
@@ -350,15 +352,26 @@ namespace LR6
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(832, 419);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(145, 17);
+            this.label15.Size = new System.Drawing.Size(144, 16);
             this.label15.TabIndex = 30;
             this.label15.Text = "Количество заданий";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(30, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(51, 16);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "label16";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 548);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.textBox12);
@@ -433,6 +446,7 @@ namespace LR6
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
 

@@ -45,7 +45,6 @@ public class Computer
         Enqueue(task);
     }
 
-
     public List<Task> Process(double progress)
     {
         List<Task> tasks = new List<Task>();
@@ -130,7 +129,6 @@ public class Computer
 
         return str;
     }
-
 }
 
 public class ComputingSystemSettings
@@ -167,7 +165,6 @@ public class ComputingSystemSettings
 
 public class ComputingSystem
 {
-
     public ComputingSystemSettings settings;
     public Computer computer1;
     public Computer computer2;
@@ -179,8 +176,6 @@ public class ComputingSystem
     public double timeLeft;
     public int completedTaskCount;
     public int taskCount;
-
-
 
     public ComputingSystem(ComputingSystemSettings settings)
     {
@@ -308,5 +303,4 @@ public class ComputingSystem
 
         return str;
     }
-
 }

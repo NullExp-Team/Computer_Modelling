@@ -300,7 +300,6 @@ public class ComputingSystem
         str += "Completed tasks: " + completedTaskCount + "\n";
         str += "All work time: " + allTime + "\n";
 
-
         return str;
     }
 }

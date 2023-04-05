@@ -173,9 +173,9 @@ namespace LR6
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(832, 148);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(247, 16);
+            this.label4.Size = new System.Drawing.Size(255, 16);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Вероятности поступания в 1 и 2 ЭВМ";
+            this.label4.Text = "Вероятности поступления в 1 и 2 ЭВМ";
             // 
             // label5
             // 
@@ -245,9 +245,9 @@ namespace LR6
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(832, 239);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(139, 16);
+            this.label8.Size = new System.Drawing.Size(172, 16);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Время работы ЭВМ1";
+            this.label8.Text = "Время обработки в ЭВМ1";
             // 
             // textBox8
             // 
@@ -280,9 +280,9 @@ namespace LR6
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(832, 284);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(139, 16);
+            this.label11.Size = new System.Drawing.Size(172, 16);
             this.label11.TabIndex = 20;
-            this.label11.Text = "Время работы ЭВМ2";
+            this.label11.Text = "Время обработки в ЭВМ2";
             // 
             // textBox10
             // 
@@ -315,9 +315,9 @@ namespace LR6
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(832, 329);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(139, 16);
+            this.label13.Size = new System.Drawing.Size(172, 16);
             this.label13.TabIndex = 24;
-            this.label13.Text = "Время работы ЭВМ3";
+            this.label13.Text = "Время обработки в ЭВМ3";
             // 
             // textBox12
             // 
@@ -362,9 +362,8 @@ namespace LR6
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(30, 23);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 16);
+            this.label16.Size = new System.Drawing.Size(0, 16);
             this.label16.TabIndex = 32;
-            this.label16.Text = "label16";
             this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // Form1

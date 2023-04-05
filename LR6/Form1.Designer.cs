@@ -360,7 +360,8 @@ namespace LR6
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(30, 23);
+            this.label16.Location = new System.Drawing.Point(23, 29);
+            this.label16.MaximumSize = new System.Drawing.Size(800, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(0, 16);
             this.label16.TabIndex = 32;
@@ -370,7 +371,7 @@ namespace LR6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1130, 548);
+            this.ClientSize = new System.Drawing.Size(1130, 898);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.label15);
@@ -406,6 +407,7 @@ namespace LR6
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

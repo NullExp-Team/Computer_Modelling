@@ -63,10 +63,7 @@ namespace LR6
 
 
             label16.Text = system.ToString();
-            label16.Font = new Font("Arial", 16);
-
-
-
+            label16.Font = new Font("Arial", 14);
         }
 
 

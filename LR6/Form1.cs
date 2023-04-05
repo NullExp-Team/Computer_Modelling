@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace LR6
 {
     public partial class Form1 : Form
@@ -23,22 +22,23 @@ namespace LR6
 
             system = new ComputingSystem(
                    new ComputingSystemSettings(
-                         Convert.ToInt32(textBox1.Text), // время между заданий
-                         Convert.ToInt32(textBox2.Text), // погрешность заданий
+                         Convert.ToDouble(textBox1.Text), // время между заданий
+                         Convert.ToDouble(textBox2.Text), // погрешность заданий
                          Convert.ToDouble(textBox4.Text), // вероятность в 1-ю
                          Convert.ToDouble(textBox3.Text), // вероятность во 2-ю
-                         Convert.ToInt32(textBox7.Text), // время работы 1-й
-                         Convert.ToInt32(textBox5.Text), // погрешность 1-й
-                         Convert.ToInt32(textBox9.Text), // время работы 2-й
-                         Convert.ToInt32(textBox8.Text), // погрешность 2-й
-                         Convert.ToInt32(textBox11.Text), // время работы 3-й
-                         Convert.ToInt32(textBox10.Text), // погрешность 3-й
+                         Convert.ToDouble(textBox7.Text), // время работы 1-й
+                         Convert.ToDouble(textBox5.Text), // погрешность 1-й
+                         Convert.ToDouble(textBox9.Text), // время работы 2-й
+                         Convert.ToDouble(textBox8.Text), // погрешность 2-й
+                         Convert.ToDouble(textBox11.Text), // время работы 3-й
+                         Convert.ToDouble(textBox10.Text), // погрешность 3-й
                          Convert.ToInt32(textBox13.Text), // кол-во заданий
                          Convert.ToDouble(textBox6.Text) // вероятность перехода во 2-ю
                    )
               );
 
             label16.Text = system.ToString();
+            label16.Font = new Font("Arial", 16);
 
 
 
@@ -122,6 +122,8 @@ namespace LR6
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+            system.Restart();
             system.InstantlyFinish();
 
             label16.Text = system.ToString();
@@ -133,6 +135,11 @@ namespace LR6
         }
 
         private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
         }

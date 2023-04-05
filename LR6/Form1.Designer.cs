@@ -166,6 +166,7 @@ namespace LR6
             this.textBox4.Size = new System.Drawing.Size(76, 22);
             this.textBox4.TabIndex = 9;
             this.textBox4.Text = "0,4";
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label4
             // 
@@ -202,7 +203,7 @@ namespace LR6
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(76, 22);
             this.textBox6.TabIndex = 15;
-            this.textBox6.Text = "0,4";
+            this.textBox6.Text = "0,3";
             // 
             // label10
             // 

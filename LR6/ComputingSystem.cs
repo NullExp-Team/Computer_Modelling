@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
+static class Rand
+{   
+    static Random random = new Random();
+    public static double get(double value, double error)
+    {
+        return Math.Round(random.NextDouble() * 2 * error + value - error, 2);
+    }
+}
+
 public class Task
 {
-    public int? timeLeft;
+    public double? timeLeft;
 
-    public Task(int? timeLeft)
+    public Task(double? timeLeft)
     {
-        this.timeLeft = timeLeft;
+        this.timeLeft =  timeLeft;
     }
 }
 
@@ -17,13 +27,15 @@ public class Computer
     public int id;
     public Queue<Task> queue;
     public double time;
-    public int processingTime;
-    public int processingTimeError;
+    public double processingTime;
+    public double processingTimeError;
     public int completedTaskCount;
 
     private Random random;
 
-    public Computer(int id, int processingTime, int processingTimeError)
+   
+
+    public Computer(int id, double processingTime, double processingTimeError)
     {
         this.id = id;
         queue = new Queue<Task>();
@@ -60,7 +72,7 @@ public class Computer
         {
             Task task = queue.Peek();
 
-            if (task.timeLeft == null) task.timeLeft = random.Next(processingTime - processingTimeError, processingTime + processingTimeError);
+            if (task.timeLeft == null) task.timeLeft = Rand.get(processingTime, processingTimeError);
 
             if (task.timeLeft < time)
             {
@@ -125,8 +137,8 @@ public class Computer
 
         str += "Computer" + id + ":" + ",  ";
         str += "Tasks - " + queue.Count + ",  ";
-        str += "taskTimeLeft - " + (Peek()?.timeLeft ?? 0) + ",  ";
-        str += "time - " + time + "\n";
+        str += "taskTimeLeft - " + (Peek()?.timeLeft ?? 0) + " м.,  ";
+        str += "time - " + time + "м.\n";
 
         return str;
     }
@@ -135,20 +147,20 @@ public class Computer
 
 public class ComputingSystemSettings
 {
-    public int taskInterval;
-    public int taskIntervalError;
+    public double taskInterval;
+    public double taskIntervalError;
     public double prob1;
     public double prob2;
-    public int processingTime1;
-    public int processingTime1Error;
-    public int processingTime2;
-    public int processingTime2Error;
-    public int processingTime3;
-    public int processingTime3Error;
+    public double processingTime1;
+    public double processingTime1Error;
+    public double processingTime2;
+    public double processingTime2Error;
+    public double processingTime3;
+    public double processingTime3Error;
     public int maxTasks;
     public double probMove2;
 
-    public ComputingSystemSettings (int taskInterval, int taskIntervalError, double prob1, double prob2, int processingTime1, int processingTime1Error, int processingTime2, int processingTime2Error, int processingTime3, int processingTime3Error, int maxCount, double probMove2)
+    public ComputingSystemSettings (double taskInterval, double taskIntervalError, double prob1, double prob2, double processingTime1, double processingTime1Error, double processingTime2, double processingTime2Error, double processingTime3, double processingTime3Error, int maxCount, double probMove2)
     {
         this.taskInterval = taskInterval;
         this.taskIntervalError = taskIntervalError;
@@ -222,14 +234,14 @@ public class ComputingSystem
                     taskCount++;
                 }
 
-                timeLeft = random.Next(settings.taskInterval - settings.taskIntervalError, settings.taskInterval + settings.taskIntervalError);
+                timeLeft = Rand.get(settings.taskInterval, settings.taskIntervalError);
             }
         }
 
         if (completedTaskCount < settings.maxTasks)
         {
             allTime += progress;
-            allTime = Math.Round(allTime,2);
+            allTime = Math.Round(allTime, 2);
         }
 
         var tasks1 = computer1.Process(progress);
@@ -269,10 +281,11 @@ public class ComputingSystem
 
     public void InstantlyFinish()
     {
+        //Process(99999);
         while (true)
         {
-            Process(1);
-            if (computer1.IsEmpty() && computer2.IsEmpty() && computer3.IsEmpty())
+            Process(0.1);
+            if (completedTaskCount == settings.maxTasks)
             {
                 break;
             }
@@ -303,7 +316,7 @@ public class ComputingSystem
         str += "Сomputer2 Completed tasks: " + computer2.completedTaskCount + "\n";
         str += "Сomputer3 Completed tasks: " + computer3.completedTaskCount + "\n";
         str += "Completed tasks: " + completedTaskCount + "\n";
-        str += "All work time: " + allTime + "\n";
+        str += "All work time: " + allTime + "м.\n";
 
 
         return str;

@@ -66,8 +66,6 @@ public class Computer
 
         time += progress;
 
-     
-
         while (time > 0 && !IsEmpty())
         {
             Task task = queue.Peek();
@@ -121,13 +119,6 @@ public class Computer
         {
             return null;
         }
-    }
-
-    public void Restart()
-    {
-        queue.Clear();
-        time = 0;
-        completedTaskCount = 0;
     }
 
     override
@@ -266,17 +257,6 @@ public class ComputingSystem
         completedTaskCount += tasks2.Count + tasks3.Count;
 
 
-    }
-
-    public void Restart()
-    {
-        computer1.Restart();
-        computer2.Restart();
-        computer3.Restart();
-        time = 0;
-        taskCount = 0;
-        completedTaskCount = 0;
-        allTime = 0;
     }
 
     public void InstantlyFinish()

@@ -16,12 +16,11 @@ namespace LR6
 
         ComputingSystem system;
 
-        public Form1()
+        ComputingSystemSettings parseSettings()
         {
-            InitializeComponent();
-
-            system = new ComputingSystem(
-                   new ComputingSystemSettings(
+            try
+            {
+                return new ComputingSystemSettings(
                          Convert.ToDouble(textBox1.Text), // время между заданий
                          Convert.ToDouble(textBox2.Text), // погрешность заданий
                          Convert.ToDouble(textBox4.Text), // вероятность в 1-ю
@@ -34,8 +33,34 @@ namespace LR6
                          Convert.ToDouble(textBox10.Text), // погрешность 3-й
                          Convert.ToInt32(textBox13.Text), // кол-во заданий
                          Convert.ToDouble(textBox6.Text) // вероятность перехода во 2-ю
-                   )
-              );
+                   );
+            }
+            catch (Exception e)
+            { 
+                MessageBox.Show("Неправильный формат данных!");
+                throw e;
+            }
+
+           
+        }
+
+        void Restart()
+        {
+            system = new ComputingSystem(parseSettings());
+        }
+
+        
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            var settings = parseSettings();
+
+          
+            system = new ComputingSystem(settings);
+           
+
 
             label16.Text = system.ToString();
             label16.Font = new Font("Arial", 16);
@@ -65,7 +90,8 @@ namespace LR6
 
         private void button2_Click(object sender, EventArgs e)
         {
-            system.Restart();
+            Restart();
+
             label16.Text = system.ToString();
         }
 
@@ -75,26 +101,9 @@ namespace LR6
             //привяжу, когда будет модель готова
             try
             {
-                var settings =
-                      new ComputingSystemSettings(
-                            Convert.ToInt32(textBox1.Text), // время между заданий
-                         Convert.ToInt32(textBox2.Text), // погрешность заданий
-                         Convert.ToDouble(textBox4.Text), // вероятность в 1-ю
-                         Convert.ToDouble(textBox3.Text), // вероятность во 2-ю
-                         Convert.ToInt32(textBox7.Text), // время работы 1-й
-                         Convert.ToInt32(textBox5.Text), // погрешность 1-й
-                         Convert.ToInt32(textBox9.Text), // время работы 2-й
-                         Convert.ToInt32(textBox8.Text), // погрешность 2-й
-                         Convert.ToInt32(textBox11.Text), // время работы 3-й
-                         Convert.ToInt32(textBox10.Text), // погрешность 3-й
-                         Convert.ToInt32(textBox13.Text), // кол-во заданий
-                         Convert.ToDouble(textBox6.Text) // вероятность перехода во 2-ю
-                      );
+                var settings = parseSettings();
 
                 system.loadNewParameters(settings);
-
-                //
-
 
                 timer1.Interval = 1000 / Convert.ToInt32(textBox12.Text);
 
@@ -103,6 +112,7 @@ namespace LR6
             {
                 MessageBox.Show("Неправильный формат данных!");
             }
+        
         }
 
 
@@ -111,7 +121,7 @@ namespace LR6
         {
             system.Process(0.1);
 
-            if(system.completedTaskCount == system.settings.maxTasks)
+            if (system.completedTaskCount == system.settings.maxTasks)
             {
                 timer1.Stop();
                 button1.Text = "Запустить";
@@ -123,7 +133,8 @@ namespace LR6
         private void button3_Click(object sender, EventArgs e)
         {
 
-            system.Restart();
+            Restart();
+
             system.InstantlyFinish();
 
             label16.Text = system.ToString();

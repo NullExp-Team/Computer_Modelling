@@ -315,15 +315,15 @@ public class ComputingSystem
     {
         while (completedTaskCount < settings.maxTasks)
         {
-            if(computer1.IsEmpty() &&  computer2.IsEmpty() && computer3.IsEmpty())
-            {
-                Process(taskInterval);
-            } 
-            else
-            {
-                var min = Utils.min(computer1.currentProcessingTime, computer2.currentProcessingTime, computer3.currentProcessingTime);
-                Process(min);
-            }
+            //if(computer1.IsEmpty() &&  computer2.IsEmpty() && computer3.IsEmpty())
+            //{
+            //    Process(taskInterval);
+            //} 
+            //else
+            //{
+            var min = Utils.min(taskInterval, computer1.currentProcessingTime, computer2.currentProcessingTime, computer3.currentProcessingTime);
+            Process(min);
+            //}
            
         }
     }

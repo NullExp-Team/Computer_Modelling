@@ -64,7 +64,7 @@ namespace LR6
 
 
             label16.Text = system.ToString();
-            label16.Font = new Font("Arial", 14);
+            label16.Font = new Font("Arial", 10);
         }
 
 
@@ -132,6 +132,11 @@ namespace LR6
         {
 
             Restart();
+
+            while(system.completedTaskCount < system.settings.maxTasks)
+            {
+                system.Process(0.1);
+            }
 
             system.InstantlyFinish();
 

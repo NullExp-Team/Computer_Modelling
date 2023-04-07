@@ -24,7 +24,7 @@ static class Utils
 
 public class Task
 {
-  
+
     public double createTime;
     public double? processingTime;
 
@@ -53,7 +53,7 @@ public class Computer
     private double waitingTimeSum = 0;
     private double meanWaitingTime = 0;
     private double processingTimeSum = 0;
- 
+
 
     public Computer(int id, double processingTime, double processingTimeError)
     {
@@ -99,7 +99,7 @@ public class Computer
             task.processingTime = procTime + currentProcessingTime;
             waitingTimeSum += workTime + downTime - createTime - Convert.ToDouble(currentProcessingTime);
             meanWaitingTime = waitingTimeSum / completedTaskCount;
-            
+
             currentProcessingTime = null;
             return task;
         }
@@ -114,7 +114,8 @@ public class Computer
     {
         List<Task> tasks = new List<Task>();
 
-        if (IsEmpty()) {
+        if (IsEmpty())
+        {
             downTime += progress;
             return tasks;
         }
@@ -122,19 +123,19 @@ public class Computer
         time += progress;
 
         // TODO: Fix calculation (сonsider progress)
-      
+
         queueCountSum += queue.Count;
         processCount++;
         meanQueueCount = queueCountSum / processCount;
 
         while (time > 0 && !IsEmpty())
         {
-          
+
 
             if (currentProcessingTime == null) currentProcessingTime = Utils.rand(processingTime, processingTimeError);
 
             // TODO: Handle time
-            if (currentProcessingTime < (time ))
+            if (currentProcessingTime < (time))
             {
                 time -= Convert.ToDouble(currentProcessingTime);
                 tasks.Add(CompleteTask());
@@ -160,7 +161,7 @@ public class Computer
         str += "ЭВМ" + id + ": ";
         str += "Очередь - " + queue.Count + ",  ";
         str += "Время обработки - " + Math.Round(currentProcessingTime ?? 0, 2) + " мин.,  ";
-        str += "Процесс - " + Math.Round(time,2) + " мин. \n";
+        str += "Процесс - " + Math.Round(time, 2) + " мин. \n";
 
         return str;
     }
@@ -171,11 +172,11 @@ public class Computer
 
         str += "ЭВМ" + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + " мин. \n ";
-        str += "Время простоя - " + Math.Round(downTime,2) + " мин. \n ";
+        str += "Время простоя - " + Math.Round(downTime, 2) + " мин. \n ";
         str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + " мин. \n";
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
         str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
-        str += "Среднее время обработки задания - " +  Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
+        str += "Среднее время обработки задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
         str += "Количество обработанных заданий - " + completedTaskCount + "\n\n";
 
         return str;
@@ -198,6 +199,7 @@ public class ComputingSystemSettings
     public int maxTasks;
     public double probMove2;
     public double timePerStep;
+
 
     public ComputingSystemSettings(double taskInterval, double taskIntervalError, double prob1, double prob2, double processingTime1, double processingTime1Error, double processingTime2, double processingTime2Error, double processingTime3, double processingTime3Error, int maxCount, double probMove2, double timePerStep)
     {
@@ -233,7 +235,8 @@ public class ComputingSystem
     public int taskCount;
     private double meanTimeToCompleteSum = 0;
     private double meanTimeToComplete = 0;
-        
+    private double meanPresenceTimeSum = 0;
+    private double meanPresenceTime = 0;
 
     public ComputingSystem(ComputingSystemSettings settings)
     {
@@ -285,17 +288,29 @@ public class ComputingSystem
         var tasks3 = computer3.Process(progress);
 
         completedTaskCount += tasks2.Count + tasks3.Count;
+        
+        tasks2.ForEach((task) => { 
+            meanTimeToCompleteSum += task.processingTime ?? 0;
+            meanPresenceTimeSum += workTime + downTime - task.createTime;
+        });
+        tasks3.ForEach((task) => { 
+            meanTimeToCompleteSum += task.processingTime ?? 0;
+            meanPresenceTimeSum += workTime + downTime - task.createTime;
+        });
 
-        tasks2.ForEach((task) => meanTimeToCompleteSum += task.processingTime ?? 0);
-        tasks3.ForEach((task) => meanTimeToCompleteSum += task.processingTime ?? 0);
 
-        if(completedTaskCount > 0)
-        meanTimeToComplete = meanTimeToCompleteSum / completedTaskCount;
+
+        if (completedTaskCount > 0)
+        {
+            meanTimeToComplete = meanTimeToCompleteSum / completedTaskCount;
+            meanPresenceTime = meanPresenceTimeSum / completedTaskCount;
+        }
+            
 
         if (taskCount < settings.maxTasks)
         {
             time += progress;
-            if(taskInterval <= time + 0.001)
+            if (taskInterval <= time + 0.001)
             {
                 while (taskInterval <= (time + 0.001) && taskCount < settings.maxTasks)
                 {
@@ -320,7 +335,7 @@ public class ComputingSystem
                     setTaskInterval();
                 }
             }
-           
+
         }
     }
 
@@ -364,6 +379,7 @@ public class ComputingSystem
         double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
         str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + "\n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
+        str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
         str += "Количество выполненных заданий: " + completedTaskCount + "\n";
 
         return str;

@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-static class Rand
+static class Utils
 {
     static Random random = new Random();
-    public static double get(double value, double error)
+    public static double rand(double value, double error)
     {
         return Math.Round(random.NextDouble() * 2 * error + value - error, 2);
+    }
+
+    public static double min(params double?[] values)
+    {
+        double min = double.MaxValue;
+        foreach (double? value in values)
+        {
+            if (value != null && value < min) min = Convert.ToDouble(value);
+        }
+        return min;
     }
 }
 
@@ -33,14 +43,16 @@ public class Computer
     public double downTime = 0;
     public double processingTime;
     public double processingTimeError;
+    public double? currentProcessingTime;
     public int completedTaskCount = 0;
     private double queueCountSum = 0;
     private double meanQueueCount = 0;
     private double meanWorkTimeTask = 0;
     private double processCount = 0;
-
+    private double waitingTimeSum = 0;
+    private double meanWaitingTime = 0;
     private double processingTimeSum = 0;
-    private double? currentProcessingTime;
+ 
 
     public Computer(int id, double processingTime, double processingTimeError)
     {
@@ -59,7 +71,8 @@ public class Computer
     {
         Task task = new Task(workTime + downTime);
         Enqueue(task);
-       
+        if (currentProcessingTime == null) currentProcessingTime = Utils.rand(processingTime, processingTimeError);
+
     }
 
     private void Enqueue(Task task)
@@ -74,6 +87,11 @@ public class Computer
 
             completedTaskCount += 1;
             meanWorkTimeTask = workTime / completedTaskCount;
+            processingTimeSum += processingTime;
+            var createTime = queue.Peek().createTime;
+            waitingTimeSum += workTime + downTime - createTime - Convert.ToDouble(currentProcessingTime);
+            meanWaitingTime = waitingTimeSum / completedTaskCount;
+            currentProcessingTime = null;
             return queue.Dequeue();
 
         }
@@ -95,6 +113,8 @@ public class Computer
         workTime += progress;
         time += progress;
 
+        // TODO: Fix calculation (сonsider progress)
+      
         queueCountSum += queue.Count;
         processCount++;
         meanQueueCount = queueCountSum / processCount;
@@ -103,16 +123,13 @@ public class Computer
         {
           
 
-            if (currentProcessingTime == null) currentProcessingTime = Rand.get(processingTime, processingTimeError);
+            if (currentProcessingTime == null) currentProcessingTime = Utils.rand(processingTime, processingTimeError);
 
-            if (currentProcessingTime < time)
+            // TODO: Handle time
+            if (currentProcessingTime < (time ))
             {
-
                 time -= Convert.ToDouble(currentProcessingTime);
-                processingTimeSum += processingTime;
                 tasks.Add(Dequeue());
-                currentProcessingTime = null;
-
             }
             else
             {
@@ -120,7 +137,6 @@ public class Computer
             }
         }
 
-        time = Math.Round(time, 2);
 
         if (IsEmpty()) time = 0;
 
@@ -135,8 +151,8 @@ public class Computer
 
         str += "ЭВМ" + id + ": ";
         str += "Очередь - " + queue.Count + ",  ";
-        str += "Время обработки - " + (currentProcessingTime ?? 0) + " м.,  ";
-        str += "Процесс - " + time + " м.\n";
+        str += "Время обработки - " + Math.Round(currentProcessingTime ?? 0, 2) + " м.,  ";
+        str += "Процесс - " + Math.Round(time,2) + " м.\n";
 
         return str;
     }
@@ -148,7 +164,9 @@ public class Computer
         str += "ЭВМ" + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + "\n ";
         str += "Время простоя - " + Math.Round(downTime,2) + "\n ";
+        str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + "\n ";
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
+        str += "Среднее время ожидания заявки в очереди - " + Math.Round(meanWaitingTime, 2) + "\n ";
         str += "Среднее время обработки задания - " +  Math.Round(meanWorkTimeTask, 2) + "\n ";
         str += "Количество обработанных - " + completedTaskCount + "\n\n";
 
@@ -171,8 +189,9 @@ public class ComputingSystemSettings
     public double processingTime3Error;
     public int maxTasks;
     public double probMove2;
+    public double timePerStep;
 
-    public ComputingSystemSettings(double taskInterval, double taskIntervalError, double prob1, double prob2, double processingTime1, double processingTime1Error, double processingTime2, double processingTime2Error, double processingTime3, double processingTime3Error, int maxCount, double probMove2)
+    public ComputingSystemSettings(double taskInterval, double taskIntervalError, double prob1, double prob2, double processingTime1, double processingTime1Error, double processingTime2, double processingTime2Error, double processingTime3, double processingTime3Error, int maxCount, double probMove2, double timePerStep)
     {
         this.taskInterval = taskInterval;
         this.taskIntervalError = taskIntervalError;
@@ -186,6 +205,7 @@ public class ComputingSystemSettings
         this.processingTime3Error = processingTime3Error;
         this.maxTasks = maxCount;
         this.probMove2 = probMove2;
+        this.timePerStep = timePerStep;
     }
 }
 
@@ -215,22 +235,56 @@ public class ComputingSystem
 
     private void setTaskInterval()
     {
-        taskInterval = Rand.get(settings.taskInterval, settings.taskIntervalError);
+        taskInterval = Utils.rand(settings.taskInterval, settings.taskIntervalError);
     }
-
+    public void Process() => Process(settings.timePerStep);
     public void Process(double progress)
     {
-        
+
+        if (completedTaskCount < settings.maxTasks)
+        {
+
+            if (computer1.IsEmpty() && computer2.IsEmpty() && computer3.IsEmpty())
+            {
+                downTime += progress;
+            }
+            else
+            {
+                workTime += progress;
+            }
+        }
+
+        var tasks1 = computer1.Process(progress);
+
+        for (int i = 0; i < tasks1.Count; i++)
+        {
+            double taskType = Utils.rand(0.5, 0.5);
+
+            if (taskType < settings.probMove2)
+            {
+                computer2.AddTask();
+            }
+            else
+            {
+                computer3.AddTask();
+            }
+        }
+
+        var tasks2 = computer2.Process(progress);
+        var tasks3 = computer3.Process(progress);
+
+        completedTaskCount += tasks2.Count + tasks3.Count;
+
         if (taskCount < settings.maxTasks)
         {
             time += progress;
-            if(taskInterval < time)
+            if(taskInterval <= time + 0.001)
             {
-                while (taskInterval < time && taskCount < settings.maxTasks)
+                while (taskInterval <= (time + 0.001) && taskCount < settings.maxTasks)
                 {
                     time -= taskInterval;
 
-                    double taskType = Rand.get(0.5, 0.5);
+                    double taskType = Utils.rand(0.5, 0.5);
 
                     if (taskType < settings.prob1)
                     {
@@ -252,52 +306,25 @@ public class ComputingSystem
            
         }
 
-        if (completedTaskCount < settings.maxTasks)
-        {
-            
-            if(computer1.IsEmpty() && computer2.IsEmpty() && computer3.IsEmpty())
-            {
-                downTime += progress;
-            } else
-            {
-                workTime += progress;
-            }
-        }
-
-        var tasks1 = computer1.Process(progress);
-
-        for (int i = 0; i < tasks1.Count; i++)
-        {
-            double taskType = Rand.get(0.5, 0.5);
-
-            if (taskType < settings.probMove2)
-            {
-                computer2.AddTask();
-            }
-            else
-            {
-                computer3.AddTask();
-            }
-        }
-
-        var tasks2 = computer2.Process(progress);
-        var tasks3 = computer3.Process(progress);
-
-        completedTaskCount += tasks2.Count + tasks3.Count;
+      
 
 
     }
 
     public void InstantlyFinish()
     {
-        //Process(99999);
-        while (true)
+        while (completedTaskCount < settings.maxTasks)
         {
-            Process(0.1);
-            if (completedTaskCount == settings.maxTasks)
+            if(computer1.IsEmpty() &&  computer2.IsEmpty() && computer3.IsEmpty())
             {
-                break;
+                Process(taskInterval);
+            } 
+            else
+            {
+                var min = Utils.min(computer1.currentProcessingTime, computer2.currentProcessingTime, computer3.currentProcessingTime);
+                Process(min);
             }
+           
         }
     }
 

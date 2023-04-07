@@ -32,7 +32,8 @@ namespace LR6
                          Convert.ToDouble(textBox11.Text), // время работы 3-й
                          Convert.ToDouble(textBox10.Text), // погрешность 3-й
                          Convert.ToInt32(textBox13.Text), // кол-во заданий
-                         Convert.ToDouble(textBox6.Text) // вероятность перехода во 2-ю
+                         Convert.ToDouble(textBox6.Text), // вероятность перехода во 2-ю
+                         Convert.ToDouble(textBox14.Text) // время за шаг
                    );
             }
             catch (Exception e)
@@ -116,7 +117,7 @@ namespace LR6
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            system.Process(0.1);
+            system.Process();
 
             if (system.completedTaskCount == system.settings.maxTasks)
             {

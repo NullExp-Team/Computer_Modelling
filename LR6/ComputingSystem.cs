@@ -173,7 +173,7 @@ public class Computer
         str += "ЭВМ" + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + " мин. \n ";
         str += "Время простоя - " + Math.Round(downTime, 2) + " мин. \n ";
-        str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + " мин. \n";
+        str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + "\n";
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
         str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
         str += "Среднее время обработки задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
@@ -233,10 +233,17 @@ public class ComputingSystem
     public double taskInterval = 0;
     public int completedTaskCount = 0;
     public int taskCount;
+
     private double meanTimeToCompleteSum = 0;
     private double meanTimeToComplete = 0;
+
     private double meanPresenceTimeSum = 0;
     private double meanPresenceTime = 0;
+
+    private double meanChannelLoadSum = 0;
+    private double meanChannelLoad = 0;
+
+    private double processCount = 0;
 
     public ComputingSystem(ComputingSystemSettings settings)
     {
@@ -254,6 +261,7 @@ public class ComputingSystem
     public void Process() => Process(settings.timePerStep);
     public void Process(double progress)
     {
+        processCount++;
 
         if (completedTaskCount < settings.maxTasks)
         {
@@ -305,7 +313,11 @@ public class ComputingSystem
             meanTimeToComplete = meanTimeToCompleteSum / completedTaskCount;
             meanPresenceTime = meanPresenceTimeSum / completedTaskCount;
         }
-            
+
+        meanChannelLoadSum += (computer1.IsEmpty() ? 0 : 1) + (computer2.IsEmpty() ? 0 : 1) + (computer3.IsEmpty() ? 0 : 1);
+        meanChannelLoad = meanChannelLoadSum / processCount;
+
+
 
         if (taskCount < settings.maxTasks)
         {
@@ -377,9 +389,10 @@ public class ComputingSystem
         str += "Время работы: " + Math.Round(workTime, 2) + " мин. \n";
         str += "Время простоя: " + Math.Round(downTime, 2) + " мин. \n";
         double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
-        str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + "\n";
+        str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + "мин. \n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
         str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
+        str += "Среднее количество загруженных каналов системы - " +  Math.Round(meanChannelLoad, 2) + "\n";
         str += "Количество выполненных заданий: " + completedTaskCount + "\n";
 
         return str;

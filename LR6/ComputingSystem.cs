@@ -389,7 +389,7 @@ public class ComputingSystem
         str += "Время работы: " + Math.Round(workTime, 2) + " мин. \n";
         str += "Время простоя: " + Math.Round(downTime, 2) + " мин. \n";
         double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
-        str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + "мин. \n";
+        str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
         str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
         str += "Среднее количество загруженных каналов системы - " +  Math.Round(meanChannelLoad, 2) + "\n";

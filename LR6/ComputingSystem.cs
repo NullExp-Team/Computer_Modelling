@@ -243,6 +243,9 @@ public class ComputingSystem
     private double meanChannelLoadSum = 0;
     private double meanChannelLoad = 0;
 
+    private double meanTaskCountSum = 0;
+    private double meanTaskCount = 0;
+
     private double processCount = 0;
 
     public ComputingSystem(ComputingSystemSettings settings)
@@ -317,7 +320,8 @@ public class ComputingSystem
         meanChannelLoadSum += (computer1.IsEmpty() ? 0 : 1) + (computer2.IsEmpty() ? 0 : 1) + (computer3.IsEmpty() ? 0 : 1);
         meanChannelLoad = meanChannelLoadSum / processCount;
 
-
+        meanTaskCountSum += computer1.queue.Count + computer2.queue.Count + computer3.queue.Count;
+        meanTaskCount = meanTaskCountSum / processCount;
 
         if (taskCount < settings.maxTasks)
         {
@@ -392,6 +396,8 @@ public class ComputingSystem
         str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
         str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
+        str += "Среднее число заявок в системе - " + Math.Round(meanTaskCount, 2) + "\n";
+   
         str += "Среднее количество загруженных каналов системы - " +  Math.Round(meanChannelLoad, 2) + "\n";
         str += "Количество выполненных заданий: " + completedTaskCount + "\n";
 

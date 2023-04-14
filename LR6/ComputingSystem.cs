@@ -181,7 +181,6 @@ public class Computer
 
         return str;
     }
-
 }
 
 public class ComputingSystemSettings
@@ -221,7 +220,6 @@ public class ComputingSystemSettings
 
 public class ComputingSystem
 {
-
     public ComputingSystemSettings settings;
     public Computer computer1;
     public Computer computer2;
@@ -403,5 +401,4 @@ public class ComputingSystem
 
         return str;
     }
-
 }

@@ -396,7 +396,7 @@ public class ComputingSystem
         str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
         str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
-        str += "Среднее число заявок в системе - " + Math.Round(meanTaskCount, 2) + "\n";
+        str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 2) + "\n";
    
         str += "Среднее количество загруженных каналов системы - " +  Math.Round(meanChannelLoad, 2) + "\n";
         str += "Количество выполненных заданий: " + completedTaskCount + "\n";

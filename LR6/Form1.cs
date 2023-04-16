@@ -63,8 +63,14 @@ namespace LR6
            
 
 
-            label16.Text = system.ToString();
-            label16.Font = new Font("Arial", 10);
+            label16.Text = system.ToStringGeneralSett();
+            label16.Font = new Font("Arial", 12);
+
+            label18.Text = system.ToStringAVM();
+            label18.Font = new Font("Arial", 12);
+
+            label19.Text = system.ToStringSys();
+            label19.Font = new Font("Arial", 12);
         }
 
 
@@ -90,7 +96,9 @@ namespace LR6
         {
             Restart();
 
-            label16.Text = system.ToString();
+            label16.Text = system.ToStringGeneralSett();
+            label18.Text = system.ToStringAVM();
+            label19.Text = system.ToStringSys();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -125,7 +133,9 @@ namespace LR6
                 button1.Text = "Запустить";
             }
 
-            label16.Text = system.ToString();
+            label16.Text = system.ToStringGeneralSett();
+            label18.Text = system.ToStringAVM();
+            label19.Text = system.ToStringSys();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -140,7 +150,9 @@ namespace LR6
 
             system.InstantlyFinish();
 
-            label16.Text = system.ToString();
+            label16.Text = system.ToStringGeneralSett();
+            label18.Text = system.ToStringAVM();
+            label19.Text = system.ToStringSys();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

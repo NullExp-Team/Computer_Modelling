@@ -173,7 +173,7 @@ public class Computer
         str += "ЭВМ" + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + " мин. \n ";
         str += "Время простоя - " + Math.Round(downTime, 2) + " мин. \n ";
-        str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + "\n";
+        //str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + downTime > 0 ? workTime + downTime : 1), 2) + "\n";
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
         str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
         str += "Среднее время обработки задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
@@ -374,19 +374,33 @@ public class ComputingSystem
         computer3.processingTimeError = settings.processingTime3Error;
     }
 
-    override
-    public string ToString()
+    //override
+    public string ToStringGeneralSett()
     {
         string str = "";
 
         str += "Временные параметры: \n";
-        str += computer1.GetTempStats();
-        str += computer2.GetTempStats();
-        str += computer3.GetTempStats();
+        str += computer1.GetTempStats() + "\n";
+        str += computer2.GetTempStats() + "\n";
+        str += computer3.GetTempStats() + "\n";
+
+        return str;
+    }
+
+    public string ToStringAVM()
+    {
+        string str = "";
         str += "\nВыходные параметры: \n";
         str += computer1.GetStats();
         str += computer2.GetStats();
         str += computer3.GetStats();
+
+        return str;
+    }
+
+    public string ToStringSys()
+    {
+        string str = "";
         str += "Система:\n";
         str += "Время работы: " + Math.Round(workTime, 2) + " мин. \n";
         str += "Время простоя: " + Math.Round(downTime, 2) + " мин. \n";
@@ -395,8 +409,8 @@ public class ComputingSystem
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
         str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
         str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 2) + "\n";
-   
-        str += "Среднее количество загруженных каналов системы - " +  Math.Round(meanChannelLoad, 2) + "\n";
+
+        str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
         str += "Количество выполненных заданий: " + completedTaskCount + "\n";
 
         return str;

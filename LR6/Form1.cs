@@ -162,5 +162,10 @@ namespace LR6
         {
 
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

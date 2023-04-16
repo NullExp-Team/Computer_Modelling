@@ -54,6 +54,23 @@ public class Computer
     private double meanWaitingTime = 0;
     private double processingTimeSum = 0;
 
+    public event EventHandler<double> WorkTimeChanged;
+
+    public double WorkTime
+    {
+        get { return workTime; }
+        set
+        {
+            workTime = value;
+            OnWorkTimeChanged(workTime);
+        }
+    }
+
+    protected virtual void OnWorkTimeChanged(double newWorkTime)
+    {
+        WorkTimeChanged?.Invoke(this, newWorkTime);
+    }
+
 
     public Computer(int id, double processingTime, double processingTimeError)
     {
@@ -109,7 +126,6 @@ public class Computer
         }
     }
 
-
     public List<Task> Process(double progress)
     {
         List<Task> tasks = new List<Task>();
@@ -122,8 +138,6 @@ public class Computer
         workTime += progress;
         time += progress;
 
-        // TODO: Fix calculation (сonsider progress)
-
         queueCountSum += queue.Count;
         processCount++;
         meanQueueCount = queueCountSum / processCount;
@@ -134,7 +148,6 @@ public class Computer
 
             if (currentProcessingTime == null) currentProcessingTime = Utils.rand(processingTime, processingTimeError);
 
-            // TODO: Handle time
             if (currentProcessingTime < (time))
             {
                 time -= Convert.ToDouble(currentProcessingTime);
@@ -152,18 +165,21 @@ public class Computer
         return tasks;
     }
 
-
-
     public string GetTempStats()
     {
         string str = "";
 
-        str += "ЭВМ " + id + ": ";
-        str += "Очередь - " + queue.Count + ",  ";
-        str += "Время обработки - " + Math.Round(currentProcessingTime ?? 0, 2) + " мин.,  ";
+        str += "ЭВМ " + id + ": " + "\n";
+        str += "Очередь - " + queue.Count + "\n"; ;
+        str += "Время обработки - " + Math.Round(currentProcessingTime ?? 0, 2) + " мин.  " + "\n"; ;
         str += "Процесс - " + Math.Round(time, 2) + " мин. \n";
 
         return str;
+    }
+
+    public double GetTimeComp()
+    {
+        return Math.Round(currentProcessingTime ?? 0, 2);
     }
 
     public string CheckEnding(int count)
@@ -394,17 +410,31 @@ public class ComputingSystem
         computer3.processingTimeError = settings.processingTime3Error;
     }
 
-    //override
     public string ToStringGeneralSett()
     {
         string str = "";
 
-        str += "Временные параметры: \n";
+        str += "Временные параметры каждой ЭВМ: \n";
         str += computer1.GetTempStats() + "\n";
         str += computer2.GetTempStats() + "\n";
         str += computer3.GetTempStats() + "\n";
 
         return str;
+    }
+
+    public double AllGetTime1()
+    {
+       return computer1.GetTimeComp();
+    }
+
+    public double AllGetTime2()
+    {
+        return computer2.GetTimeComp();
+    }
+
+    public double AllGetTime3()
+    {
+        return computer3.GetTimeComp();
     }
 
     public string ToStringAVM()

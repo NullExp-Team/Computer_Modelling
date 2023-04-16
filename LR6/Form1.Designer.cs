@@ -85,7 +85,7 @@ namespace LR6
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(5, 32);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 64);
             this.button1.TabIndex = 0;
@@ -96,18 +96,18 @@ namespace LR6
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(5, 113);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 32);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Сброс";
+            this.button2.Text = "Сброс настроек";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(148, 32);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(79, 113);
             this.button3.TabIndex = 2;
@@ -118,7 +118,7 @@ namespace LR6
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(598, 128);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 49);
             this.button4.TabIndex = 3;
@@ -139,7 +139,7 @@ namespace LR6
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(6, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(58, 20);
             this.textBox1.TabIndex = 5;
@@ -159,7 +159,7 @@ namespace LR6
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(90, 32);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(58, 20);
             this.textBox2.TabIndex = 7;
@@ -168,7 +168,7 @@ namespace LR6
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(155, 71);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(58, 20);
             this.textBox3.TabIndex = 11;
@@ -188,7 +188,7 @@ namespace LR6
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(46, 71);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(58, 20);
             this.textBox4.TabIndex = 9;
@@ -201,9 +201,9 @@ namespace LR6
             this.label4.Location = new System.Drawing.Point(3, 55);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(201, 13);
+            this.label4.Size = new System.Drawing.Size(207, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Вероятности поступления в 1 и 2 ЭВМ";
+            this.label4.Text = "Вероятности поступления на 1 и 2 ЭВМ";
             // 
             // label5
             // 
@@ -230,7 +230,7 @@ namespace LR6
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(7, 111);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(58, 20);
             this.textBox6.TabIndex = 15;
@@ -242,14 +242,14 @@ namespace LR6
             this.label10.Location = new System.Drawing.Point(5, 95);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(183, 13);
+            this.label10.Size = new System.Drawing.Size(166, 13);
             this.label10.TabIndex = 14;
-            this.label10.Text = "Вероятность перехода во 2-ю ЭВМ";
+            this.label10.Text = "Вероятность перехода в ЭВМ 2";
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(93, 37);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(58, 20);
             this.textBox5.TabIndex = 19;
@@ -269,7 +269,7 @@ namespace LR6
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(9, 37);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(58, 20);
             this.textBox7.TabIndex = 17;
@@ -281,14 +281,14 @@ namespace LR6
             this.label8.Location = new System.Drawing.Point(7, 21);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 13);
+            this.label8.Size = new System.Drawing.Size(140, 13);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Время обработки в ЭВМ1";
+            this.label8.Text = "Время обработки в ЭВМ 1";
             // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(93, 74);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(2);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(58, 20);
             this.textBox8.TabIndex = 23;
@@ -308,7 +308,7 @@ namespace LR6
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(9, 74);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(2);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(58, 20);
             this.textBox9.TabIndex = 21;
@@ -320,14 +320,14 @@ namespace LR6
             this.label11.Location = new System.Drawing.Point(7, 58);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 13);
+            this.label11.Size = new System.Drawing.Size(140, 13);
             this.label11.TabIndex = 20;
-            this.label11.Text = "Время обработки в ЭВМ2";
+            this.label11.Text = "Время обработки в ЭВМ 2";
             // 
             // textBox10
             // 
             this.textBox10.Location = new System.Drawing.Point(93, 111);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(2);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(58, 20);
             this.textBox10.TabIndex = 27;
@@ -347,7 +347,7 @@ namespace LR6
             // textBox11
             // 
             this.textBox11.Location = new System.Drawing.Point(9, 111);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(58, 20);
             this.textBox11.TabIndex = 25;
@@ -359,14 +359,14 @@ namespace LR6
             this.label13.Location = new System.Drawing.Point(7, 94);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(137, 13);
+            this.label13.Size = new System.Drawing.Size(140, 13);
             this.label13.TabIndex = 24;
-            this.label13.Text = "Время обработки в ЭВМ3";
+            this.label13.Text = "Время обработки в ЭВМ 3";
             // 
             // textBox12
             // 
             this.textBox12.Location = new System.Drawing.Point(185, 86);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(2);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(58, 20);
             this.textBox12.TabIndex = 29;
@@ -389,7 +389,7 @@ namespace LR6
             // textBox13
             // 
             this.textBox13.Location = new System.Drawing.Point(318, 53);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(2);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(58, 20);
             this.textBox13.TabIndex = 31;
@@ -421,7 +421,7 @@ namespace LR6
             // textBox14
             // 
             this.textBox14.Location = new System.Drawing.Point(186, 37);
-            this.textBox14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox14.Margin = new System.Windows.Forms.Padding(2);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(58, 20);
             this.textBox14.TabIndex = 34;
@@ -433,9 +433,9 @@ namespace LR6
             this.label17.Location = new System.Drawing.Point(184, 21);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(77, 13);
+            this.label17.Size = new System.Drawing.Size(110, 13);
             this.label17.TabIndex = 33;
-            this.label17.Text = "Время за шаг";
+            this.label17.Text = "Время за шаг в сек.";
             // 
             // groupBox1
             // 
@@ -512,29 +512,32 @@ namespace LR6
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(28, 319);
+            this.progressBar1.Location = new System.Drawing.Point(250, 338);
+            this.progressBar1.Maximum = 5;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(468, 10);
+            this.progressBar1.Size = new System.Drawing.Size(257, 10);
             this.progressBar1.TabIndex = 39;
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(28, 354);
+            this.progressBar2.Location = new System.Drawing.Point(250, 424);
+            this.progressBar2.Maximum = 8;
             this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(468, 10);
+            this.progressBar2.Size = new System.Drawing.Size(257, 10);
             this.progressBar2.TabIndex = 40;
             // 
             // progressBar3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(28, 393);
+            this.progressBar3.Location = new System.Drawing.Point(250, 516);
+            this.progressBar3.Maximum = 8;
             this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(468, 10);
+            this.progressBar3.Size = new System.Drawing.Size(257, 10);
             this.progressBar3.TabIndex = 41;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(547, 278);
+            this.label18.Location = new System.Drawing.Point(581, 278);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(33, 13);
             this.label18.TabIndex = 42;
@@ -543,7 +546,7 @@ namespace LR6
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1054, 278);
+            this.label19.Location = new System.Drawing.Point(1089, 278);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -551,7 +554,8 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(1057, 338);
+            this.progressBar4.Location = new System.Drawing.Point(1092, 338);
+            this.progressBar4.Maximum = 650;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
             this.progressBar4.TabIndex = 44;
@@ -570,7 +574,7 @@ namespace LR6
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label16);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace LR6
 {
     public partial class Form1 : Form
@@ -50,19 +52,15 @@ namespace LR6
             system = new ComputingSystem(parseSettings());
         }
 
-        
-
+       
         public Form1()
         {
             InitializeComponent();
 
             var settings = parseSettings();
 
-          
             system = new ComputingSystem(settings);
-           
-
-
+                     
             label16.Text = system.ToStringGeneralSett();
             label16.Font = new Font("Arial", 12);
 
@@ -72,9 +70,6 @@ namespace LR6
             label19.Text = system.ToStringSys();
             label19.Font = new Font("Arial", 12);
         }
-
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -103,8 +98,7 @@ namespace LR6
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //loadNewParameters()
-            //привяжу, когда будет модель готова
+
             try
             {
                 var settings = parseSettings();
@@ -121,8 +115,6 @@ namespace LR6
         
         }
 
-
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             system.Process();
@@ -136,6 +128,22 @@ namespace LR6
             label16.Text = system.ToStringGeneralSett();
             label18.Text = system.ToStringAVM();
             label19.Text = system.ToStringSys();
+
+            if (Convert.ToInt32(system.AllGetTime1()) == 0)
+                progressBar1.Value = 0;
+            else
+                progressBar1.Value = Convert.ToInt32(system.AllGetTime1());
+
+            if (Convert.ToInt32(system.AllGetTime2()) == 0)
+                progressBar2.Value = 0;
+            else
+                progressBar2.Value = Convert.ToInt32(system.AllGetTime2());
+
+            if (Convert.ToInt32(system.AllGetTime3()) == 0)
+                progressBar3.Value = 0;
+            else
+                progressBar3.Value = Convert.ToInt32(system.AllGetTime3());
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -154,6 +162,12 @@ namespace LR6
             label18.Text = system.ToStringAVM();
             label19.Text = system.ToStringSys();
         }
+        private void Computer_WorkTimeChanged(object sender, double newWorkTime)
+        {
+            // Обновляем значение ProgressBar на форме
+            progressBar4.Value = (int)newWorkTime;
+        }
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {

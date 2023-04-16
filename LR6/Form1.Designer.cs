@@ -75,6 +75,7 @@ namespace LR6
             this.progressBar3 = new System.Windows.Forms.ProgressBar();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.progressBar4 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -548,11 +549,19 @@ namespace LR6
             this.label19.TabIndex = 43;
             this.label19.Text = "Система:";
             // 
+            // progressBar4
+            // 
+            this.progressBar4.Location = new System.Drawing.Point(1057, 338);
+            this.progressBar4.Name = "progressBar4";
+            this.progressBar4.Size = new System.Drawing.Size(274, 10);
+            this.progressBar4.TabIndex = 44;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1483, 781);
+            this.ClientSize = new System.Drawing.Size(1517, 781);
+            this.Controls.Add(this.progressBar4);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.progressBar3);
@@ -624,6 +633,7 @@ namespace LR6
         private System.Windows.Forms.ProgressBar progressBar3;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ProgressBar progressBar4;
     }
 }
 

@@ -555,7 +555,7 @@ namespace LR6
             // progressBar4
             // 
             this.progressBar4.Location = new System.Drawing.Point(1092, 338);
-            this.progressBar4.Maximum = 650;
+            this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
             this.progressBar4.TabIndex = 44;

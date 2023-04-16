@@ -123,6 +123,7 @@ namespace LR6
             {
                 timer1.Stop();
                 button1.Text = "Запустить";
+                progressBar4.Maximum = progressBar4.Value;
             }
 
             label16.Text = system.ToStringGeneralSett();
@@ -144,6 +145,8 @@ namespace LR6
             else
                 progressBar3.Value = Convert.ToInt32(system.AllGetTime3());
 
+            progressBar4.Value = Convert.ToInt32(system.GetWorkTime());
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -161,13 +164,9 @@ namespace LR6
             label16.Text = system.ToStringGeneralSett();
             label18.Text = system.ToStringAVM();
             label19.Text = system.ToStringSys();
-        }
-        private void Computer_WorkTimeChanged(object sender, double newWorkTime)
-        {
-            // Обновляем значение ProgressBar на форме
-            progressBar4.Value = (int)newWorkTime;
-        }
 
+            progressBar4.Value = progressBar4.Maximum;
+        }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {

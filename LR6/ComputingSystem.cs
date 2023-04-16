@@ -54,24 +54,6 @@ public class Computer
     private double meanWaitingTime = 0;
     private double processingTimeSum = 0;
 
-    public event EventHandler<double> WorkTimeChanged;
-
-    public double WorkTime
-    {
-        get { return workTime; }
-        set
-        {
-            workTime = value;
-            OnWorkTimeChanged(workTime);
-        }
-    }
-
-    protected virtual void OnWorkTimeChanged(double newWorkTime)
-    {
-        WorkTimeChanged?.Invoke(this, newWorkTime);
-    }
-
-
     public Computer(int id, double processingTime, double processingTimeError)
     {
         this.id = id;
@@ -486,5 +468,10 @@ public class ComputingSystem
         str += "Количество выполненных заданий: " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n";
 
         return str;
+    }
+
+    public double GetWorkTime()
+    {
+        return Math.Round(workTime, 2);
     }
 }

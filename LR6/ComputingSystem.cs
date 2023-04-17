@@ -154,7 +154,7 @@ public class Computer
         str += "ЭВМ " + id + ": " + "\n";
         str += "Очередь - " + queue.Count + "\n"; ;
         str += "Время обработки - " + Math.Round(currentProcessingTime ?? 0, 2) + " мин.  " + "\n"; ;
-        str += "Процесс - " + Math.Round(time, 2) + " мин. \n";
+        //str += "Процесс - " + Math.Round(time, 2) + " мин. \n";
 
         return str;
     }

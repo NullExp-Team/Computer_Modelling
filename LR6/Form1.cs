@@ -33,11 +33,11 @@ namespace LR6
                          Convert.ToDouble(textBox8.Text), // погрешность 2-й
                          Convert.ToDouble(textBox11.Text), // время работы 3-й
                          Convert.ToDouble(textBox10.Text), // погрешность 3-й
-                         Convert.ToInt32(textBox13.Text), // кол-во заданий
+                         Convert.ToInt32(numericUpDown1.Value), // кол-во заданий
                          Convert.ToDouble(textBox6.Text), // вероятность перехода во 2-ю
                          Convert.ToDouble(textBox14.Text) // время за шаг
                    );
-            }
+            } 
             catch (Exception e)
             { 
                 MessageBox.Show("Неправильный формат данных!");
@@ -94,6 +94,7 @@ namespace LR6
             label16.Text = system.ToStringGeneralSett();
             label18.Text = system.ToStringAVM();
             label19.Text = system.ToStringSys();
+            progressBar4.Value = 0;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -118,7 +119,7 @@ namespace LR6
         private void timer1_Tick(object sender, EventArgs e)
         {
             system.Process();
-
+            int k = 0;
             if (system.completedTaskCount == system.settings.maxTasks)
             {
                 timer1.Stop();
@@ -145,13 +146,15 @@ namespace LR6
             else
                 progressBar3.Value = Convert.ToInt32(system.AllGetTime3());
 
-            progressBar4.Value = Convert.ToInt32(system.GetWorkTime());
+            if (progressBar4.Value == progressBar4.Maximum)
+                k++;
+            else 
+                progressBar4.Value = Convert.ToInt32(system.GetWorkTime());
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             Restart();
 
             while(system.completedTaskCount < system.settings.maxTasks)

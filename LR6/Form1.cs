@@ -43,8 +43,6 @@ namespace LR6
                 MessageBox.Show("Неправильный формат данных!");
                 throw e;
             }
-
-           
         }
 
         void Restart()
@@ -99,7 +97,6 @@ namespace LR6
 
         private void button4_Click(object sender, EventArgs e)
         {
-
             try
             {
                 var settings = parseSettings();
@@ -107,7 +104,6 @@ namespace LR6
                 system.loadNewParameters(settings);
 
                 timer1.Interval = 1000 / Convert.ToInt32(textBox12.Text);
-
             }
             catch
             {

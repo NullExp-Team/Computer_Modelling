@@ -1,0 +1,75 @@
+@startuml
+
+class Utils {
+    - static random: Random
+    + rand(value: double, error: double): double
+    + min(values: double?): double
+}
+
+class Task {
+    - createTime: double
+    - processingTime: double?
+    + Task(createTime: double)
+}
+
+class Computer {
+    - id: int
+    - queue: Queue<Task>
+    - time: double
+    - workTime: double
+    - deadTime: double
+    - processingTime: double
+    - processingTimeError: double
+    - currentProcessingTime: double?
+    - completedTaskCount: int
+    - queueCountSum: double
+    - meanQueueCount: double
+    - meanWorkTimeTask: double
+    - processCount: double
+    - waitingTimeSum: double
+    - meanWaitingTime: double
+    - processingTimeSum: double
+    + Computer(id: int, processingTime: double, processingTimeError: double)
+    + IsEmpty(): bool
+    + AddTask(task: Task)
+    + AddTask()
+    - Enqueue(task: Task)
+    - CompleteTask(): Task
+    + Process(progress: double): List<Task>
+    + GetTimeComp(): double
+}
+
+class ComputingSystemSettings {
+    - taskInterval: double
+    - taskIntervalError: double
+    - prob1: double
+    - prob2: double
+    - processingTime1: double
+    - processingTime1Error: double
+    - processingTime2: double
+    - processingTime2Error: double
+    - processingTime3: double
+    - processingTime3Error: double
+    - maxTasks: int
+    - probMove2: double
+    - timePerStep: double
+    + ComputingSystemSettings(taskInterval: double, taskIntervalError: double, prob1: double, prob2: double, processingTime1: double, processingTime1Error: double, processingTime2: double, processingTime2Error: double, processingTime3: double, processingTime3Error: double, maxCount: int, probMove2: double, timePerStep: double)
+}
+
+class ComputingSystem {
+    - settings: ComputingSystemSettings
+    - computer1: Computer
+    - computer2: Computer
+    - computer3: Computer
+    - time: double
+    - workTime: double
+    - deadTime: double
+    + ComputingSystem(settings: ComputingSystemSettings)
+}
+
+Utils --> Task
+Task --> Computer
+ComputingSystemSettings --> ComputingSystem
+Computer --> ComputingSystem
+
+@enduml

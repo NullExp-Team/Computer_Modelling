@@ -538,7 +538,7 @@ namespace LR6
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(956, 278);
+            this.label19.Location = new System.Drawing.Point(965, 278);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -546,7 +546,7 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(959, 338);
+            this.progressBar4.Location = new System.Drawing.Point(968, 338);
             this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);

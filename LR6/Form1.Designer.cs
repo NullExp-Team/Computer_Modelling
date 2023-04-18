@@ -30,6 +30,7 @@ namespace LR6
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -68,6 +69,7 @@ namespace LR6
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
@@ -75,12 +77,11 @@ namespace LR6
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -133,9 +134,9 @@ namespace LR6
             this.label1.Location = new System.Drawing.Point(4, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 13);
+            this.label1.Size = new System.Drawing.Size(154, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Интервал между заданиями";
+            this.label1.Text = "Интервал между заданиями:";
             // 
             // textBox1
             // 
@@ -202,9 +203,9 @@ namespace LR6
             this.label4.Location = new System.Drawing.Point(3, 55);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(207, 13);
+            this.label4.Size = new System.Drawing.Size(210, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Вероятности поступления на 1 и 2 ЭВМ";
+            this.label4.Text = "Вероятности поступления на 1 и 2 ЭВМ:";
             // 
             // label5
             // 
@@ -243,9 +244,9 @@ namespace LR6
             this.label10.Location = new System.Drawing.Point(5, 95);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(172, 13);
+            this.label10.Size = new System.Drawing.Size(175, 13);
             this.label10.TabIndex = 14;
-            this.label10.Text = "Вероятность перехода во ЭВМ 2";
+            this.label10.Text = "Вероятность перехода во ЭВМ 2:";
             // 
             // textBox5
             // 
@@ -282,9 +283,9 @@ namespace LR6
             this.label8.Location = new System.Drawing.Point(7, 21);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(140, 13);
+            this.label8.Size = new System.Drawing.Size(143, 13);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Время обработки в ЭВМ 1";
+            this.label8.Text = "Время обработки в ЭВМ 1:";
             // 
             // textBox8
             // 
@@ -321,9 +322,9 @@ namespace LR6
             this.label11.Location = new System.Drawing.Point(7, 58);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(140, 13);
+            this.label11.Size = new System.Drawing.Size(143, 13);
             this.label11.TabIndex = 20;
-            this.label11.Text = "Время обработки в ЭВМ 2";
+            this.label11.Text = "Время обработки в ЭВМ 2:";
             // 
             // textBox10
             // 
@@ -360,9 +361,9 @@ namespace LR6
             this.label13.Location = new System.Drawing.Point(7, 94);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(140, 13);
+            this.label13.Size = new System.Drawing.Size(143, 13);
             this.label13.TabIndex = 24;
-            this.label13.Text = "Время обработки в ЭВМ 3";
+            this.label13.Text = "Время обработки в ЭВМ 3:";
             // 
             // textBox12
             // 
@@ -379,9 +380,9 @@ namespace LR6
             this.label14.Location = new System.Drawing.Point(183, 51);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(152, 13);
+            this.label14.Size = new System.Drawing.Size(155, 13);
             this.label14.TabIndex = 28;
-            this.label14.Text = "Количество шагов в секунду";
+            this.label14.Text = "Количество шагов в секунду:";
             // 
             // timer1
             // 
@@ -490,6 +491,24 @@ namespace LR6
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Параметры";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numericUpDown1.Location = new System.Drawing.Point(327, 54);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(53, 22);
+            this.numericUpDown1.TabIndex = 45;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button1);
@@ -529,7 +548,7 @@ namespace LR6
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(538, 278);
+            this.label18.Location = new System.Drawing.Point(540, 243);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(33, 13);
             this.label18.TabIndex = 42;
@@ -538,7 +557,7 @@ namespace LR6
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(965, 278);
+            this.label19.Location = new System.Drawing.Point(996, 278);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -546,35 +565,17 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(968, 338);
+            this.progressBar4.Location = new System.Drawing.Point(999, 338);
             this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
             this.progressBar4.TabIndex = 44;
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDown1.Location = new System.Drawing.Point(327, 54);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(53, 22);
-            this.numericUpDown1.TabIndex = 45;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1517, 781);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.progressBar4);
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.label19);
@@ -586,9 +587,10 @@ namespace LR6
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label16);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Вычислительная система ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -596,8 +598,8 @@ namespace LR6
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

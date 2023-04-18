@@ -92,6 +92,10 @@ namespace LR6
             label16.Text = system.ToStringGeneralSett();
             label18.Text = system.ToStringAVM();
             label19.Text = system.ToStringSys();
+            
+            progressBar1.Value = 0;
+            progressBar2.Value = 0;
+            progressBar3.Value = 0;
             progressBar4.Value = 0;
         }
 
@@ -165,6 +169,10 @@ namespace LR6
             label19.Text = system.ToStringSys();
 
             progressBar4.Value = progressBar4.Maximum;
+
+            progressBar1.Value = 0;
+            progressBar2.Value = 0;
+            progressBar3.Value = 0;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

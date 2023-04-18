@@ -188,7 +188,7 @@ public class Computer
         str += "ЭВМ " + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + " мин. \n ";
         str += "Время простоя - " + Math.Round(deadTime, 2) + " мин. \n ";
-        str += "Коэффициент загрузки - " + Math.Round(workTime / (workTime + deadTime > 0 ? workTime + deadTime : 1), 2) + "\n";
+        str += "Занятость - " + Math.Round(workTime / (workTime + deadTime > 0 ? workTime + deadTime : 1), 2) * 100 + "% " + "\n ";
         //str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
         str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
         str += "Среднее время обработки задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
@@ -412,7 +412,7 @@ public class ComputingSystem
     public string ToStringAVM()
     {
         string str = "";
-        str += "Итоговые результаты по всем ЭВМ: \n \n";
+        str += "Итоговые результаты по всем ЭВМ: \n";
         str += computer1.GetStats();
         str += computer2.GetStats();
         str += computer3.GetStats();

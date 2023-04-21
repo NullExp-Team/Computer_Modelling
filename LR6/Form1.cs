@@ -62,8 +62,14 @@ namespace LR6
             label16.Text = system.ToStringGeneralSett();
             label16.Font = new Font("Arial", 12);
 
-            label18.Text = system.ToStringAVM();
+            label18.Text = system.ToStringAVM1();
             label18.Font = new Font("Arial", 12);
+
+            label20.Text = system.ToStringAVM2();
+            label20.Font = new Font("Arial", 12);
+
+            label21.Text = system.ToStringAVM3();
+            label21.Font = new Font("Arial", 12);
 
             label19.Text = system.ToStringSys();
             label19.Font = new Font("Arial", 12);
@@ -90,7 +96,9 @@ namespace LR6
             Restart();
 
             label16.Text = system.ToStringGeneralSett();
-            label18.Text = system.ToStringAVM();
+            label18.Text = system.ToStringAVM1();
+            label20.Text = system.ToStringAVM2();
+            label21.Text = system.ToStringAVM3();
             label19.Text = system.ToStringSys();
             
             progressBar1.Value = 0;
@@ -119,7 +127,7 @@ namespace LR6
         private void timer1_Tick(object sender, EventArgs e)
         {
             system.Process();
-            int k = 0;
+
             if (system.completedTaskCount == system.settings.maxTasks)
             {
                 timer1.Stop();
@@ -128,7 +136,9 @@ namespace LR6
             }
 
             label16.Text = system.ToStringGeneralSett();
-            label18.Text = system.ToStringAVM();
+            label18.Text = system.ToStringAVM1();
+            label20.Text = system.ToStringAVM2();
+            label21.Text = system.ToStringAVM3();
             label19.Text = system.ToStringSys();
 
             if (Convert.ToInt32(system.AllGetTime1()) == 0)
@@ -146,9 +156,7 @@ namespace LR6
             else
                 progressBar3.Value = Convert.ToInt32(system.AllGetTime3());
 
-            if (progressBar4.Value == progressBar4.Maximum)
-                k++;
-            else 
+            if (progressBar4.Value != progressBar4.Maximum)
                 progressBar4.Value = Convert.ToInt32(system.GetWorkTime());
 
         }
@@ -165,7 +173,9 @@ namespace LR6
             system.InstantlyFinish();
 
             label16.Text = system.ToStringGeneralSett();
-            label18.Text = system.ToStringAVM();
+            label18.Text = system.ToStringAVM1();
+            label20.Text = system.ToStringAVM2();
+            label21.Text = system.ToStringAVM3();
             label19.Text = system.ToStringSys();
 
             progressBar4.Value = progressBar4.Maximum;

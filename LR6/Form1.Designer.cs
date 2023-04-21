@@ -77,6 +77,8 @@ namespace LR6
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -402,13 +404,14 @@ namespace LR6
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(25, 278);
+            this.label16.Location = new System.Drawing.Point(11, 625);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.MaximumSize = new System.Drawing.Size(600, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(86, 13);
             this.label16.TabIndex = 32;
             this.label16.Text = "Общие данные:";
+            this.label16.Visible = false;
             this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // textBox14
@@ -484,7 +487,7 @@ namespace LR6
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Location = new System.Drawing.Point(13, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(750, 244);
             this.groupBox3.TabIndex = 37;
@@ -523,41 +526,44 @@ namespace LR6
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(250, 338);
+            this.progressBar1.Location = new System.Drawing.Point(236, 685);
             this.progressBar1.Maximum = 5;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(257, 10);
             this.progressBar1.TabIndex = 39;
+            this.progressBar1.Visible = false;
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(250, 409);
+            this.progressBar2.Location = new System.Drawing.Point(236, 756);
             this.progressBar2.Maximum = 8;
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(257, 10);
             this.progressBar2.TabIndex = 40;
+            this.progressBar2.Visible = false;
             // 
             // progressBar3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(250, 485);
+            this.progressBar3.Location = new System.Drawing.Point(236, 832);
             this.progressBar3.Maximum = 8;
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(257, 10);
             this.progressBar3.TabIndex = 41;
+            this.progressBar3.Visible = false;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(540, 243);
+            this.label18.Location = new System.Drawing.Point(10, 278);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(33, 13);
+            this.label18.Size = new System.Drawing.Size(42, 13);
             this.label18.TabIndex = 42;
-            this.label18.Text = "ЭВМ:";
+            this.label18.Text = "ЭВМ 1:";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(996, 278);
+            this.label19.Location = new System.Drawing.Point(909, 458);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -565,17 +571,37 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(999, 338);
+            this.progressBar4.Location = new System.Drawing.Point(912, 518);
             this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
             this.progressBar4.TabIndex = 44;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(351, 458);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(42, 13);
+            this.label20.TabIndex = 45;
+            this.label20.Text = "ЭВМ 2:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(590, 278);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(42, 13);
+            this.label21.TabIndex = 46;
+            this.label21.Text = "ЭВМ 3:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.progressBar4);
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.label19);
@@ -653,6 +679,8 @@ namespace LR6
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ProgressBar progressBar4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
     }
 }
 

@@ -188,12 +188,11 @@ public class Computer
         str += "ЭВМ " + id + ":\n ";
         str += "Время работы - " + Math.Round(workTime, 2) + " мин. \n ";
         str += "Время простоя - " + Math.Round(deadTime, 2) + " мин. \n ";
-        str += "Занятость - " + Math.Round(workTime / (workTime + deadTime > 0 ? workTime + deadTime : 1), 2) * 100 + "% " + "\n ";
-        //str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + "\n ";
+        str += "Занятость - " + Math.Round(workTime / (workTime + deadTime > 0 ? workTime + deadTime : 1), 2) * 100 + "% \n ";
+        str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + " " + CheckEnding(Convert.ToInt32(Math.Round(meanQueueCount, 2))) + " \n ";
         str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
-        str += "Среднее время обработки задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
-
-        str += "Количество обработанных заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n\n";
+        str += "Среднее время выполнения задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
+        str += "Количество обработанных заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + " \n\n ";
 
         return str;
     }
@@ -409,17 +408,30 @@ public class ComputingSystem
         return computer3.GetTimeComp();
     }
 
-    public string ToStringAVM()
+    public string ToStringAVM1()
     {
         string str = "";
-        str += "Итоговые результаты по всем ЭВМ: \n";
+        str += "Итоговые результаты по ЭВМ 1: \n";
         str += computer1.GetStats();
+
+        return str;
+    }
+    public string ToStringAVM2()
+    {
+        string str = "";
+        str += "Итоговые результаты по ЭВМ 3: \n";
         str += computer2.GetStats();
+
+        return str;
+    }
+    public string ToStringAVM3()
+    {
+        string str = "";
+        str += "Итоговые результаты по ЭВМ 3: \n";
         str += computer3.GetStats();
 
         return str;
     }
-
     public string CheckEnding(int count)
     {
         string taskWord;
@@ -445,15 +457,15 @@ public class ComputingSystem
         str += "Система:\n\n";
         str += "Время работы: " + Math.Round(workTime, 2) + " мин. \n\n";
         str += "Время простоя: " + Math.Round(deadTime, 2) + " мин. \n";
-        double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
-        str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
+        //double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
+        //str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
         str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
 
-        //str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
+        str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
 
         str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 0) + " " + CheckEnding(Convert.ToInt32(meanTaskCount)) + "\n";
 
-        //str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
+        str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
 
         str += "Количество выполненных заданий: " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n";
 

@@ -139,7 +139,8 @@ public class Computer
                 break;
         }
 
-        if (IsEmpty()) time = 0;
+        if (IsEmpty()) 
+            time = 0;
 
         return tasks;
     }
@@ -192,7 +193,8 @@ public class Computer
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + " " + CheckEnding(Convert.ToInt32(Math.Round(meanQueueCount, 2))) + " \n ";
         str += "Среднее время задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
         str += "Среднее время выполнения задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
-        str += "Количество выполненых заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + " \n\n ";
+        str += "Количество выполненых заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + " \n ";
+        str += "Очередь - " + queue.Count + " " + CheckEnding(queue.Count) + " \n\n  ";
 
         return str;
     }
@@ -338,12 +340,12 @@ public class ComputingSystem
         meanTaskCountSum += computer1.queue.Count + computer2.queue.Count + computer3.queue.Count;
         meanTaskCount = meanTaskCountSum / processCount;
 
-        if (taskCount < settings.maxTasks)
+        if (completedTaskCount < settings.maxTasks)
         {
             time += progress;
             if (taskInterval <= time + 0.001)
             {
-                while (taskInterval <= (time + 0.001) && taskCount < settings.maxTasks)
+                while (taskInterval <= (time + 0.001) && completedTaskCount < settings.maxTasks)
                 {
                     time -= taskInterval;
 

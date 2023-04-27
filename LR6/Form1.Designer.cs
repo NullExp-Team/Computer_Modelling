@@ -104,7 +104,7 @@ namespace LR6
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 32);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Сброс настроек";
+            this.button2.Text = "Сброс";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -404,7 +404,7 @@ namespace LR6
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 625);
+            this.label16.Location = new System.Drawing.Point(1114, 66);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.MaximumSize = new System.Drawing.Size(600, 0);
             this.label16.Name = "label16";
@@ -416,7 +416,7 @@ namespace LR6
             // 
             // textBox14
             // 
-            this.textBox14.Location = new System.Drawing.Point(12, 750);
+            this.textBox14.Location = new System.Drawing.Point(11, 734);
             this.textBox14.Margin = new System.Windows.Forms.Padding(2);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(58, 20);
@@ -427,7 +427,7 @@ namespace LR6
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(10, 734);
+            this.label17.Location = new System.Drawing.Point(9, 718);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(110, 13);
@@ -526,7 +526,7 @@ namespace LR6
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(236, 685);
+            this.progressBar1.Location = new System.Drawing.Point(1339, 126);
             this.progressBar1.Maximum = 5;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(257, 10);
@@ -535,7 +535,7 @@ namespace LR6
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(236, 756);
+            this.progressBar2.Location = new System.Drawing.Point(1339, 197);
             this.progressBar2.Maximum = 8;
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(257, 10);
@@ -544,7 +544,7 @@ namespace LR6
             // 
             // progressBar3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(236, 832);
+            this.progressBar3.Location = new System.Drawing.Point(1339, 273);
             this.progressBar3.Maximum = 8;
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(257, 10);

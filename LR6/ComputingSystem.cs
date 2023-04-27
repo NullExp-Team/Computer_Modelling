@@ -190,11 +190,21 @@ public class Computer
         str += "Время простоя - " + Math.Round(deadTime, 2) + " мин. \n ";
         str += "Занятость - " + Math.Round(workTime / (workTime + deadTime > 0 ? workTime + deadTime : 1), 2) * 100 + "% \n ";
         str += "Средняя длина очереди - " + Math.Round(meanQueueCount, 2) + " " + CheckEnding(Convert.ToInt32(Math.Round(meanQueueCount, 2))) + " \n ";
-        str += "Среднее время ожидания задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
+        str += "Среднее время задания в очереди - " + Math.Round(meanWaitingTime, 2) + " мин. \n ";
         str += "Среднее время выполнения задания - " + Math.Round(meanWorkTimeTask, 2) + " мин. \n ";
-        str += "Количество обработанных заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + " \n\n ";
+        str += "Количество выполненых заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + " \n\n ";
 
         return str;
+    }
+
+    public double GetMean()
+    {
+        return Math.Round(meanWaitingTime, 2);
+    }
+    
+    public double GetDead()
+    {
+        return Math.Round(deadTime, 2);
     }
 }
 
@@ -454,20 +464,28 @@ public class ComputingSystem
     public string ToStringSys()
     {
         string str = "";
+
         str += "Система:\n\n";
-        str += "Время работы: " + Math.Round(workTime, 2) + " мин. \n\n";
-        str += "Время простоя: " + Math.Round(deadTime, 2) + " мин. \n";
-        //double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
-        //str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
-        str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
 
-        str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
+        str += "Общее время работы системы: " + Math.Round(workTime, 2) + " мин. \n\n";
+        str += "Общее время простоя системы: " + Math.Round(deadTime, 2) + " мин. \n";
 
-        str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 0) + " " + CheckEnding(Convert.ToInt32(meanTaskCount)) + "\n";
-
-        str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
+        //str += "Среднее время простоя ЭВМ: " + Math.Round((computer1.GetDead() + computer2.GetDead() + computer3.GetDead()) / 3, 2) + " мин. \n";
 
         str += "Количество выполненных заданий: " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n";
+
+        //double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
+        //str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
+
+        str += "Среднее время выполнения задания - " + Math.Round(meanTimeToComplete, 2) + " мин. \n";
+
+        //str += "Среднее время присутствия задания в системе - " + Math.Round(meanPresenceTime, 2) + " мин. \n";
+
+        //str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 0) + " " + CheckEnding(Convert.ToInt32(meanTaskCount)) + "\n";
+
+        //str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
+
+        str += "Среднее время задания в очереди - " + Math.Round(computer1.GetMean() + computer2.GetMean() + computer3.GetMean(), 2) + " мин. \n ";
 
         return str;
     }

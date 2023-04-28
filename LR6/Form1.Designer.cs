@@ -563,7 +563,7 @@ namespace LR6
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(968, 458);
+            this.label19.Location = new System.Drawing.Point(916, 491);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -571,7 +571,7 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(971, 518);
+            this.progressBar4.Location = new System.Drawing.Point(919, 551);
             this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
@@ -599,7 +599,7 @@ namespace LR6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1404, 749);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.progressBar4);

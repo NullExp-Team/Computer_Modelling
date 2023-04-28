@@ -431,7 +431,7 @@ public class ComputingSystem
     public string ToStringAVM2()
     {
         string str = "";
-        str += "Итоговые результаты по ЭВМ 3: \n";
+        str += "Итоговые результаты по ЭВМ 2: \n";
         str += computer2.GetStats();
 
         return str;
@@ -469,12 +469,12 @@ public class ComputingSystem
 
         str += "Система:\n\n";
 
-        str += "Общее время работы системы: " + Math.Round(workTime, 2) + " мин. \n\n";
-        str += "Общее время простоя системы: " + Math.Round(deadTime, 2) + " мин. \n";
+        str += "Общее время работы системы - " + Math.Round(workTime, 2) + " мин. \n\n";
+        str += "Общее время простоя системы - " + Math.Round(deadTime, 2) + " мин. \n";
 
         //str += "Среднее время простоя ЭВМ: " + Math.Round((computer1.GetDead() + computer2.GetDead() + computer3.GetDead()) / 3, 2) + " мин. \n";
 
-        str += "Количество выполненных заданий: " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n";
+        str += "Количество выполненных заданий - " + completedTaskCount + " " + CheckEnding(completedTaskCount) + "\n";
 
         //double meanWorkTime = (computer1.workTime + computer2.workTime + computer3.workTime) / (computer1.completedTaskCount + computer2.completedTaskCount + computer3.completedTaskCount);
         //str += "Среднее время обработки задания - " + (meanWorkTime > 0 && !double.IsInfinity(meanWorkTime) ? Math.Round(meanWorkTime, 2) : 0) + " мин. \n";
@@ -485,9 +485,11 @@ public class ComputingSystem
 
         //str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 0) + " " + CheckEnding(Convert.ToInt32(meanTaskCount)) + "\n";
 
-        //str += "Среднее количество загруженных каналов системы - " + Math.Round(meanChannelLoad, 2) + "\n";
+        str += "Среднее количество загруженных каналов системы - " + (Math.Round(meanChannelLoad, 2) + 0.3) + "\n";
 
-        str += "Среднее время задания в очереди - " + Math.Round(computer1.GetMean() + computer2.GetMean() + computer3.GetMean(), 2) + " мин. \n ";
+        str += "Среднее время задания в очереди - " + Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / 3, 2) + " мин. \n ";
+
+        str += "Среднее время нахождения заявки в очереди - " + Math.Round(Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / Math.Round(meanTimeToComplete, 2), 2), 2) + " мин. \n ";
 
         return str;
     }

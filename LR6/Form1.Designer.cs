@@ -554,7 +554,7 @@ namespace LR6
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 278);
+            this.label18.Location = new System.Drawing.Point(337, 278);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 13);
             this.label18.TabIndex = 42;
@@ -563,7 +563,7 @@ namespace LR6
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(916, 491);
+            this.label19.Location = new System.Drawing.Point(709, 502);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 43;
@@ -571,7 +571,7 @@ namespace LR6
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(919, 551);
+            this.progressBar4.Location = new System.Drawing.Point(712, 562);
             this.progressBar4.Maximum = 700;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(274, 10);
@@ -580,7 +580,7 @@ namespace LR6
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(351, 458);
+            this.label20.Location = new System.Drawing.Point(691, 278);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(42, 13);
             this.label20.TabIndex = 45;
@@ -589,7 +589,7 @@ namespace LR6
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(590, 278);
+            this.label21.Location = new System.Drawing.Point(337, 502);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(42, 13);
             this.label21.TabIndex = 46;

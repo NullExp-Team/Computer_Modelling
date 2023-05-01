@@ -487,7 +487,7 @@ public class ComputingSystem
 
         str += "Среднее количество загруженных каналов системы - " + (Math.Round(meanChannelLoad, 2) + 0.3) + "\n";
 
-        str += "Среднее время задания в очереди - " + Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / 3, 2) + " мин. \n ";
+        str += "Среднее время задания в очереди - " + Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / 3, 2) + " мин. \n";
 
         str += "Среднее время нахождения заявки в очереди - " + Math.Round(Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / Math.Round(meanTimeToComplete, 2), 2), 2) + " мин. \n ";
 

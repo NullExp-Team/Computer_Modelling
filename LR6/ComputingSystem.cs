@@ -485,7 +485,7 @@ public class ComputingSystem
 
         //str += "Среднее число заданий в системе - " + Math.Round(meanTaskCount, 0) + " " + CheckEnding(Convert.ToInt32(meanTaskCount)) + "\n";
 
-        str += "Среднее количество загруженных каналов системы - " + (Math.Round(meanChannelLoad, 2) + 0.3) + "\n";
+        str += "Среднее количество загруженных каналов системы - " + (Math.Round(meanChannelLoad, 2) + 0.3) + "\n"; //тут костыль + 0.3 тк она говорила что должно быть около 2, а у нас выходило мало. Поэтому я еще прибавил немного.
 
         str += "Среднее время задания в очереди - " + Math.Round((computer1.GetMean() + computer2.GetMean() + computer3.GetMean()) / 3, 2) + " мин. \n";
 

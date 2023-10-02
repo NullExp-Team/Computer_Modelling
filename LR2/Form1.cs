@@ -19,14 +19,19 @@ namespace LR2
         Random random = new Random();
 
         public static double n = 2;
+
         bool isThird = false;
+
         int currentPointCount { 
             get {
                 try
                 {
+
                     return int.Parse(pointTestCount.Text);
+
                 }
-                catch {
+                catch 
+                {
                     MessageBox.Show(
                                    "Укажите количество точек",
                                    "Сообщение",
@@ -34,6 +39,7 @@ namespace LR2
                                    MessageBoxIcon.Information,
                                    MessageBoxDefaultButton.Button1,
                                    MessageBoxOptions.DefaultDesktopOnly);
+
 
                     return 100;
                 }
@@ -43,22 +49,36 @@ namespace LR2
         public Form1()
         {
             InitializeComponent();
+
             Setup();
         }
 
         private void Setup()
         {
             GraphPane plane = zedGraphControl1.GraphPane;
+
             plane.Title.Text = "NullExp Lab2";
+
             plane.XAxis.Title.Text = "Ось X";
+
             plane.YAxis.Title.Text = "Ось Y";
+
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+                
+
+
+
+                
+        }
 
         private void Clear()
         {
             zedGraphControl1.GraphPane.CurveList.Clear();
             zedGraphControl1.GraphPane.GraphObjList.Clear();
+
 
             zedGraphControl1.GraphPane.XAxis.Type = AxisType.Linear;
             zedGraphControl1.GraphPane.XAxis.Scale.TextLabels = null;
@@ -73,7 +93,8 @@ namespace LR2
         }
 
         /// Этот метод добавляет на график кривую с указанным заголовком, списком точек, цветом и типом символа.
-        /// Если для параметра lastToFirst задано значение true и список точек содержит хотя бы одну точку, первая точка добавляется в конец списка.
+        /// Если для параметра lastToFirst задано значение true и список точек содержит хотя бы одну точку, 
+        //первая точка добавляется в конец списка.
         private void addCurve(string title, PointPairList points, Color color, SymbolType symbolType = SymbolType.None, bool lastToFirst = false)
         {
             GraphPane plane = zedGraphControl1.GraphPane;
@@ -115,7 +136,11 @@ namespace LR2
         /// Это перегрузка предыдущего метода DrawFunction, который не принимает параметры yMin и yMax и не фильтрует значения y.
         private PointPair DrawFunction(Func<double, double> func, double xMin, double xMax, double xStep, string title, Color color, bool lastToFirst = false)
         {
-            return DrawFunction(func, xMin, xMax, null, null, xStep, title, color, lastToFirst);
+
+            return DrawFunction(func, xMin, xMax, 
+                                                null, null, 
+                                                xStep, title, color, lastToFirst);
+            
         }
 
         /// этот метод генерирует набор случайных точек в указанном диапазоне и добавляет на график два набора точек,
@@ -163,6 +188,7 @@ namespace LR2
                 label3.Text = " Пи (приближённо):";
                 areaLabel.Text = ((area/n)/n).ToString();
             }
+
 
             return k;
         }
@@ -220,20 +246,25 @@ namespace LR2
             double sin(double x,double n)
             {
                 double sum = 0;
+
                 for (int i = 1; i <= n; i++)
                 {
                     sum += Math.Sqrt(11 - n * Math.Pow(Math.Sin(x), 2));
                 }
+
+
                 return (5.0 / n) * sum;
             }
 
             double cos(double x, double n)
             {
                 double sum = 0;
+
                 for (int i = 1; i <= n; i++)
                 {
                     sum += Math.Sqrt(29 - n * Math.Pow(Math.Cos(x), 2));
                 }
+
 
                 return (7.0 / n) * sum;
             }
@@ -295,9 +326,26 @@ namespace LR2
                 maxX = list[i].X > maxX ? list[i].X : maxX;
                 maxY = list[i].Y > maxY ? list[i].Y : maxY;
             }
+
             addCurve(title, list, color, SymbolType.None, lastToFirst);
 
+            private void Form1_KeyDown(object sender, KeyEventArgs e)
+            {
+                
+
+
+                
+            }
+
             return new PointPair4(maxX, maxY, minX, minY);
+
+            private void Form1_KeyDown(object sender, KeyEventArgs e)
+            {
+                
+
+
+                
+            }
 
         }
         private void thirdTask_Click(object sender, EventArgs e)
@@ -330,16 +378,24 @@ namespace LR2
             if (n <= 10)
             {
                 a = 11 + n; b = 11 - n;
-            } else
+            } 
+            else
             {
                 a = n + 10; b = n - 10;
             }
+            
+            private void Form1_KeyDown(object sender, KeyEventArgs e)
+            {
+                
 
+                
+            }
 
             Func<double, double> p = (fi) =>
             {
                 return Math.Sqrt(a*Math.Cos(fi) * Math.Cos(fi)+b*Math.Sin(fi) * Math.Sin(fi));
             };
+
             Func<double, PointPair> func = (fi) =>
             {
                 return new PointPair(p(fi) * Math.Cos(fi), p(fi) * Math.Sin(fi));
@@ -357,7 +413,8 @@ namespace LR2
                 if (point.X > 0)
                 {
                     fi = Math.Atan(point.Y / point.X);
-                } else if (point.X < 0)
+                } 
+                else if (point.X < 0)
                 {
                     fi = Math.PI + Math.Atan(point.Y / point.X);
                 }
@@ -378,12 +435,18 @@ namespace LR2
                 }
                 point.X -= maxPoint.Z;
                 point.Y -= maxPoint.T;
+
                 double ada = p(fi);
+
                 return r < ada;
+
                 absoluteErrorLabel.Text = Math.Round(3 * (1 / Math.Sqrt(currentPointCount)), 4).ToString();
             };
 
-            PointTest(currentPointCount, new PointPair(0, 0), new PointPair(maxPoint.X, maxPoint.Y), test);
+            PointTest(currentPointCount,
+                                        new PointPair(0, 0), 
+                                        new PointPair(maxPoint.X, maxPoint.Y), 
+                                        test);
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -426,6 +489,12 @@ namespace LR2
         private void absoluteErrorLabel_Click(object sender, EventArgs e)
         {
 
+
+
+
+
+
         }
     }
+    
 }

@@ -329,23 +329,10 @@ namespace LR2
 
             addCurve(title, list, color, SymbolType.None, lastToFirst);
 
-            private void Form1_KeyDown(object sender, KeyEventArgs e)
-            {
-                
 
-
-                
-            }
 
             return new PointPair4(maxX, maxY, minX, minY);
 
-            private void Form1_KeyDown(object sender, KeyEventArgs e)
-            {
-                
-
-
-                
-            }
 
         }
         private void thirdTask_Click(object sender, EventArgs e)
@@ -384,12 +371,7 @@ namespace LR2
                 a = n + 10; b = n - 10;
             }
             
-            private void Form1_KeyDown(object sender, KeyEventArgs e)
-            {
-                
 
-                
-            }
 
             Func<double, double> p = (fi) =>
             {
@@ -456,13 +438,7 @@ namespace LR2
 
 
         bool flagScale = true;
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-
-            
-        }
-
+ 
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             GraphPane myPane = zedGraphControl1.GraphPane;
